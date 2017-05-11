@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateAlertgroupsTable extends Migration
 {
 
     /**
@@ -16,14 +16,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create(
-            DBTable::USER, function (Blueprint $table) {
+            DBTable::ALERT_GROUP, function (Blueprint $table) {
                 $table->uuid('id');
-                $table->string('username', 255);
-                $table->string('email', 255)->collation('ascii_general_ci')->unique('email');
-                $table->string('password_hash', 255);
+                $table->string('name', 255);
+                $table->char('user_id', 36);
                 $table->softDeletes();
                 $table->primary('id');
                 $table->timestamps();
+            }
+        );
+        Schema::table(
+            DBTable::ALERT_GROUP, function (Blueprint $table) {
+                $table->foreign('user_id', 'fk__users__alert_groups')->references('id')->on(DBTable::USER)->onDelete('cascade');
             }
         );
     }
@@ -35,6 +39,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::USER);
+        Schema::dropIfExists(DBTable::ALERT_GROUP);
     }
 }
