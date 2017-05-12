@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateAlertgroupsTable extends Migration
 {
 
     /**
@@ -15,11 +15,9 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create(DBTable::USER, function (Blueprint $table) {
+        Schema::create(DBTable::ALERTGROUP, function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('username', 100);
-            $table->string('email', 200)->collation('ascii_general_ci')->unique('email');
-            $table->string('password', 255);
+            $table->string('name', 45);
             $table->timestamps();
             $table->softDeletes();
             $table->primary('id');
@@ -33,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::USER);
+        Schema::dropIfExists(DBTable::ALERTGROUP);
     }
 }
