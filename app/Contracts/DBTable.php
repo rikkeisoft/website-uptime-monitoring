@@ -9,11 +9,11 @@ namespace App\Contracts;
 class DBTable
 {
 
-    const USER = 'dtb_users';
-    const WEBSITE = 'dtb_websites';
-    const ALERTGROUP = 'dtb_alert_groups';
-    const ALERTMETHOD = 'dtb_alert_methods';
-    const MONITOR = 'dtb_monitors';
-    const ALERTMETHODALERTGROUP = 'dtb_alert_method_alert_groups';
+    const USER = 'users';
+    const WEBSITE = 'websites';
+    const ALERT_GROUP = 'alert_groups';
+    const ALERT_METHOD = 'alert_methods';
+    const MONITOR = 'monitors';
+    const ALERT_METHOD_ALERT_GROUP = 'alert_method_alert_groups';
 
 }
