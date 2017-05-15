@@ -45,6 +45,6 @@ class Monitor extends Model
      */
     public function alertgroup()
     {
-        return $this->belongsTo(Alertgroup::class, 'alert_group_id', 'id');
+        return $this->belongsTo(AlertGroup::class, 'alert_group_id', 'id');
     }
 }

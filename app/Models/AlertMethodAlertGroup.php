@@ -29,7 +29,7 @@ class AlertMethodlAertGroup extends Model
      */
     public function alertgroup()
     {
-        return $this->belongsTo(Alertgroup::class, 'alert_group_id', 'id');
+        return $this->belongsTo(AlertGroup::class, 'alert_group_id', 'id');
     }
 
     /**
@@ -37,6 +37,6 @@ class AlertMethodlAertGroup extends Model
      */
     public function alertmethod()
     {
-        return $this->belongsTo(Alertmethod::class, 'alert_method_id', 'id');
+        return $this->belongsTo(AlertMethod::class, 'alert_method_id', 'id');
     }
 }
