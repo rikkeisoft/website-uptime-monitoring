@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateAlertmethodsTable extends Migration
 {
 
     /**
@@ -15,11 +15,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create(DBTable::USER, function (Blueprint $table) {
+        Schema::create(DBTable::ALERT_METHOD, function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('username', 100);
+            $table->string('name', 100);
+            $table->tinyInteger('type')->comment('1=Email, 2=SMS,3=Webhook');
             $table->string('email', 200)->collation('ascii_general_ci')->unique('email');
-            $table->string('password', 255);
+            $table->string('phone_number', 20);
+            $table->string('webhook', 200);
             $table->timestamps();
             $table->softDeletes();
             $table->primary('id');
@@ -33,6 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::USER);
+        Schema::dropIfExists(DBTable::ALERT_METHOD);
     }
 }

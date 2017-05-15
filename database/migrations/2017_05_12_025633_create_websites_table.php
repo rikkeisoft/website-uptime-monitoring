@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateWebsitesTable extends Migration
 {
 
     /**
@@ -15,11 +15,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create(DBTable::USER, function (Blueprint $table) {
+        Schema::create(DBTable::WEBSITE, function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('username', 100);
-            $table->string('email', 200)->collation('ascii_general_ci')->unique('email');
-            $table->string('password', 255);
+            $table->string('url', 255);
+            $table->string('name', 100);
+            $table->tinyInteger('sensitivity')->comment('1=Low, 2=Medium,3=High');
+            $table->tinyInteger('status')->comment('1=disable, 2=enable');
+            $table->integer('frequency');
             $table->timestamps();
             $table->softDeletes();
             $table->primary('id');
@@ -33,6 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::USER);
+        Schema::dropIfExists(DBTable::WEBSITE);
     }
 }
