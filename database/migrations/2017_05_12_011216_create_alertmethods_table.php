@@ -15,7 +15,7 @@ class CreateAlertmethodsTable extends Migration
      */
     public function up()
     {
-        Schema::create(DBTable::ALERTMETHOD, function (Blueprint $table) {
+        Schema::create(DBTable::ALERT_METHOD, function (Blueprint $table) {
             $table->uuid('id');
             $table->string('name', 100);
             $table->tinyInteger('type')->comment('1=Email, 2=SMS,3=Webhook');
@@ -35,6 +35,6 @@ class CreateAlertmethodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::ALERTMETHOD);
+        Schema::dropIfExists(DBTable::ALERT_METHOD);
     }
 }

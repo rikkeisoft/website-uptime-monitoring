@@ -15,15 +15,15 @@ class CreateAlertmethodalertgroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create(DBTable::ALERTMETHODALERTGROUP, function (Blueprint $table) {
+        Schema::create(DBTable::ALERT_METHOD_ALERT_GROUP, function (Blueprint $table) {
             $table->uuid('id');
             $table->char('alert_method_id', 36);
             $table->char('alert_group_id', 36);
             $table->timestamps();
             $table->softDeletes();
             $table->primary('id');
-            $table->foreign('alert_method_id','fk__dtb_alert_methods_dtb_alert_method_alert_groups')->references('id')->on(DBTable::ALERTMETHOD)->onDelete('cascade');
-            $table->foreign('alert_group_id','fk__dtb_alert_groups_dtb_alert_method_alert_groups')->references('id')->on(DBTable::ALERTGROUP)->onDelete('cascade');
+            $table->foreign('alert_method_id','fk__dtb_alert_methods_dtb_alert_method_alert_groups')->references('id')->on(DBTable::ALERT_METHOD)->onDelete('cascade');
+            $table->foreign('alert_group_id','fk__dtb_alert_groups_dtb_alert_method_alert_groups')->references('id')->on(DBTable::ALERT_GROUP)->onDelete('cascade');
         });
     }
 
@@ -34,6 +34,6 @@ class CreateAlertmethodalertgroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::ALERTMETHODALERTGROUP);
+        Schema::dropIfExists(DBTable::ALERT_METHOD_ALERT_GROUP);
     }
 }

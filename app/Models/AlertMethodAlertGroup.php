@@ -2,14 +2,15 @@
 
 namespace App;
 
+use App\Contracts\DBTable;
 use Illuminate\Database\Eloquent\Model;
 
-class Alertmethodalertgroup extends Model
+class AlertMethodlAertGroup extends Model
 {
    /**
      * @var string
      */
-    protected $table = DBTable::ALERTMETHODALERTGROUP;
+    protected $table = DBTable::ALERT_METHOD_ALERT_GROUP;
 
     /**
      * @var string

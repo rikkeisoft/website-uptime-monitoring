@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Contracts\DBTable;
 use Illuminate\Database\Eloquent\Model;
 
 class Monitor extends Model

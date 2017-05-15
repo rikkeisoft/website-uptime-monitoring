@@ -2,16 +2,9 @@
 namespace App;
 
 use App\Contracts\DBTable;
-use App\Notifications\UserWasRegistered as RegisteredNotification;
-use App\Notifications\PasswordWillReset as PasswordResetNotification;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
-class Alertgroup extends Model
+class AlertGroup extends Model
 {
 
     /**
