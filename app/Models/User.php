@@ -21,8 +21,8 @@ class User extends Model
         'password_hash', 'access_token'
     ];
 
-    public static function generateAccessToken(string $email, string $username, $password_hash): string
+    public static function generateAccessToken(string $email, string $username, $password): string
     {
-        return md5(sprintf('%s:%s:%s', $email, $username, (string) $password_hash) . Str::random(8));
+        return md5(sprintf('%s:%s:%s', $email, $username, (string) $password) . Str::random(8));
     }
 }

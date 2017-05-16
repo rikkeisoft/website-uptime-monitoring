@@ -17,14 +17,16 @@ class CreateUsersTable extends Migration
     {
         Schema::create(
             DBTable::USER, function (Blueprint $table) {
-                $table->uuid('id');
-                $table->string('username', 255);
-                $table->string('email', 255);
-                $table->string('password_hash', 255);
-                $table->softDeletes();
-                $table->timestamps();
-                $table->primary('id');
-            }
+            $table->uuid('id');
+            $table->string('username', 255);
+            $table->string('email', 255);
+            $table->string('password_hash', 255);
+            $table->string('access_token', 255)->nullable();
+            $table->integer('status');
+            $table->softDeletes();
+            $table->timestamps();
+            $table->primary('id');
+        }
         );
     }
 
