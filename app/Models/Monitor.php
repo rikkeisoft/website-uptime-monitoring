@@ -1,27 +1,29 @@
 <?php
-namespace App;
+
+namespace App/Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Alsofronie\Uuid\UuidModelTrait;
 
 class Monitor extends Model
 {
+    use UuidModelTrait;
+
+    public $incrementing = false;
 
     protected $fillable = [
-        'result','user_id','website_id','alert_group_id',
+        'result',
+        'website_id',
+        'alert_group_id',
     ];
 
     public function website()
     {
-        return $this->belongsTo(Website::class, 'website_id','id');
+        return $this->belongsTo(Website::class, 'website_id', 'id');
     }
 
-    public function alertgroup()
+    public function alertGroup()
     {
-        return $this->belongsTo(AlertGroup::class, 'alert_group_id','id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id','id');
+        return $this->belongsTo(AlertGroup::class, 'alert_group_id', 'id');
     }
 }

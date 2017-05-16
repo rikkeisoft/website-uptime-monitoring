@@ -1,13 +1,23 @@
 <?php
-namespace App;
+
+namespace App/Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Alsofronie\Uuid\UuidModelTrait;
 
 class Website extends Model
 {
+    use UuidModelTrait;
+
+    public $incrementing = false;
 
     protected $fillable = [
-        'name', 'sensitivity', 'frequency', 'status', 'url', 'user_id'
+        'user_id',
+        'url'
+        'name',
+        'sensitivity',
+        'frequency',
+        'status'
     ];
 
     public function user()

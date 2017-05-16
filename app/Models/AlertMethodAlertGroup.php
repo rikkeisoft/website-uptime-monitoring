@@ -1,18 +1,23 @@
 <?php
-namespace App;
+
+namespace App/Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Alsofronie\Uuid\UuidModelTrait;
 
-class AlertMethodlAertGroup extends Model
+class AlertMethodAlertGroup extends Model
 {
+    use UuidModelTrait;
 
-    public function alertgroup()
+    public $incrementing = false;
+
+    public function alertGroup()
     {
-        return $this->belongsTo(AlertGroup::class, 'alert_group_id','id');
+        return $this->belongsTo(AlertGroup::class, 'alert_group_id', 'id');
     }
 
-    public function alertmethod()
+    public function alertMethod()
     {
-        return $this->belongsTo(AlertMethod::class, 'alert_method_id','id');
+        return $this->belongsTo(AlertMethod::class, 'alert_method_id', 'id');
     }
 }

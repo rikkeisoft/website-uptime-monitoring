@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAlertmethodalertgroupsTable extends Migration
+class CreateAlertMethodAlertGroupTable extends Migration
 {
 
     /**
@@ -21,10 +21,15 @@ class CreateAlertmethodalertgroupsTable extends Migration
                 $table->char('alert_method_id', 36);
                 $table->char('alert_group_id', 36);
                 $table->softDeletes();
+                $table->timestamps();
                 $table->primary('id');
+            }
+        );
+
+        Schema::table(
+            DBTable::ALERT_METHOD_ALERT_GROUP, function (Blueprint $table) {
                 $table->foreign('alert_method_id', 'fk__alert_methods__alert_method_alert_group')->references('id')->on(DBTable::ALERT_METHOD)->onDelete('cascade');
                 $table->foreign('alert_group_id', 'fk__alert_groups__alert_method_alert_group')->references('id')->on(DBTable::ALERT_GROUP)->onDelete('cascade');
-                $table->timestamps();
             }
         );
     }

@@ -19,11 +19,11 @@ class CreateUsersTable extends Migration
             DBTable::USER, function (Blueprint $table) {
                 $table->uuid('id');
                 $table->string('username', 255);
-                $table->string('email', 255)->collation('ascii_general_ci')->unique('email');
+                $table->string('email', 255);
                 $table->string('password_hash', 255);
                 $table->softDeletes();
-                $table->primary('id');
                 $table->timestamps();
+                $table->primary('id');
             }
         );
     }

@@ -1,13 +1,19 @@
 <?php
-namespace App;
+
+namespace App/Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Alsofronie\Uuid\UuidModelTrait;
 
 class AlertGroup extends Model
 {
+    use UuidModelTrait;
+
+    public $incrementing = false;
 
     protected $fillable = [
-        'name','user_id'
+        'user_id',
+        'name'
     ];
 
     public function user()
