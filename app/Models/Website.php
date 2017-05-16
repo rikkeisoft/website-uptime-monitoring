@@ -1,6 +1,5 @@
 <?php
-
-namespace App/Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
@@ -13,7 +12,7 @@ class Website extends Model
 
     protected $fillable = [
         'user_id',
-        'url'
+        'url',
         'name',
         'sensitivity',
         'frequency',
