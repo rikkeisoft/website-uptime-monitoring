@@ -17,12 +17,12 @@ Auth::routes();
 // route home
 Route::get('/home', 'HomeController@index')->name('home');
 //route active user
-Route::get('/activeuser','Auth\RegisterController@active');
+Route::get('/activate','Auth\RegisterController@activate');
 
 //route notification
-Route::get('/error',function(){
-    return view('notification.404');
+Route::get('/activate-error',function(){
+    return view('template-activate-auth.active-error');
 });
-Route::get('/active',function(){
-    return view('notification.active');
+Route::get('/activate/successfully',function(){
+    return view('template-activate-auth.active');
 });

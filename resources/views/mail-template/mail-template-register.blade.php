@@ -20,7 +20,7 @@
     <body>
         <h2>Hello:{{$name}}</h2>
         <h1>Welcome to website uptime monitor, please active accout with you!</h1>
-        <p> <a  class="btn btn-primary btn-lg" href="http://localhost:8000/activeuser?access_token={{$access_token}}">Active now</a></p>
+        <p> <a  class="btn btn-primary btn-lg" href="http://localhost:8000/activate?access_token={{$access_token}}">Active now</a></p>
     </body>
 </html>
 

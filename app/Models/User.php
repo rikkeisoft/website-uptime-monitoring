@@ -26,8 +26,4 @@ class User extends Authenticatable
         'password'
     ];
 
-    public static function generateAccessToken(string $email, string $username, $password): string
-    {
-        return md5(sprintf('%s:%s:%s', $email, $username, (string) $password) . Str::random(8));
-    }
 }
