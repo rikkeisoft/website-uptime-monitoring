@@ -4,21 +4,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
 
+    use Notifiable;
     use UuidModelTrait;
 
     public $incrementing = false;
     protected $fillable = [
         'username',
         'email',
-        'password_hash',
-        'status'
+        'status',
+        'access_token',
+        'remember_token',
+        'password'
     ];
     protected $hidden = [
-        'password_hash', 'access_token'
+        'password'
     ];
 
     public static function generateAccessToken(string $email, string $username, $password): string

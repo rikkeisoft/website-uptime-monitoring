@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Input;
 use Mail;
+use Illuminate\Support\Str;
+
 
 class RegisterController extends Controller
 {
@@ -20,43 +22,36 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function showRegistrationForm()
+    protected function validator(array $data)
     {
-        return view('auth.register');
+        return Validator::make($data, [
+                'username' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+        ]);
     }
 
-    public function register()
+    protected function create(array $data)
     {
-        $rules = array(
-            'username' => 'required|string|max:20|min:3',
-            'email' => 'required|max:100|min:3',
-            'password' => 'required|min:6|max:20',
-        );
-        // Generate access_token
         $token = User::generateAccessToken(
-                input::get("email"),
-                input::get("username"),
-                input::get('password')
+            input::get("email"),
+            input::get("username"), 
+            input::get('password')
         );
-
-        if (!Validator::make(input::all(), $rules)->fails()) {
-            $user = new User();
-            $user->email = input::get("email");
-            $user->username = input::get("username");
-            $user->password_hash = bcrypt(input::get("password"));
-            $user->access_token = $token;
-            $user->status = 0;
-            $user->save();
-            Mail::send('mail', array('name' => input::get("username"), 'email' => input::get("email"),'access_token'=>$token), function($message) {
-                $message->to(input::get("email"), 'Guest')->subject('Register completed, confirm email verify!!');
-            });
-
-            return redirect('/home');
-        } else {
-            return "Registration failed!";
-        }
+        Mail::send('mail', array('name' => input::get("username"), 'email' => input::get("email"), 'access_token' => $token), function($message) {
+            $message->to(input::get("email"), 'Guest')->subject('Register completed, confirm email verify!!');
+        });
+        return User::create([
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'status' => 0,
+                'access_token' => $token,
+                'remember_token' => Str::random(60)
+        ]);
     }
-    public function active()
+
+    public static function active()
     {
         $token = null;
         $token = input::get("access_token");
@@ -64,10 +59,11 @@ class RegisterController extends Controller
         if (!empty($user)) {
             $user = User::find($user['id']);
             $user->status = 1;
+            $user->access_token = null;
             $user->save();
-            echo "active success";
-        }else {
-           return "Account does not exist";    
+          return redirect('/active');
+        } else {
+            return redirect('/error');
         }
     }
 }

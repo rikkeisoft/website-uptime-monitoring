@@ -14,7 +14,7 @@
         <script src="{{ asset('/js/jquery.validate.js')}}" type="text/javascript"></script>
     </head>
     <body>
-         <div id="app">
+        <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -48,7 +48,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
@@ -72,6 +72,7 @@
         </nav>
 
         @yield('content')
-    </div>
-    </body>
+  <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+</body>
 </html>

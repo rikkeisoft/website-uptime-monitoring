@@ -14,7 +14,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
-// Route home
+// route home
 Route::get('/home', 'HomeController@index')->name('home');
-//Route active user
+//route active user
 Route::get('/activeuser','Auth\RegisterController@active');
+
+//route notification
+Route::get('/error',function(){
+    return view('notification.404');
+});
+Route::get('/active',function(){
+    return view('notification.active');
+});
