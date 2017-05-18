@@ -10,14 +10,13 @@ use Illuminate\Support\Facades\Input;
 
 class RegisterController extends Controller
 {
+   protected $redirectTo = '/home';
 
-    protected $redirectTo = '/home';
-
+  
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('activate');
     }
-
     public function showRegistrationForm()
     {
         return view('auth.register');
