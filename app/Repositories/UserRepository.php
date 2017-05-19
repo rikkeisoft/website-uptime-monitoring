@@ -38,15 +38,8 @@ class UserRepository
         } catch (Exception $ex) {
              Log::error($ex->getMessage());
             return false;
-        }        
-//            User::create($data);
-//            Mail::send('mail-template/mail-template-register', ['name' => $data['username'], 'email' => $data['email'], 'access_token' => $data['access_token']], function($message) {
-//                $message->to(Input::get('email'))->subject('Register completed, confirm email verify!!');
-//            });
-//            return redirect('login');
-//        } else {
-//            return "Registration failed, please try again!";
-//        }
+        }
+            
     }
 
     public function activateUser($token)
