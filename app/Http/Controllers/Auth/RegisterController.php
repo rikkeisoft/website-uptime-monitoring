@@ -24,13 +24,14 @@ class RegisterController extends Controller
 
     public function register(RegistrationRequest $request)
     {
-        $data = $request->input();
-        $result = $this->userRepository->createUser($data);
+        $user= $request->input();
+        $result = $this->userRepository->createUser($user);
         if ($result === false) {
 
             return 'Error'; // Redirect to error page
-        }
-        return redirect('/home');
+         }
+        
+            return redirect('/home');
     }
 
     public function activate(Request $request)
@@ -41,6 +42,6 @@ class RegisterController extends Controller
         if ($result === false) {
             return redirect('/activate-error');
         }
-        return redirect('/activate/successfully');
+            return redirect('/activate/successfully');
     }
 }
