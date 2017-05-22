@@ -1,75 +1,46 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\Auth\RegistrationRequest;
+use App\Repositories\UserRepository;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
-    use RegistersUsers;
+    protected $userRepository;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('activate');
+        $this->userRepository = new UserRepository();
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function showRegistrationForm()
     {
-        return Validator::make(
-            $data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            ]
-        );
+        return view('auth.register');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function register(RegistrationRequest $request)
     {
-        return User::create(
-            [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            ]
-        );
+        $formData = $request->input();
+        $result = $this->userRepository->createUser($formData);
+        if ($result === false) {
+            return 'Error'; // Redirect to error page
+        }
+
+        return redirect('/home');
+    }
+
+    public function activate(Request $request)
+    {
+        $token = $request->input('access_token', null);
+        $result = $this->userRepository->activateUser($token);
+
+        if ($result === false) {
+            return redirect('/activate-error');
+        }
+        return redirect('/activate/successfully');
     }
 }

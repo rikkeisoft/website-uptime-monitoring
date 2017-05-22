@@ -6,9 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "alsofronie/eloquent-uuid": "dev-master",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0",
-        "alsofronie/eloquent-uuid": "dev-master"
+        "laravel/tinker": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -44,9 +44,9 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
         ],
-        "phpunit": "php vendor/phpunit/phpunit/phpunit",
-        "phpcs": "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
-        "phpcbf": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf"
+     "phpunit": "php vendor/phpunit/phpunit/phpunit",
+     "phpcs": "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
+     "phpcbf": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf"
     },
     "config": {
         "preferred-install": "dist",

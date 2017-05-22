@@ -1,28 +1,27 @@
 <?php
-
-namespace App/Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
+
+    use Notifiable;
     use UuidModelTrait;
 
     public $incrementing = false;
-
     protected $fillable = [
         'username',
         'email',
-        'password_hash'
+        'status',
+        'access_token',
+        'remember_token',
+        'password'
     ];
-
     protected $hidden = [
-        'password_hash',
+        'password'
     ];
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password_hash'] = Hash::make($value);
-    }
 }
