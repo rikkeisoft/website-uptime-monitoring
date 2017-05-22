@@ -35,7 +35,6 @@ class UserRepository
             $data->fill($user);
             $createdUser = $data->saveOrFail();
             // Get access_token, Event send mail
-            $getAccess =$data['access_token'];
             event(new UserCreated($user));
             
             return $createdUser;
@@ -50,11 +49,10 @@ class UserRepository
         if (!$token) {
             return false;
         }
-        $checkedUser = User::where('access_token', '=', $token)->first();
-        if (empty($checkedUser)) {
+        $user = User::where('access_token', $token)->first();
+        if (empty($user)) {
             return false;
         }
-        $user = User::find($checkedUser['id']);
         $user->status = 1;
         $user->access_token = null;
         $updated = $user->save();

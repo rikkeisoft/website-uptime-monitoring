@@ -45,9 +45,9 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'status' => 1])) {
             // Authentication passed...
             return redirect()->intended('/');
-        } else {
+        }
             Auth::logout();
             return redirect('/activate-error');
-        }
+     
     }
 }

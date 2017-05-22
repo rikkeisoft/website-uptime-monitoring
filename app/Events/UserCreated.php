@@ -21,7 +21,7 @@ class UserCreated
      */
     public function __construct($user)
     {
-        $this -> user = $user;
+        $this->user = $user;
     }
 
     /**
@@ -31,6 +31,6 @@ class UserCreated
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('event-send-mail');
     }
 }

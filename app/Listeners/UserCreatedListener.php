@@ -20,7 +20,7 @@ class UserCreatedListener
         $subject = 'Register completed, confirm email verify!!';
         
         Mail::send('mail-template/mail-template-register', [
-            'name' =>$user['username'],
+            'name' => $user['username'],
             'access_token' => $user['access_token']
         ], function ($message) use ($user, $subject) {
             $message->to($user['email'])->subject($subject);

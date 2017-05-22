@@ -24,7 +24,7 @@ class RegisterController extends Controller
 
     public function register(RegistrationRequest $request)
     {
-        $user= $request->input();
+        $user = $request->input();
         $result = $this->userRepository->createUser($user);
         if ($result === false) {
             return 'Error'; // Redirect to error page

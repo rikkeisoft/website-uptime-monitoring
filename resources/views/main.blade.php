@@ -9,9 +9,9 @@
         <title>{{ config('app.name', 'Website Uptime Monitor') }}</title>
 
         <!-- Latest compiled and minified CSS & JS -->
-        <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css')}}" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="//code.jquery.com/jquery.js"></script>
-        <script src="{{ asset('/js/jquery.validate.js')}}" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="app">
