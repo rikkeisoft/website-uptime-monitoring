@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -41,13 +41,11 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'status' => 1])) {
             // Authentication passed...
             return redirect()->intended('/');
         }
-            Auth::logout();
-            return redirect('/activate-error');
-     
+        Auth::logout();
+        return redirect('/activate-error');
     }
 }

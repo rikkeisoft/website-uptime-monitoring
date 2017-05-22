@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegistrationRequest;
-use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 
 class RegisterController extends Controller
@@ -24,23 +24,23 @@ class RegisterController extends Controller
 
     public function register(RegistrationRequest $request)
     {
-        $user = $request->input();
-        $result = $this->userRepository->createUser($user);
+        $formData = $request->input();
+        $result = $this->userRepository->createUser($formData);
         if ($result === false) {
             return 'Error'; // Redirect to error page
         }
-        
-            return redirect('/home');
+
+        return redirect('/home');
     }
 
     public function activate(Request $request)
     {
-        $token = $request->input('access_token');
+        $token = $request->input('access_token', null);
         $result = $this->userRepository->activateUser($token);
 
         if ($result === false) {
             return redirect('/activate-error');
         }
-            return redirect('/activate/successfully');
+        return redirect('/activate/successfully');
     }
 }
