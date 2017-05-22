@@ -9,16 +9,6 @@ class UserCreatedListener
 {
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param  UserCreated  $event
@@ -27,8 +17,13 @@ class UserCreatedListener
     public function handle(UserCreated $event)
     {
         $user = $event->user;
-        Mail::send('mail-template/mail-template-register', ['name' => input::get('username'), 'access_token' => $user], function($message) {
-            $message->to(input::get('email'))->subject('Register completed, confirm email verify!!');
+        $subject = 'Register completed, confirm email verify!!';
+        
+        Mail::send('mail-template/mail-template-register', [
+            'name' =>$user['username'],
+            'access_token' => $user['access_token']
+        ], function ($message) use ($user, $subject) {
+            $message->to($user['email'])->subject($subject);
         });
     }
 }

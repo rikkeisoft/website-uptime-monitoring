@@ -16,7 +16,8 @@ class CreateAlertMethodsTable extends Migration
     public function up()
     {
         Schema::create(
-            DBTable::ALERT_METHOD, function (Blueprint $table) {
+            DBTable::ALERT_METHOD,
+            function (Blueprint $table) {
                 $table->uuid('id');
                 $table->char('user_id', 36);
                 $table->string('name', 255);
@@ -31,7 +32,8 @@ class CreateAlertMethodsTable extends Migration
         );
 
         Schema::table(
-            DBTable::ALERT_METHOD, function (Blueprint $table) {
+            DBTable::ALERT_METHOD,
+            function (Blueprint $table) {
                 $table->foreign('user_id', 'fk__users__alert_methods')->references('id')->on(DBTable::USER)->onDelete('cascade');
             }
         );

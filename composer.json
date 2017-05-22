@@ -44,9 +44,9 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
         ],
-        "phpunit": "php vendor/phpunit/phpunit/phpunit",
-        "phpcs": "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
-        "phpcbf": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf"
+     "phpunit": "php vendor/phpunit/phpunit/phpunit",
+     "phpcs": "php vendor/squizlabs/php_codesniffer/scripts/phpcs",
+     "phpcbf": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf"
     },
     "config": {
         "preferred-install": "dist",

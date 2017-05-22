@@ -17,7 +17,8 @@ class CreateMonitorsTable extends Migration
     {
         Schema::create(DBTable::MONITOR, function (Blueprint $table) {
             $table->uuid('id');
-            $table->tinyInteger('result')->comment('1: Success, 2: Failed');;
+            $table->tinyInteger('result')->comment('1: Success, 2: Failed');
+            ;
             $table->char('website_id', 36);
             $table->char('alert_group_id', 36);
             $table->timestamps();

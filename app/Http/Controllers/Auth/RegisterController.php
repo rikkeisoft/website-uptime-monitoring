@@ -27,9 +27,8 @@ class RegisterController extends Controller
         $user= $request->input();
         $result = $this->userRepository->createUser($user);
         if ($result === false) {
-
             return 'Error'; // Redirect to error page
-         }
+        }
         
             return redirect('/home');
     }

@@ -11,9 +11,9 @@ class UserRepository
 
     /**
      * Create a new  user
-     * 
+     *
      * @param type $data
-     * 
+     *
      * @return boolean
      */
     public function createUser($user = [])
@@ -36,7 +36,7 @@ class UserRepository
             $createdUser = $data->saveOrFail();
             // Get access_token, Event send mail
             $getAccess =$data['access_token'];
-            event(new UserCreated($getAccess));
+            event(new UserCreated($user));
             
             return $createdUser;
         } catch (Exception $ex) {

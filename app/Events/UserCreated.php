@@ -20,9 +20,8 @@ class UserCreated
      * @return void
      */
     public function __construct($user)
-    {  
-        $this->user=$user;
-
+    {
+        $this -> user = $user;
     }
 
     /**

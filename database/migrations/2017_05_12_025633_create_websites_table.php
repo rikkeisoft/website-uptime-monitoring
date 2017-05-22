@@ -16,7 +16,8 @@ class CreateWebsitesTable extends Migration
     public function up()
     {
         Schema::create(
-            DBTable::WEBSITE, function (Blueprint $table) {
+            DBTable::WEBSITE,
+            function (Blueprint $table) {
                 $table->uuid('id');
                 $table->char('user_id', 36);
                 $table->string('url', 255);
@@ -31,7 +32,8 @@ class CreateWebsitesTable extends Migration
         );
 
         Schema::table(
-            DBTable::WEBSITE, function (Blueprint $table) {
+            DBTable::WEBSITE,
+            function (Blueprint $table) {
                 $table->foreign('user_id', 'fk__users__websites')->references('id')->on(DBTable::USER)->onDelete('cascade');
             }
         );

@@ -16,18 +16,19 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create(
-            DBTable::USER, function (Blueprint $table) {
-            $table->uuid('id');
-            $table->string('username', 255);
-            $table->string('email', 255);
-            $table->string('password', 255);
-            $table->string('access_token', 255)->nullable();
-            $table->integer('status');
-            $table->string('remember_token', 100)->nullable();
-            $table->softDeletes();
-            $table->timestamps();
-            $table->primary('id');
-        }
+            DBTable::USER,
+            function (Blueprint $table) {
+                $table->uuid('id');
+                $table->string('username', 255);
+                $table->string('email', 255);
+                $table->string('password', 255);
+                $table->string('access_token', 255)->nullable();
+                $table->integer('status');
+                $table->string('remember_token', 100)->nullable();
+                $table->softDeletes();
+                $table->timestamps();
+                $table->primary('id');
+            }
         );
     }
 
