@@ -1,5 +1,8 @@
 @extends('../master')
 
+@section('title')
+    Admin|Website Uptime Monitor
+@endsection
 @section('content') 
 <div id="page-wrapper">
             <div class="row">
@@ -99,4 +102,4 @@
                     </div>
                 </div>
             </div>
-            @endsection
+@endsection

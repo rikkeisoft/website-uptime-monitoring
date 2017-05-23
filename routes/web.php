@@ -30,6 +30,3 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
-
-//route admin dashboard
-Route::resource('/dashboard','AdminController');
