@@ -62,7 +62,7 @@ abstract class BaseRepository implements RepositoryInterface
      * @param array $columns
      * @return array
      */
-    public function paginate(string $limit = null, $columns = ['*'])
+    public function paginate(string $limit, $columns = ['*'])
     {
         $limit = is_null($limit) ? 10 : $limit;
 

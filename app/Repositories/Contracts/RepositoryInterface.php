@@ -34,7 +34,7 @@ interface RepositoryInterface
      * @param array $columns
      * @return array
      */
-    public function paginate(string $limit = 10, $columns = ['*']);
+    public function paginate(string $limit, $columns = ['*']);
 
     /**
      * Save a new entity in repository
