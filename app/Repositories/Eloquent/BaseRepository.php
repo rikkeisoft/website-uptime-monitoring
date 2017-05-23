@@ -58,7 +58,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     /**
      * Retrieve all data of repository, paginated
-     * @param null $limit
+     * @param string $limit
      * @param array $columns
      * @return array
      */
@@ -71,7 +71,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     /**
      * Find data by id
-     * @param $id
+     * @param string $id
      * @param array $columns
      * @return array
      */
@@ -81,10 +81,11 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * @param $attribute
-     * @param $value
+     * find data by attribute
+     * @param string $attribute
+     * @param string $value
      * @param array $columns
-     * @return mixed
+     * @return array
      */
     public function findAllBy(string $attribute, string $value, $columns = ['*'])
     {
@@ -104,7 +105,7 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Update a entity in repository by id
      * @param array $input
-     * @param $id
+     * @param string $id
      * @return array
      */
     public function update(array $input, string $id)
@@ -118,7 +119,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     /**
      * Delete a entity in repository by id
-     * @param $id
+     * @param string $id
      * @return int
      */
     public function delete(string $id)

@@ -13,7 +13,7 @@ interface RepositoryInterface
 
     /**
      * Find data by id
-     * @param $id
+     * @param string $id
      * @param array $columns
      * @return array
      */
@@ -21,8 +21,8 @@ interface RepositoryInterface
 
     /**
      * find data by attribute
-     * @param $attribute
-     * @param $value
+     * @param string $attribute
+     * @param string $value
      * @param array $columns
      * @return mixed
      */
@@ -30,7 +30,7 @@ interface RepositoryInterface
 
     /**
      * Retrieve all data of repository, paginated
-     * @param null $limit
+     * @param string $limit
      * @param array $columns
      * @return array
      */
@@ -46,14 +46,14 @@ interface RepositoryInterface
     /**
      * Update a entity in repository by id
      * @param array $input
-     * @param $id
+     * @param string $id
      * @return array
      */
     public function update(array $input, string $id);
 
     /**
      * Delete a entity in repository by id
-     * @param $id
+     * @param string $id
      * @return int
      */
     public function delete(string $id);

@@ -9,7 +9,7 @@ class AlertMethodsRepository extends BaseRepository
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return class
      */
     public function setModel()
     {
