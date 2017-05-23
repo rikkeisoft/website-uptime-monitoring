@@ -30,7 +30,7 @@ class RegisterController extends Controller
             return 'Error'; // Redirect to error page
         }
 
-        return redirect('/home');
+        return redirect('/login');
     }
 
     public function activate(Request $request)

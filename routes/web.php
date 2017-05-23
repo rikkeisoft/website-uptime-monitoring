@@ -16,8 +16,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// route home
-Route::get('/home', 'HomeController@index')->name('home');
+// route administrator
+Route::get('/home','HomeController@showStatistics');
 
 //route active user
 Route::get('/activate', 'Auth\RegisterController@activate');
