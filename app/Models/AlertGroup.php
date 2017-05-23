@@ -10,7 +10,7 @@ class AlertGroup extends BaseModelInterface
 {
     use UuidModelTrait;
     use SoftDeletes;
-    
+
     public $incrementing = false;
 
     protected $fillable = [
