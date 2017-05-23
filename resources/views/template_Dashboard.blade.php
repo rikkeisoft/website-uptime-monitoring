@@ -1,37 +1,23 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>  @yield('title')</title>
-
+    <title>@yield('title')</title>
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <!-- MetisMenu CSS -->
     <link href="{{asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="{{asset('dist/css/sb-admin-2.css')}}" rel="stylesheet">
-
     <!-- Morris Charts CSS -->
     <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-
 </head>
-
 <body>
-
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -47,8 +33,10 @@
             <ul class="nav navbar-top-links navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                <li><a href="{{ route('login') }}">Login</a></li>
-                <li><a href="{{ route('register') }}">Register</a></li>
+                <li><a href="{{ route('login') }}">Login</a>
+                </li>
+                <li><a href="{{ route('register') }}">Register</a>
+                </li>
                 @else
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -57,12 +45,9 @@
 
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
@@ -70,10 +55,10 @@
                     </ul>
                 </li>
                 @endif
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
+            </ul>
+            <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -171,25 +156,23 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-          @yield('content')
-         <!-- /.panel-body -->
-                        <div class="panel-footer">
-                            <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
-                                        Send
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                        <!-- /.panel-footer -->
-                    </div>
-                    <!-- /.panel .chat-panel -->
-                </div>
-                <!-- /.col-lg-4 -->
+        @yield('content')
+        <!-- /.panel-body -->
+        <div class="panel-footer">
+            <div class="input-group">
+                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                <span class="input-group-btn">
+                <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                </span>
             </div>
-        <!-- /.row -->
+        </div>
+        <!-- /.panel-footer -->
+    </div>
+    <!-- /.panel .chat-panel -->
+    </div>
+    <!-- /.col-lg-4 -->
+    </div>
+    <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
 
@@ -197,7 +180,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script   src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

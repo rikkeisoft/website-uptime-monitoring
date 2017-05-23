@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\HomeRepository;
+use App\Services\StatisticsService;
 
 class HomeController extends Controller
-{  
-    protected  $HomeRepository;
-
-   public function __construct()
-    {  
+{   
+    public function __construct()
+    {
         $this->middleware('auth');
-        $this->HomeRepository = new HomeRepository();
     }
   
     /**
@@ -21,23 +18,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        return view('home');
     }
     
      /**
      * Show the alert group in dashboard.
      */
-    public function showItems()
+    public function showStatistics()
     {
-        $result = $this->HomeRepository->showItems();
-        if($result === false) {
-            return 'Error';
-        }
+        $result = StatisticsService::showStatistics();
+
         return view('admin.dashboard')->with([
-             'alertgroup' => $result['alertgroup'],
-             'alertmethod' => $result['alertmethod'],
-             'website' => $result['website'],
-             'websiteup' => $result['websiteup']
+             'alert_groups' => $result['alert_groups'],
+             'alert_methods' => $result['alert_methods'],
+             'websites' => $result['websites'],
+             'up_websites' => $result['up_websites']
         ]);
     }
  

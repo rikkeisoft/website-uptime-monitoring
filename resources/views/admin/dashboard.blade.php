@@ -1,10 +1,10 @@
-@extends('../master')
+@extends('../template_Dashboard')
 
 @section('title')
     Admin|Website Uptime Monitor
 @endsection
-@section('content') 
-<div id="page-wrapper">
+@section('content')
+    <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
@@ -21,8 +21,8 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$alertgroup}}</div>
-                                    <div>Alert Group</div>
+                                    <div class="huge">{{ $alert_groups }}</div>
+                                    <div>Alert Groups</div>
                                 </div>
                             </div>
                         </div>
@@ -43,8 +43,8 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$alertmethod}}</div>
-                                    <div>Alert Method</div>
+                                    <div class="huge">{{ $alert_methods }}</div>
+                                    <div>Alert Methods</div>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     <i class="fa fa-shopping-cart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$website}}</div>
+                                    <div class="huge">{{ $websites }}</div>
                                     <div>Total Websites</div>
                                 </div>
                             </div>
@@ -87,8 +87,8 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$websiteup}}</div>
-                                    <div>Website Disabled</div>
+                                    <div class="huge">{{ $up_websites }}</div>
+                                    <div>Website Enable</div>
                                 </div>
                             </div>
                         </div>
