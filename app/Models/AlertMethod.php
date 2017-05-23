@@ -11,6 +11,18 @@ class AlertMethod extends Model
     use UuidModelTrait;
     use SoftDeletes;
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new UserIdScope());
+    }
+
     public $incrementing = false;
 
     protected $fillable = [
