@@ -15,11 +15,13 @@ abstract class BaseRepository implements RepositoryInterface
     private $app;
 
     /**
-    var
+     * @var Model
      */
     protected $model;
 
     /**
+     * BaseRepository constructor.
+     * @param App $app
      */
     public function __construct(App $app)
     {
@@ -28,19 +30,26 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * @return Model
-     * @throws RepositoryException
+     * Specify Model class name
+     *
+     * @return mixed
      */
-    public function makeModel() {
-        $model = $this->app->make($this->model());
+    abstract public function setModel();
 
-        if (!$model instanceof Model)
-            throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+    /**
+     * @return Model
+     * make model
+     */
+    public function makeModel()
+    {
+        $model = $this->app->make($this->setModel());
 
         return $this->model = $model;
     }
 
     /**
+     * @param array $columns
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      * Retrieve all data of repository
      */
     public function all($columns = ['*'])
@@ -49,6 +58,9 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * @param null $limit
+     * @param array $columns
+     * @return mixed
      * Retrieve all data of repository, paginated
      */
     public function paginate($limit = null, $columns = ['*'])
@@ -57,7 +69,11 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $this->model->paginate($limit, $columns);
     }
+
     /**
+     * @param $id
+     * @param array $columns
+     * @return mixed
      * Find data by id
      */
     public function find($id, $columns = ['*'])
@@ -66,6 +82,8 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * @param array $input
+     * @return mixed
      * Save a new entity in repository
      */
     public function create(array $input)
@@ -74,6 +92,9 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * @param array $input
+     * @param $id
+     * @return $this
      * Update a entity in repository by id
      */
     public function update(array $input, $id)
@@ -86,11 +107,9 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Delete a entity in repository by id
-     *
      * @param $id
-     *
      * @return int
+     * Delete a entity in repository by id
      */
     public function delete($id)
     {
