@@ -21,7 +21,7 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <div class="huge">{{$alertgroup}}</div>
                                     <div>Alert Group</div>
                                 </div>
                             </div>
@@ -43,8 +43,8 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Websites</div>
+                                    <div class="huge">{{$alertmethod}}</div>
+                                    <div>Alert Method</div>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +65,8 @@
                                     <i class="fa fa-shopping-cart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>Alert Method</div>
+                                    <div class="huge">{{$website}}</div>
+                                    <div>Total Websites</div>
                                 </div>
                             </div>
                         </div>
@@ -87,8 +87,8 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>Support Tickets!</div>
+                                    <div class="huge">{{$websiteup}}</div>
+                                    <div>Website Disabled</div>
                                 </div>
                             </div>
                         </div>

@@ -172,10 +172,7 @@
             <!-- /.navbar-static-side -->
         </nav>
           @yield('content')
-
-       
-           
-                        <!-- /.panel-body -->
+         <!-- /.panel-body -->
                         <div class="panel-footer">
                             <div class="input-group">
                                 <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
@@ -200,9 +197,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script   src="https://code.jquery.com/jquery-3.2.1.js"
-        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-        crossorigin="anonymous"></script>
+    <script   src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
