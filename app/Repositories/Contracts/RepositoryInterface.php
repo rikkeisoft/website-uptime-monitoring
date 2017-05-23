@@ -7,7 +7,7 @@ interface RepositoryInterface
     /**
      * Retrieve all data of repository
      */
-    public function all();
+    public function all($columns = ['*']);
 
     /**
      * Find data by id
