@@ -1,9 +1,8 @@
 <?php
 namespace App\Repositories;
 
-use Log;
 use App\Repositories\Eloquent\BaseRepository;
-use App\Repositories\Contracts\RepositoryInterface;
+use App\Models\Website;
 
 class WebsiteRepository extends BaseRepository
 {
@@ -14,18 +13,6 @@ class WebsiteRepository extends BaseRepository
      */
     public function setModel()
     {
-        return 'App\Models\Website';
-    }
-
-    /**
-     * @param $user_id
-     * @return mixed
-     * get all website with user_id
-     */
-    public function findAllWebsite($user_id)
-    {
-        return $this->model->where('user_id', $user_id)
-            ->where('deleted_at', null)
-            ->get();
+        return Website::class;
     }
 }

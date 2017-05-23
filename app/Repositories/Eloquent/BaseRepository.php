@@ -31,14 +31,13 @@ abstract class BaseRepository implements RepositoryInterface
 
     /**
      * Specify Model class name
-     *
-     * @return mixed
+     * @return class
      */
     abstract public function setModel();
 
     /**
-     * @return Model
      * make model
+     * @return Model
      */
     public function makeModel()
     {
@@ -48,43 +47,54 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * @param array $columns
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
      * Retrieve all data of repository
+     * @param array $columns
+     * @return array
      */
-    public function all($columns = ['*'])
+    public function all(array $columns = ['*'])
     {
-        return $this->model->all();
+        return $this->model->all($columns);
     }
 
     /**
+     * Retrieve all data of repository, paginated
      * @param null $limit
      * @param array $columns
-     * @return mixed
-     * Retrieve all data of repository, paginated
+     * @return array
      */
-    public function paginate($limit = null, $columns = ['*'])
+    public function paginate(string $limit = null, $columns = ['*'])
     {
-        $limit = is_null($limit) ? config('repository.pagination.limit', 10) : $limit;
+        $limit = is_null($limit) ? 10 : $limit;
 
         return $this->model->paginate($limit, $columns);
     }
 
     /**
+     * Find data by id
      * @param $id
      * @param array $columns
-     * @return mixed
-     * Find data by id
+     * @return array
      */
-    public function find($id, $columns = ['*'])
+    public function find(string $id, $columns = ['*'])
     {
         return $this->model->findOrFail($id, $columns);
     }
 
     /**
-     * @param array $input
+     * @param $attribute
+     * @param $value
+     * @param array $columns
      * @return mixed
+     */
+    public function findAllBy(string $attribute, string $value, $columns = ['*'])
+    {
+        return $this->model->where($attribute, '=', $value)->get($columns);
+    }
+
+    /**
      * Save a new entity in repository
+     * @param array $input
+     * @return boolean
      */
     public function create(array $input)
     {
@@ -92,26 +102,26 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * Update a entity in repository by id
      * @param array $input
      * @param $id
-     * @return $this
-     * Update a entity in repository by id
+     * @return array
      */
-    public function update(array $input, $id)
+    public function update(array $input, string $id)
     {
         $model = $this->model->findOrFail($id);
         $model->fill($input);
         $model->save();
 
-        return $this;
+        return $model;
     }
 
     /**
+     * Delete a entity in repository by id
      * @param $id
      * @return int
-     * Delete a entity in repository by id
      */
-    public function delete($id)
+    public function delete(string $id)
     {
         return $this->model->destroy($id);
     }

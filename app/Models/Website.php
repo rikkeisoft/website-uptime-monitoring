@@ -3,10 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Website extends Model
 {
     use UuidModelTrait;
+    use SoftDeletes;
 
     public $incrementing = false;
 

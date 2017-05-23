@@ -6,41 +6,55 @@ interface RepositoryInterface
 {
     /**
      * Retrieve all data of repository
+     * @param array $columns
+     * @return array
      */
-    public function all($columns = ['*']);
+    public function all(array $columns = ['*']);
 
     /**
      * Find data by id
+     * @param $id
+     * @param array $columns
+     * @return array
      */
-    public function find($id, $columns = ['*']);
+    public function find(string $id, $columns = ['*']);
 
     /**
-     * @param null $limit
+     * find data by attribute
+     * @param $attribute
+     * @param $value
      * @param array $columns
      * @return mixed
-     *  Retrieve all data of repository, paginated
      */
-    public function paginate($limit = null, $columns = ['*']);
+    public function findAllBy(string $attribute, string $value, $columns = ['*']);
 
     /**
-     * @param array $input
-     * @return mixed
+     * Retrieve all data of repository, paginated
+     * @param null $limit
+     * @param array $columns
+     * @return array
+     */
+    public function paginate(string $limit = 10, $columns = ['*']);
+
+    /**
      * Save a new entity in repository
+     * @param array $input
+     * @return boolean
      */
     public function create(array $input);
 
     /**
+     * Update a entity in repository by id
      * @param array $input
      * @param $id
-     * @return mixed
-     * Update a entity in repository by id
+     * @return array
      */
-    public function update(array $input, $id);
+    public function update(array $input, string $id);
 
     /**
-     * @param $id
-     * @return mixed
      * Delete a entity in repository by id
+     * @param $id
+     * @return int
      */
-    public function delete($id);
+    public function delete(string $id);
 }
