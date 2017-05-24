@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
 
 class AlertMethodAlertGroup extends BaseModel
 {
