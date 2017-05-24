@@ -5,6 +5,9 @@ use App\Scopes\UserIdScope;
 
 class Website extends BaseModel
 {
+    const STATUS_ENABLED = 1;
+    const STATUS_DISABLED = 2;
+  
     /**
      * The "booting" method of the model.
      *
@@ -16,7 +19,7 @@ class Website extends BaseModel
 
         static::addGlobalScope(new UserIdScope());
     }
-
+    
     protected $fillable = [
         'user_id',
         'url',

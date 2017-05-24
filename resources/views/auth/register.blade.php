@@ -1,4 +1,4 @@
-@extends("../main")
+@extends("../template_Auth")
 @section('title')
 Register
 @endsection

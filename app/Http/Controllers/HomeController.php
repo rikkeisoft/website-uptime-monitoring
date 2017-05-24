@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\StatisticsService;
 
 class HomeController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+{   
     public function __construct()
     {
         $this->middleware('auth');
     }
-
+  
     /**
      * Show the application dashboard.
      *
@@ -25,4 +20,20 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    
+     /**
+     * Show the alert group in dashboard.
+     */
+    public function showStatistics()
+    {
+        $result = StatisticsService::showStatistics();
+
+        return view('admin.dashboard')->with([
+             'alert_groups' => $result['alert_groups'],
+             'alert_methods' => $result['alert_methods'],
+             'websites' => $result['websites'],
+             'up_websites' => $result['up_websites']
+        ]);
+    }
+ 
 }
