@@ -30,3 +30,7 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
+
+//route alertGroup
+Route::get('/alert-group','AlertGroupController@index');
+Route::get('/alert-group/{id}/delete','AlertGroupController@destroy');

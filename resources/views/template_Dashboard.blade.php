@@ -15,6 +15,7 @@
     <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -77,13 +78,13 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Methods<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Alert Groups</a>
+                                    <a href="flot.html">Alert Methods</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Add New</a>
@@ -95,7 +96,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Alert Groups</a>
+                                    <a href="/alert-group">Alert Groups</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Add New</a>
@@ -157,16 +158,7 @@
             <!-- /.navbar-static-side -->
         </nav>
         @yield('content')
-        <!-- /.panel-body -->
-        <div class="panel-footer">
-            <div class="input-group">
-                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                <span class="input-group-btn">
-                <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
-                </span>
-            </div>
-        </div>
-        <!-- /.panel-footer -->
+       <!-- /.panel-footer -->
     </div>
     <!-- /.panel .chat-panel -->
     </div>
@@ -179,9 +171,6 @@
 
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -191,8 +180,6 @@
     <!-- Morris Charts JavaScript -->
     <script src="{{ asset('vendor/raphael/raphael.min.js')}}"></script>
     <script src="{{ asset('vendor/morrisjs/morris.min.js')}}"></script>
-    <script src="{{ asset('js/morris-data.js')}}"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('dist/js/sb-admin-2.js')}}"></script>
 
