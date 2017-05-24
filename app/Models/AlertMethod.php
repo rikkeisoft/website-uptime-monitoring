@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Alsofronie\Uuid\UuidModelTrait;
+use App\Scopes\UserIdScope;
 
-class AlertMethod extends Model
+class AlertMethod extends BaseModel
 {
-    use UuidModelTrait;
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
 
-    public $incrementing = false;
-
+        static::addGlobalScope(new UserIdScope());
+    }
+    
     protected $fillable = [
         'user_id',
         'name',

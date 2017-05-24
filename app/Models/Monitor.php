@@ -2,15 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Alsofronie\Uuid\UuidModelTrait;
-
-class Monitor extends Model
+class Monitor extends BaseModel
 {
-    use UuidModelTrait;
-
-    public $incrementing = false;
-
     protected $fillable = [
         'result',
         'website_id',
