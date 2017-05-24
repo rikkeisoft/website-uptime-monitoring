@@ -15,6 +15,24 @@
     <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{{ asset('vendor/raphael/raphael.min.js')}}"></script>
+    <script src="{{ asset('vendor/morrisjs/morris.min.js')}}"></script>
+    <script src="{{ asset('js/morris-data.js')}}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ asset('dist/js/sb-admin-2.js')}}"></script>
+
 </head>
 <body>
     <div id="wrapper">
@@ -179,22 +197,7 @@
 
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="{{ asset('vendor/raphael/raphael.min.js')}}"></script>
-    <script src="{{ asset('vendor/morrisjs/morris.min.js')}}"></script>
-    <script src="{{ asset('js/morris-data.js')}}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('dist/js/sb-admin-2.js')}}"></script>
 
 </body>
 

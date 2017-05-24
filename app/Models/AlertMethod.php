@@ -6,6 +6,12 @@ use App\Scopes\UserIdScope;
 
 class AlertMethod extends BaseModel
 {
+    const LIST_TYPE_ALERT_METHOD = [
+        '1' => 'Email',
+        '2' => 'SMS',
+        '3' => 'Webhook'
+    ];
+
     /**
      * The "booting" method of the model.
      *
