@@ -2,17 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Alsofronie\Uuid\UuidModelTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\BaseModel;
 
-class Monitor extends Model
+class Monitor extends BaseModel
 {
-    use UuidModelTrait;
-    use SoftDeletes;
-
-    public $incrementing = false;
-
     protected $fillable = [
         'result',
         'website_id',

@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Alsofronie\Uuid\UuidModelTrait;
+use App\Models\BaseModel;
 
-class AlertMethodAlertGroup extends Model
+class AlertMethodAlertGroup extends BaseModel
 {
-    use UuidModelTrait;
-
-    public $incrementing = false;
-
     public function alertGroup()
     {
         return $this->belongsTo(AlertGroup::class, 'alert_group_id', 'id');

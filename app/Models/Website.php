@@ -1,16 +1,22 @@
 <?php
 namespace App\Models;
 
-use App\Models\BaseModelInterface;
-use Alsofronie\Uuid\UuidModelTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\BaseModel;
+use App\Scopes\UserIdScope;
 
-class Website extends Model
+class Website extends BaseModel
 {
-    use UuidModelTrait;
-    use SoftDeletes;
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
 
-    public $incrementing = false;
+        static::addGlobalScope(new UserIdScope());
+    }
 
     protected $fillable = [
         'user_id',

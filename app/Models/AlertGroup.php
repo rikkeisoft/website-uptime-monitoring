@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
-use App\Models\BaseModelInterface;
-use Alsofronie\Uuid\UuidModelTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\BaseModel;
+use App\Scopes\UserIdScope;
 
-class AlertGroup extends BaseModelInterface
+class AlertGroup extends BaseModel
 {
-    use UuidModelTrait;
-    use SoftDeletes;
 
-    public $incrementing = false;
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new UserIdScope());
+    }
 
     protected $fillable = [
         'user_id',
