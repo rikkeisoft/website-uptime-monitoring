@@ -1,4 +1,4 @@
-const LIST_TYPE = {"1":"1", "2":"2", "3":"3"};
+const LIST_TYPE = {"1":"Email", "2":"SMS", "3":"WebHook"};
 
 $(document).ready(function (e) {
     showOldType();
@@ -14,8 +14,8 @@ function showDiv(prefix,chooser)
     var selectedOption = (chooser.options[chooser.selectedIndex].value);
 
     $.each(LIST_TYPE, function( index, value ) {
-        if (selectedOption == value)  {
-            displayDiv(prefix,value);
+        if (selectedOption == index)  {
+            displayDiv(prefix,index);
         }
     });
 }
@@ -34,8 +34,8 @@ function showOldType()
     $("#type1").hide();
 
     $.each(LIST_TYPE, function( index, value ) {
-        if(type == value) {
-            displayDiv("type",value);
+        if(type == index) {
+            displayDiv("type",index);
         }
     });
 

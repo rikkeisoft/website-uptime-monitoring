@@ -1,30 +1,31 @@
 @extends('template_Dashboard')
 
 @section('title')
-    Add Alert Methods|Website Uptime Monitor
+    Edit Alert Methods|Website Uptime Monitor
 @endsection
 
 @section('content')
-    <div class="" style="padding-top: 20px;">
+    <div class="">
         <div class="row">
             @component('flash_alert_message')
 
             @endcomponent
             <div class="col-lg-12">
-                <h1 class="page-header">Add Alert Methods</h1>
+                <h1 class="page-header">Edit Alert Methods</h1>
             </div>
             <div style="margin: 20px 0">
                 <a href="{{ route('viewListAlertMethods') }}"><button type="button" class="btn btn-primary" >List Alert Methods</button></a>
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('addAlertMethods') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('updateAlertMethod') }}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ $alertMethod->id }}">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-1 control-label">Methods Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ !empty(old('name'))?old('name'):$alertMethod->name }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -38,9 +39,9 @@
                             <label for="type" class="col-md-1 control-label">Type</label>
 
                             <div class="col-md-6">
-                                <select id="type" class="form-control" name="type" onchange="showDiv('type',this)" value="{{ old('type') }}">
+                                <select id="type" class="form-control" name="type" onchange="showDiv('type',this)" value="{{ !empty(old('type'))?old('type'):$alertMethod->type }}">
                                     @foreach($listType as $key => $value)
-                                        <option value="{{ $key }}" {{ old('type')== $key?'selected':''  }}>{{ $value }}</option>
+                                        <option value="{{ $key }}" {{ $alertMethod->type== $key?'selected':''  }}>{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -50,7 +51,7 @@
                             <label for="email" class="col-md-1 control-label">E-Mail</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ !empty(old('email'))?old('email'):$alertMethod->email }}" autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -64,7 +65,7 @@
                             <label for="phone_number" class="col-md-1 control-label">Phone Number</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" disabled autofocus>
+                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ !empty(old('phone_number'))?old('phone_number'):$alertMethod->phone_number }}" disabled autofocus>
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
@@ -78,7 +79,7 @@
                             <label for="webhook" class="col-md-1 control-label">Webhook</label>
 
                             <div class="col-md-6">
-                                <input id="webhook" type="webhook" class="form-control" name="webhook" value="{{ old('webhook') }}" disabled autofocus>
+                                <input id="webhook" type="webhook" class="form-control" name="webhook" value="{{ !empty(old('webhook'))?old('webhook'):$alertMethod->webhook }}" disabled autofocus>
 
                                 @if ($errors->has('webhook'))
                                     <span class="help-block">
@@ -89,9 +90,9 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-1">
+                            <div class="col-md-8 col-md-offset-1">
                                 <button type="submit" class="btn btn-primary">
-                                    Add Methods
+                                    Update Methods
                                 </button>
                             </div>
                         </div>

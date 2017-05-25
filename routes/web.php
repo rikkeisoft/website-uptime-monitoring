@@ -37,4 +37,9 @@ Route::get('/alertmethods/list', 'AlertMethodsController@index')->name('viewList
 //router add alert method view
 Route::get('/alertmethods/add', 'AlertMethodsController@add')->name('viewAddAlertMethods');
 
+//router edit alert method view
+Route::get('/alertmethods/update/{id}', 'AlertMethodsController@update')->name('viewUpdateAlertMethods');
+
 Route::post('/alertmethods/add_alert_method', 'AlertMethodsController@addAlertMethod')->name('addAlertMethods');
+Route::post('/alertmethods/update_alert_method', 'AlertMethodsController@updateAlertMethod')->name('updateAlertMethod');
+Route::post('/alertmethods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');

@@ -5,16 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
+
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <!-- MetisMenu CSS -->
-    <link href="{{asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/metisMenu.min.css')}}" rel="stylesheet">
+
     <!-- Custom CSS -->
-    <link href="{{asset('dist/css/sb-admin-2.css')}}" rel="stylesheet">
+    <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
+
     <!-- Morris Charts CSS -->
-    <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
+    <link href="{{asset('css/morris.css')}}" rel="stylesheet">
+
     <!-- Custom Fonts -->
-    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
+    <!-- Custom style -->
+    <link href="{{ asset('css/style.css')}}" rel="stylesheet" type="text/css">
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
@@ -23,15 +31,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
+    <script src="{{ asset('js/metisMenu.min.js')}}"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="{{ asset('vendor/raphael/raphael.min.js')}}"></script>
-    <script src="{{ asset('vendor/morrisjs/morris.min.js')}}"></script>
-    <script src="{{ asset('js/morris-data.js')}}"></script>
+    <script src="{{ asset('js/raphael.min.js')}}"></script>
+
+    <script src="{{ asset('js/morris.min.js')}}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('dist/js/sb-admin-2.js')}}"></script>
+    <script src="{{ asset('js/sb-admin-2.js')}}"></script>
+
+    <script src="{{ asset('js/website-uptime-monitoring.js')}}"></script>
 
 </head>
 <body>
@@ -74,12 +84,7 @@
                 </li>
                 @endif
             </ul>
-            <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-            </ul>
             <!-- /.navbar-top-links -->
-
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -101,10 +106,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Methods<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Alert Groups</a>
+                                    <a href="{{ route('viewListAlertMethods') }}">Alert Methods</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Add New</a>
+                                    <a href="{{ route('viewAddAlertMethods') }}">Add New Alert Methods</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -159,46 +164,19 @@
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
-                    </li>
-
-                    </ul>
-                    <!-- /.nav-second-level -->
-                    </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                    </li>
-                    </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        @yield('content')
+        <div id="page-wrapper">
+            @yield('content')
+        </div>
         <!-- /.panel-body -->
         <div class="panel-footer">
-            <div class="input-group">
-                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                <span class="input-group-btn">
-                <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
-                </span>
-            </div>
+
         </div>
-        <!-- /.panel-footer -->
     </div>
-    <!-- /.panel .chat-panel -->
-    </div>
-    <!-- /.col-lg-4 -->
-    </div>
-    <!-- /.row -->
-    </div>
-    <!-- /#page-wrapper -->
-
-
-    <!-- /#wrapper -->
-
-
-
 </body>
 
 </html>
