@@ -31,7 +31,9 @@ Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
 
-//route alertGroup
+//route alert-group
 Route::resource('/alert-group','AlertGroupController');
-Route::get('/alert-group/{id}/delete','AlertGroupController@destroy');
-Route::get('/alert-group/{id}/edit','AlertGroupController@edit');
+//route deleted alert-group
+Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
+//route edit alert-group
+Route::post('/alert-group/updateAlertGroup','AlertGroupController@updateAlertGroup')->name('updateAlertGroup');

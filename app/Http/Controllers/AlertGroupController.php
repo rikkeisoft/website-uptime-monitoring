@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Repositories\AlertGroupsRepository;
 use Auth;
 use App\Http\Requests\AlertGroupRequest;
+use Illuminate\Http\Request;
 
 class AlertGroupController extends Controller
 {
@@ -61,13 +62,17 @@ class AlertGroupController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return bool
      */
-    public function update(AlertGroupRequest $request, $id)
+    public function updateAlertGroup(AlertGroupRequest $request)
     {
-     $data = $this->alertGroupsRepository->find($id);
-     $data = $request->input('name');
-     dd($data);
+        $data = $request->only('name');
+        $id = $request->input('id');
+        if (empty($data)){
+            return false;
+        }
+        $result = $this->alertGroupsRepository->update($data,$id);
+        return redirect('/alert-group');
     }
 
     /**
@@ -101,15 +106,13 @@ class AlertGroupController extends Controller
      * @param  int  $id
      * @return string
      */
-    public function destroy($id)
+    public function destroyAlertGroup(Request $request)
     {
-        if (!$id){
+        $data = $request->input('chkCat');
+        if (empty($data)){
             return false;
         }
-        $result = $this->alertGroupsRepository->delete($id);
-        if ($result === false){
-            return "deleted false";
-        }
+        $result = $this->alertGroupsRepository->delete($data);
         return redirect('/alert-group');
     }
 
