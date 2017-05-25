@@ -16,6 +16,7 @@
     <!-- Custom Fonts -->
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -99,7 +100,7 @@
                                     <a href="/alert-group">Alert Groups</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Add New</a>
+                                    <a href="/alert-group/create">Add New</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

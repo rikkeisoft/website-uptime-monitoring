@@ -5,7 +5,12 @@ Alert Group
 @endsection
 @section('content')
 <div id="page-wrapper">
-    <h1>List Alert Groups</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group">
+            <a class="btn green btn-success" href="/alert-group/create"><span>Add New </span><i class="fa fa-plus"></i></a>
+            <button class="btn red btn btn-danger">Remove selected</button></div></div>
+    </div>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -24,7 +29,7 @@ Alert Group
             <td>{{ $key->created_at }}</td>
             <td>{{ $key->updated_at }}</td>
             <td>
-                <a type="button" class="btn btn-primary btn-sm"href="{!! $key->id !!}">Edit</a>
+                <a type="button" class="btn btn-primary btn-sm"href="alert-group/{!! $key->id !!}/edit">Edit</a>
                 <a type="button" class="btn btn-danger btn-sm" href="alert-group/{!! $key->id !!}/delete">Delete</a>
             </td>
         </tr>

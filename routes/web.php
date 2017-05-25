@@ -32,5 +32,6 @@ Route::get('/activate/successfully',function(){
 });
 
 //route alertGroup
-Route::get('/alert-group','AlertGroupController@index');
+Route::resource('/alert-group','AlertGroupController');
 Route::get('/alert-group/{id}/delete','AlertGroupController@destroy');
+Route::get('/alert-group/{id}/edit','AlertGroupController@edit');
