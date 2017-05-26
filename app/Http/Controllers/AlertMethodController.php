@@ -50,6 +50,7 @@ class AlertMethodsController extends Controller
     }
 
     /**
+     * view update alert methods
      * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -90,6 +91,7 @@ class AlertMethodsController extends Controller
     }
 
     /**
+     * update alert methods post
      * @param UpdateAlertMethodsRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
