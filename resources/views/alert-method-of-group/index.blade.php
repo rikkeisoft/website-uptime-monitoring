@@ -5,12 +5,12 @@
 @endsection
 @section('content')
     <div id="page-wrapper">
-        <form id="destroyForm" role="form" method="POST" action="{{ route('destroyAlertMethodAlertGroup') }}">
+        <form id="destroyForm" role="form" method="POST" action="{{ route('destroyMethodofGroup') }}">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-6">
                     <div class="btn-group">
-                        <a class="btn green btn-success" href="/alert-group/create"><span>Add New </span><i class="fa fa-plus"></i></a>
+                        <a class="btn green btn-success" href="{{ asset('alert-method-of-group/create')}}"><span>Add New </span><i class="fa fa-plus"></i></a>
                         <button class="btn red btn btn-danger" id="SubmitDelete" disabled>Remove selected</button>
                     </div>
                 </div>
@@ -30,12 +30,12 @@
                 @foreach($items as $key)
                     <tr>
                         <td><input class="checkbox" type="checkbox" name="chkCat[]" onclick="clickCheckbox();" value="{!! $key->id !!}"></td>
-                        <td>{{ $key->alert_method_id }}</td>
-                        <td>{{ $key->alert_group_id }}</td>
+                        <td>{{ $key->alertGroup->name }}</td>
+                        <td>{{ $key->alertMethod->name }}</td>
                         <td>{{ $key->created_at }}</td>
                         <td>{{ $key->updated_at }}</td>
                         <td>
-                            <a type="button" class="btn btn-primary btn-sm"href="alert-group/{!! $key->id !!}/edit">Edit</a>
+                            <a type="button" class="btn btn-primary btn-sm"href="/alert-method-of-group/{!! $key->id !!}/edit">Edit</a>
                         </td>
                     </tr>
                 @endforeach

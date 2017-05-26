@@ -15,6 +15,8 @@
     <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -108,10 +110,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Alert Method of a Group</a>
+                                    <a href="{{ asset('alert-method-of-group')}}">Alert Method of a Group</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Add New</a>
+                                    <a href="{{ asset('alert-method-of-group')}}">Add New</a>
                                 </li>
                             </ul>
                         </li>
@@ -179,8 +181,6 @@
 
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
