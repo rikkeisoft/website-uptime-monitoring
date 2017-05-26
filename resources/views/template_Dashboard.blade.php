@@ -169,9 +169,7 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        <div id="page-wrapper">
-            @yield('content')
-        </div>
+        @yield('content')
         <!-- /.panel-body -->
         <div class="panel-footer">
 
