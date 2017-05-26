@@ -138,6 +138,5 @@ class AlertMethodsController extends Controller
 
             return redirect()->back();
         }
-
     }
 }

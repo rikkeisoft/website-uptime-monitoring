@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 class AlertMethodAlertGroup extends BaseModel
 {
     public function alertGroup()
