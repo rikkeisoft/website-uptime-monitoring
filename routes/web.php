@@ -30,3 +30,17 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
+
+
+//router list website
+Route::get('/websites/list', 'WebsitesController@index')->name('viewListWebsite');
+
+//router add websites view
+Route::get('/websites/add', 'WebsitesController@add')->name('viewAddWebsite');
+
+//router edit websites view
+Route::get('/websites/update/{id}', 'WebsitesController@update')->name('viewUpdateWebsite');
+
+Route::post('/websites/add_website', 'WebsitesController@addWebsite')->name('addWebsite');
+Route::post('/websites/update_website', 'WebsitesController@updateWebsite')->name('updateWebsite');
+Route::post('/websites/delete_website', 'WebsitesController@deleteWebsite')->name('deleteWebsite');
