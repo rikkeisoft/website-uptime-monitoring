@@ -47,7 +47,6 @@ class AlertMethodAlertGroupController extends Controller
     {
         $alertGroup = $this->alertGroupsRepository->all();
         $alertMethod = $this->alertMethodsRepository->all();
-
         if (empty($alertGroup && $alertMethod)){
             return false;
         }
@@ -107,7 +106,6 @@ class AlertMethodAlertGroupController extends Controller
         $checkRequest = $request->input('alert_method_id');
         $data = $request->only('alert_group_id','alert_method_id');
         $id = $request->input('id');
-
         // Check request null
         if (empty($checkRequest)){
             return redirect('/alert-method-of-group');
