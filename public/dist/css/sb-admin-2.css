@@ -432,3 +432,7 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+.green
+{
+  margin-right: 0.25em !important;
+}
