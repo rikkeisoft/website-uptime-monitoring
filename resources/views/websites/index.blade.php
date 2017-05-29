@@ -29,10 +29,10 @@
                                     <th><input type="checkbox" id="select_all"/></th>
                                     <th>Name</th>
                                     <th>Url</th>
+                                    <th>Alert Group</th>
                                     <th>Sensitivity</th>
                                     <th>Status</th>
                                     <th>Frequency</th>
-                                    <th>Create By</th>
                                     <th>Created</th>
                                     <th class="center">Update</th>
                                 </tr>
@@ -43,10 +43,10 @@
                                         <td><input type="checkbox" name="chkCat[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
                                         <td>{{ $website->name }}</td>
                                         <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
+                                        <td>{{ isset($website->monitor->alertGroup->name)?$website->monitor->alertGroup->name:'' }}</td>
                                         <td>{{ $listSensitivity[$website->sensitivity] }}</td>
-                                        <td>{{ $listStatus[$website->status] }}</td>
+                                        <td><button type="button" onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')" class="btn btn-sm {{ $website->status == 1?'btn-primary':'btn-danger' }}" >{{ $listStatus[$website->status] }}</button></td>
                                         <td>{{ $listFrequency[$website->frequency] }}</td>
-                                        <td>{{ $website->user->username }}</td>
                                         <td>{{ $website->created_at }}</td>
                                         <td class="center"><a href="{{ $url=action('WebsitesController@update',$website->id) }}"><i class="fa fa-edit"></i></a></td>
                                     </tr>
@@ -55,6 +55,11 @@
                             </table>
                             <button type="button" class="btn btn-danger" id="SubmitDelete" disabled >Delete</button>
                         </form>
+                        <form id="checkEnableDisable" method="post" action="{{ route('setStatusWebsite') }}">
+                            <input id="checkEnableDisableID" name="id" type="hidden">
+                            <input id="checkEnableDisableStatus" name="status" type="hidden">
+                            {{ csrf_field() }}
+                        </form>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -62,5 +67,6 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
+        <script src="{{ asset('js/website.js')}}"></script>
     </div>
 @endsection

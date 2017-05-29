@@ -5,38 +5,60 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddWebsitesRequest;
 use App\Http\Requests\UpdateWebsitesRequest;
 use App\Models\Website;
+use App\Repositories\AlertGroupsRepository;
+use App\Repositories\MonitorRepository;
 use Illuminate\Http\Request;
 use App\Repositories\WebsiteRepository;
 use Illuminate\Support\Facades\Auth;
 
 class WebsitesController extends Controller
 {
-    protected $websiteRepository;
+
+    protected $websiteRepository,
+        $monitorRepository,
+        $alertGroupsRepository,
+        $listStatus,
+        $listFrequency,
+        $listSensitivity;
     /**
      * WebsitesController constructor.
      * @param WebsiteRepository $websiteRepository
      */
-    public function __construct(WebsiteRepository $websiteRepository)
+    public function __construct(WebsiteRepository $websiteRepository, MonitorRepository $monitorRepository, AlertGroupsRepository $alertGroupsRepository)
     {
         $this->middleware('auth');
 
         $this->websiteRepository = $websiteRepository;
+
+        $this->monitorRepository = $monitorRepository;
+
+        $this->alertGroupsRepository = $alertGroupsRepository;
+
+        $this->listFrequency = Website::LIST_FREQUENCY;
+
+        $this->listSensitivity = Website::LIST_SENSITIVITY;
+
+        $this->listStatus = Website::LIST_STATUS;
     }
 
     /**
+     * view list website
      * @return \Illuminate\View\View
      */
     public function index()
     {
         $listWebsite = $this->websiteRepository->all();
 
-        $listFrequency = Website::LIST_FREQUENCY;
+        $listAlertGroup = $this->alertGroupsRepository->all();
 
-        $listSensitivity = Website::LIST_SENSITIVITY;
-
-        $listStatus = Website::LIST_STATUS;
-
-        return view('websites.index', compact('listWebsite', 'listFrequency', 'listSensitivity', 'listStatus'));
+        return view('websites.index')
+            ->with([
+                'listWebsite' => $listWebsite,
+                'listFrequency' => $this->listFrequency,
+                'listSensitivity' => $this->listSensitivity,
+                'listStatus' => $this->listStatus,
+                'listAlertGroup' => $listAlertGroup
+            ]);
     }
 
     /**
@@ -51,7 +73,15 @@ class WebsitesController extends Controller
 
         $listStatus = Website::LIST_STATUS;
 
-        return view('websites.add', compact('listFrequency', 'listSensitivity', 'listStatus'));
+        $listAlertGroup = $this->alertGroupsRepository->all();
+
+        return view('websites.add')
+            ->with([
+                'listFrequency' => $this->listFrequency,
+                'listSensitivity' => $this->listSensitivity,
+                'listStatus' => $this->listStatus,
+                'listAlertGroup' => $listAlertGroup
+            ]);
     }
 
     /**
@@ -63,7 +93,9 @@ class WebsitesController extends Controller
     {
         $website = $this->websiteRepository->find($id);
 
-        if(empty($website)) abort(404);
+        if (empty($website)) {
+            abort(404);
+        }
 
         $listFrequency = Website::LIST_FREQUENCY;
 
@@ -71,7 +103,16 @@ class WebsitesController extends Controller
 
         $listStatus = Website::LIST_STATUS;
 
-        return view('websites.update', compact('website', 'listFrequency', 'listSensitivity', 'listStatus'));
+        $listAlertGroup = $this->alertGroupsRepository->all();
+
+        return view('websites.update')
+            ->with([
+                'website' => $website,
+                'listFrequency' => $this->listFrequency,
+                'listSensitivity' => $this->listSensitivity,
+                'listStatus' => $this->listStatus,
+                'listAlertGroup' => $listAlertGroup
+            ]);
     }
 
     /**
@@ -89,8 +130,18 @@ class WebsitesController extends Controller
         $createWebsite = $this->websiteRepository->create($data);
 
         if ($createWebsite) {
-            //messgae alert success
-            $request->session()->flash('alert-success', 'Add Success');
+            //create monitor with website
+            $dataMonitor = $request->only('alert_group_id');
+            $dataMonitor['website_id'] = $createWebsite->id;
+            $dataMonitor['result'] = 2;
+
+            $createMonitor = $this->monitorRepository->create($dataMonitor);
+
+            if ($createMonitor) {
+                $request->session()->flash('alert-success', 'Add Success');
+            } else {
+                $request->session()->flash('alert-error', 'Add Monitor Error');
+            }
 
             return redirect()->route('viewListWebsite');
         } else {
@@ -115,8 +166,17 @@ class WebsitesController extends Controller
         $update = $this->websiteRepository->update($data, $id);
 
         if ($update) {
-            //messgae alert success
-            $request->session()->flash('alert-success', 'Update Success');
+            //update monitor with website
+            $dataMonitor = $request->only('alert_group_id');
+            $monitorId = $update->monitor->id;
+
+            $updateMonitor = $this->monitorRepository->update($dataMonitor, $monitorId);
+
+            if ($updateMonitor) {
+                $request->session()->flash('alert-success', 'Update Success');
+            } else {
+                $request->session()->flash('alert-error', 'Update Monitor Error');
+            }
 
             return redirect()->route('viewListWebsite');
         } else {
@@ -148,6 +208,38 @@ class WebsitesController extends Controller
             $request->session()->flash('alert-error', 'Add Error');
 
             return redirect()->back();
+        }
+    }
+
+    /**
+     * set enable or disable website
+     * @param Request $request
+     * @return json
+     */
+    public function setEnableDisable(Request $request)
+    {
+        $status = $request->input('status');
+
+        if ($status == 1) {
+            $data = [
+                'status' => 2
+            ];
+        } else {
+            $data = [
+                'status' => 1
+            ];
+        }
+
+        $id = $request->input('id');
+
+        $update = $this->websiteRepository->update($data, $id);
+
+        $listStatus = Website::LIST_STATUS;
+
+        if (isset($update->id)) {
+            return json_encode(['success' => true]);
+        } else {
+            return json_encode(['success' => false]);
         }
     }
 }

@@ -8,25 +8,25 @@ class Website extends BaseModel
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 2;
 
-    const LIST_STATUS = array(
+    const LIST_STATUS = [
         '1' => 'Enable',
         '2' => 'Disabled',
-    );
+    ];
 
-    const LIST_FREQUENCY = array(
+    const LIST_FREQUENCY = [
         '5' => '5 minutes',
         '10' => '10 minutes',
         '15' => '15 minutes',
         '20' => '20 minutes',
         '30' => '30 minutes',
         '60' => '60 minutes',
-    );
+    ];
 
-    const LIST_SENSITIVITY = array(
+    const LIST_SENSITIVITY = [
         '1' => 'Low: Retry 1 times',
         '3' => 'Medium: Retry 3 times',
         '5' => 'High: Retry 5 times',
-    );
+    ];
 
     /**
      * The "booting" method of the model.
@@ -52,5 +52,10 @@ class Website extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function monitor()
+    {
+        return $this->hasOne(Monitor::class, 'website_id', 'id');
     }
 }

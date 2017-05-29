@@ -44,3 +44,4 @@ Route::get('/websites/update/{id}', 'WebsitesController@update')->name('viewUpda
 Route::post('/websites/add_website', 'WebsitesController@addWebsite')->name('addWebsite');
 Route::post('/websites/update_website', 'WebsitesController@updateWebsite')->name('updateWebsite');
 Route::post('/websites/delete_website', 'WebsitesController@deleteWebsite')->name('deleteWebsite');
+Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
