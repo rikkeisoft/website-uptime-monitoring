@@ -29,11 +29,10 @@
                                     <th><input type="checkbox" id="select_all"/></th>
                                     <th>Name</th>
                                     <th>Url</th>
+                                    <th>Time of the last request</th>
                                     <th>Alert Group</th>
-                                    <th>Sensitivity</th>
-                                    <th>Status</th>
-                                    <th>Frequency</th>
-                                    <th>Created</th>
+                                    <th>Disable/Enable</th>
+                                    <th>Created Time</th>
                                     <th class="center">Update</th>
                                 </tr>
                                 </thead>
@@ -43,10 +42,9 @@
                                         <td><input type="checkbox" name="chkCat[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
                                         <td>{{ $website->name }}</td>
                                         <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
+                                        <td>{{ $website->updated_at }}</td>
                                         <td>{{ isset($website->monitor->alertGroup->name)?$website->monitor->alertGroup->name:'' }}</td>
-                                        <td>{{ $listSensitivity[$website->sensitivity] }}</td>
                                         <td><button type="button" onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')" class="btn btn-sm {{ $website->status == 1?'btn-primary':'btn-danger' }}" >{{ $listStatus[$website->status] }}</button></td>
-                                        <td>{{ $listFrequency[$website->frequency] }}</td>
                                         <td>{{ $website->created_at }}</td>
                                         <td class="center"><a href="{{ $url=action('WebsitesController@update',$website->id) }}"><i class="fa fa-edit"></i></a></td>
                                     </tr>

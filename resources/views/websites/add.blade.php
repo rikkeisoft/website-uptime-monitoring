@@ -65,6 +65,18 @@
                         </div>
                         @endif
 
+                        <div class="form-group{{ $errors->has('frequency') ? ' has-error' : '' }}">
+                            <label for="frequency" class="col-md-1 control-label">frequency</label>
+
+                            <div class="col-md-6">
+                                <select id="type" class="form-control" name="frequency" value="{{ old('frequency') }}">
+                                    @foreach($listFrequency as $key => $value)
+                                        <option value="{{ $key }}" {{ old('frequency')== $key?'selected':''  }}>{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('sensitivity') ? ' has-error' : '' }}">
                             <label for="sensitivity" class="col-md-1 control-label">Sensitivity</label>
 
@@ -84,18 +96,6 @@
                                 <select id="status" class="form-control" name="status" value="{{ old('status') }}">
                                     @foreach($listStatus as $key => $value)
                                         <option value="{{ $key }}" {{ old('status')== $key?'selected':''  }}>{{ $value }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('frequency') ? ' has-error' : '' }}">
-                            <label for="frequency" class="col-md-1 control-label">frequency</label>
-
-                            <div class="col-md-6">
-                                <select id="type" class="form-control" name="frequency" value="{{ old('frequency') }}">
-                                    @foreach($listFrequency as $key => $value)
-                                        <option value="{{ $key }}" {{ old('frequency')== $key?'selected':''  }}>{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
