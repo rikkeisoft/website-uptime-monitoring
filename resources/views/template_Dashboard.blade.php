@@ -11,6 +11,7 @@
     <link href="{{asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{asset('dist/css/sb-admin-2.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <!-- Morris Charts CSS -->
     <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
