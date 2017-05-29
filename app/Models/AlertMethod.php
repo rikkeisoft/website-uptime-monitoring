@@ -37,4 +37,9 @@ class AlertMethod extends BaseModel
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function alertmethodalertgroup()
+    {
+        return $this->hasOne(AlertMethodAlertGroup::class);
+    }
 }

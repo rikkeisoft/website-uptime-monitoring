@@ -24,6 +24,7 @@ class CreateAlertMethodsRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'alert_group_id' => 'required|string|max:255',
             'type' => 'required|integer|min:1',
             'email' => 'sometimes|required|string|email|max:255',
             'phone_number' => 'sometimes|required|string|max:255',

@@ -34,6 +34,24 @@
                             </div>
                         </div>
 
+                        @if(!empty($listAlertGroup))
+                            <div class="form-group{{ $errors->has('alert_group_id') ? ' has-error' : '' }}">
+                                <label for="alert_group_id" class="col-md-1 control-label">Alert Group</label>
+
+                                <div class="col-md-6">
+                                    <select id="alertGroupId" class="form-control" name="alert_group_id" value="{{ old('alert_group_id') }}">
+                                        @foreach($listAlertGroup as $value)
+                                            <option value="{{ $value->id }}" {{ old('alert_group_id')== $value->id?'selected':''  }}>{{ $value->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('alert_group_id'))
+                                        <span class="help-block">
+                                <strong>{{ $errors->first('alert_group_id') }}</strong>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-1 control-label">Type</label>
 

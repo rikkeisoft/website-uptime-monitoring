@@ -28,6 +28,7 @@
                                     <tr>
                                         <th><input type="checkbox" id="select_all"/></th>
                                         <th>Name</th>
+                                        <th>Alert Group</th>
                                         <th>Type</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
@@ -42,6 +43,7 @@
                                         <tr class="odd gradeX">
                                             <td><input type="checkbox" name="chkCat[]" value="{{ $alert->id }}" onclick="clickCheckbox();"></td>
                                             <td>{{ $alert->name }}</td>
+                                            <td>{{ $alert->alertmethodalertgroup->alertGroup->name }}</td>
                                             <td>{{ $listType[$alert->type] }}</td>
                                             <td>{{ $alert->email }}</td>
                                             <td>{{ $alert->phone_number }}</td>

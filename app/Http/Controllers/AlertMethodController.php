@@ -2,6 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\AlertMethod;
+use App\Repositories\AlertGroupsRepository;
+use App\Repositories\AlertMethodAlertGroupRepository;
+use App\Repositories\MonitorRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateAlertMethodsRequest;
 use App\Http\Requests\UpdateAlertMethodsRequest;
@@ -11,18 +14,24 @@ use Illuminate\Support\Facades\Auth;
 class AlertMethodsController extends Controller
 {
 
-    private $alertMethodsRepository;
+    protected $alertMethodsRepository;
+
+    protected $alertMethodAlertGroupRepository;
+
+    protected $alertGroupsRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(AlertMethodsRepository $alertMethodsRepository)
+    public function __construct(AlertMethodsRepository $alertMethodsRepository, AlertMethodAlertGroupRepository $alertMethodAlertGroupRepository, AlertGroupsRepository $alertGroupsRepository)
     {
         $this->middleware('auth');
 
         $this->alertMethodsRepository = $alertMethodsRepository;
+        $this->alertMethodAlertGroupRepository = $alertMethodAlertGroupRepository;
+        $this->alertGroupsRepository = $alertGroupsRepository;
     }
 
     /**
@@ -46,7 +55,9 @@ class AlertMethodsController extends Controller
     {
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
 
-        return view('alertmethods.add', compact('listType'));
+        $listAlertGroup = $this->alertGroupsRepository->all();
+
+        return view('alertmethods.add', compact('listType', 'listAlertGroup'));
     }
 
     /**
@@ -58,9 +69,15 @@ class AlertMethodsController extends Controller
     {
         $alertMethod = $this->alertMethodsRepository->find($id);
 
+        if (empty($alertMethod)) {
+            abort(404);
+        }
+
+        $listAlertGroup = $this->alertGroupsRepository->all();
+
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
 
-        return view('alertmethods.edit', compact('listType', 'alertMethod'));
+        return view('alertmethods.edit', compact('listType', 'alertMethod', 'listAlertGroup'));
     }
 
     /**
@@ -78,8 +95,16 @@ class AlertMethodsController extends Controller
         $createAlertMethod = $this->alertMethodsRepository->create($data);
 
         if ($createAlertMethod) {
-            //messgae alert success
-            $request->session()->flash('alert-success', 'Add Success');
+            $dataAlertMethodGroup = $request->only('alert_group_id');
+            $dataAlertMethodGroup['alert_method_id'] = $createAlertMethod->id;
+
+            $createAlertMethodGroup = $this->alertMethodAlertGroupRepository->create($dataAlertMethodGroup);
+
+            if ($createAlertMethodGroup) {
+                $request->session()->flash('alert-success', 'Add Success');
+            } else {
+                $request->session()->flash('alert-error', 'Add Alert Method Alert Group Error');
+            }
 
             return redirect()->route('viewListAlertMethods');
         } else {
@@ -104,8 +129,16 @@ class AlertMethodsController extends Controller
         $update = $this->alertMethodsRepository->update($data, $id);
 
         if ($update) {
-            //messgae alert success
-            $request->session()->flash('alert-success', 'Update Success');
+            $dataAlertMethodGroup = $request->only('alert_group_id');
+            $dataAlertMethodGroupId = $update->alertmethodalertgroup->id;
+
+            $updateMethodGroup = $this->alertMethodAlertGroupRepository->update($dataAlertMethodGroup, $dataAlertMethodGroupId);
+
+            if ($updateMethodGroup) {
+                $request->session()->flash('alert-success', 'update Success');
+            } else {
+                $request->session()->flash('alert-error', 'update Alert Method Alert Group Error');
+            }
 
             return redirect()->route('viewListAlertMethods');
         } else {
