@@ -97,10 +97,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/alert-group">Alert Groups</a>
+                                    <a href="{{asset('/alert-group')}}">Alert Groups</a>
                                 </li>
                                 <li>
-                                    <a href="/alert-group/create">Add New</a>
+                                    <a href="{{asset('/alert-group/create')}}">Add New</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Repositories\AlertGroupsRepository;
 use Auth;
 use App\Http\Requests\AlertGroupRequest;
@@ -29,17 +28,6 @@ class AlertGroupController extends Controller
             return false;
         }
         return view('alert-group.index')->with('items',$result);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

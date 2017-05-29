@@ -1,5 +1,4 @@
 @extends('../template_Dashboard')
-
 @section('title')
 Alert Group
 @endsection
@@ -10,7 +9,7 @@ Alert Group
         <div class="row">
             <div class="col-md-6">
                 <div class="btn-group">
-                    <a class="btn green btn-success" href="/alert-group/create"><span>Add New </span><i class="fa fa-plus"></i></a>
+                    <a class="btn green btn-success" href="{{asset('/alert-group/create')}}"><span>Add New </span><i class="fa fa-plus"></i></a>
                     <button class="btn red btn btn-danger" id="SubmitDelete" disabled>Remove selected</button>
                 </div>
             </div>
