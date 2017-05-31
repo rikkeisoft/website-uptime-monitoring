@@ -14,16 +14,20 @@ class UserRepositoryTest extends TestCase
 
     /**
      * Test request function CreateUser
+     * @param array $user
+     * @return bool
      */
-    public function testCreateUser()
+    public function testCreateUser($user = [])
     {
-        $result = UserRepository::createUser();
-        if (empty($user)) {
+        //TODO USER NULL
+        if (empty($user)){
             return false;
         }
+        //TODO USER NOT ARRAY
+        //TODO USER INCONSONANT
 
+        //TODO USER FIT
         $user = factory(User::class)->create();
-        //test user
         $this->assertDatabaseHas('users', [
             'username' => 'Mr Test',
             'email' => 'khanhpoly@gmail.com',
