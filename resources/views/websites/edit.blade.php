@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div id="page-wrapper">
+    <div id="page-wrapper" >
         <div class="row">
             @component('flash_alert_message')
 
