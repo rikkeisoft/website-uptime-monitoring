@@ -65,11 +65,11 @@ class WebsitesController extends Controller
      * view add website
      * @return \Illuminate\View\View
      */
-    public function add()
+    public function create()
     {
        $listAlertGroup = $this->alertGroupsRepository->all();
 
-        return view('websites.add')
+        return view('websites.create')
             ->with([
                 'listFrequency' => $this->listFrequency,
                 'listSensitivity' => $this->listSensitivity,
@@ -78,12 +78,17 @@ class WebsitesController extends Controller
             ]);
     }
 
+    public function show()
+    {
+
+    }
+
     /**
      * view update website
      * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function update($id)
+    public function edit(string $id)
     {
         $website = $this->websiteRepository->find($id);
 
@@ -93,7 +98,7 @@ class WebsitesController extends Controller
 
         $listAlertGroup = $this->alertGroupsRepository->all();
 
-        return view('websites.update')
+        return view('websites.edit')
             ->with([
                 'website' => $website,
                 'listFrequency' => $this->listFrequency,
@@ -108,7 +113,7 @@ class WebsitesController extends Controller
      * @param AddWebsitesRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addWebsite(AddWebsitesRequest $request)
+    public function store(AddWebsitesRequest $request)
     {
 
         $data = $request->only('url', 'name', 'sensitivity', 'status', 'frequency');
@@ -131,7 +136,7 @@ class WebsitesController extends Controller
                 $request->session()->flash('alert-error', 'Add Monitor Error');
             }
 
-            return redirect()->route('viewListWebsite');
+            return redirect()->route('websites.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Add Error');
@@ -141,15 +146,16 @@ class WebsitesController extends Controller
     }
 
     /**
-     * update wwebsite post
+     * update website post
      * @param UpdateWebsitesRequest $request
+     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateWebsite(UpdateWebsitesRequest $request)
+    public function update(UpdateWebsitesRequest $request, string $id)
     {
         $data = $request->only('url', 'name', 'sensitivity', 'status', 'frequency');
 
-        $id = $request->input('id');
+        //$id = $request->input('id');
 
         $update = $this->websiteRepository->update($data, $id);
 
@@ -166,7 +172,7 @@ class WebsitesController extends Controller
                 $request->session()->flash('alert-error', 'Update Monitor Error');
             }
 
-            return redirect()->route('viewListWebsite');
+            return redirect()->route('websites.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Update Error');
@@ -188,9 +194,9 @@ class WebsitesController extends Controller
 
         if ($deleteWebsite) {
             //messgae alert success
-            $request->session()->flash('alert-success', 'Add Success');
+            $request->session()->flash('alert-success', 'Delete Success');
 
-            return redirect()->route('viewListWebsite');
+            return redirect()->route('websites.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Add Error');

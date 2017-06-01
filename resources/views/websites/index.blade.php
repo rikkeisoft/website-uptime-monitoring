@@ -12,7 +12,8 @@
             <div class="col-lg-12">
                 <h1 class="page-header">List Website</h1>
                 <div style="margin: 20px 0">
-                    <a href="{{ route('viewAddWebsite') }}"><button type="button" class="btn btn-primary" >Add Website</button></a>
+                    <a href="{{ route('websites.create') }}"><button type="button" class="btn btn-primary" >Add Website</button></a>
+                    <button type="button" class="btn btn-danger btn-danger-website" id="SubmitDelete" disabled >Delete</button>
                 </div>
             </div>
 
@@ -50,12 +51,12 @@
                                             </a>
                                         </td>
                                         <td>{{ $website->created_at }}</td>
-                                        <td class="center"><a href="{{ $url=action('WebsitesController@update',$website->id) }}"><i class="fa fa-edit"></i></a></td>
+                                        <td class="center"><a href="{{ route('websites.edit', [$website->id]) }}"><i class="fa fa-edit"></i></a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-danger" id="SubmitDelete" disabled >Delete</button>
+
                         </form>
                         <form id="checkEnableDisable" method="post" action="{{ route('setStatusWebsite') }}">
                             <input id="checkEnableDisableID" name="id" type="hidden">
