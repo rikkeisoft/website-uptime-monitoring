@@ -30,3 +30,6 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
+Route::get('/error-create-user',function(){
+    return view('error.error-CreateUser');
+});

@@ -27,9 +27,8 @@ class RegisterController extends Controller
         $formData = $request->input();
         $result = $this->userRepository->createUser($formData);
         if ($result === false) {
-            return 'Error'; // Redirect to error page
+            return view('/error-create-user');
         }
-
         return redirect('/login');
     }
 
@@ -37,7 +36,6 @@ class RegisterController extends Controller
     {
         $token = $request->input('access_token', null);
         $result = $this->userRepository->activateUser($token);
-
         if ($result === false) {
             return redirect('/activate-error');
         }

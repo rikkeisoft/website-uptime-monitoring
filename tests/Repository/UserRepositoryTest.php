@@ -4,81 +4,62 @@ namespace Tests\Repository;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class UserRepositoryTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations, DatabaseTransactions;
 
     /**
      * Test request Repository function CreateUser empty
-     * @internal param array $data
      */
-    public function testCreateUserEmpty()
+    public function testCreateUserEmptyData()
     {
         $data = [];
-        $createdUser = app(UserRepository::class)->createUser($data);
-        $this->assertEmpty($createdUser);
+        $result = app(UserRepository::class)->createUser($data);
+        $this->assertFalse($result);
     }
 
     /**
      * Test request Repository function CreateUser true
-     * @return bool
-     * @internal param array $data
      */
-    public function testCreateUserTrue()
+    public function testCreateUserSuccessfully()
     {
         Mail::fake();
         $data = [
             'username' => 'Mr Test',
             'email' => 'mrtest124@gmail.com',
-            'password' => bcrypt('password')
+            'password' => 'password'
         ];
-        $createdUser = app(UserRepository::class)->createUser($data);
-        $this->assertTrue($createdUser);
-    }
-
-    /**
-     * Test request Repository function CreateUser false
-     * @return bool
-     * @internal param array $data
-     */
-    public function testCreateUserFalse()
-    {
-        $data = [];
-        $createdUser = app(UserRepository::class)->createUser($data);
-        $this->assertFalse($createdUser);
+        $result = app(UserRepository::class)->createUser($data);
+        $this->assertTrue($result);
     }
 
 
     /**
-     * Test request Repository function Activate Empty
-     * @return bool
+     * Test request Repository function Activate empty token
      */
-    public function testActivateUserEmpty()
+    public function testActivateUserByInvalidToken()
     {
-        $token = [];
-        $updated = app(UserRepository::class)->activateUser($token);
-        $this->assertEmpty($updated);
+        $token = '';
+        $result= app(UserRepository::class)->activateUser($token);
+        $this->assertFalse($result);
     }
 
     /**
-     * Test request Repository function Activate True
-     * @return bool
+     * Test request Repository function Activate status false
      */
-    public function testActivateUserTrue()
+    public function  testActivateUserByStatus()
     {
-        $token = [
-            'access_token' => "D0NaNVz43YzjitVlekIU"
-        ];
-        $updated = app(UserRepository::class)->activateUser($token);
-        $this->assertTrue($updated);
+        $status = 1;
+        $result = app(UserRepository::class)->activateUser($status);
+        $this->assertFalse($result);
     }
-
     /**
      * Test request Repository function Activate False
-     * @return bool
      */
     public function testActivateUserFalse()
     {
@@ -87,5 +68,17 @@ class UserRepositoryTest extends TestCase
         ];
         $updated = app(UserRepository::class)->activateUser($token);
         $this->assertFalse($updated);
+    }
+    /**
+     * Test request Repository function Activate True
+     */
+    public function testActivateUserTrue()
+    {
+        factory(User::class, 5)->create();
+        $token = [
+            'access_token' => "D0NaNVz43YzjitVlekIU"
+        ];
+        $updated = app(UserRepository::class)->activateUser($token);
+        $this->assertTrue($updated);
     }
 }
