@@ -67,13 +67,7 @@ class WebsitesController extends Controller
      */
     public function add()
     {
-        $listFrequency = Website::LIST_FREQUENCY;
-
-        $listSensitivity = Website::LIST_SENSITIVITY;
-
-        $listStatus = Website::LIST_STATUS;
-
-        $listAlertGroup = $this->alertGroupsRepository->all();
+       $listAlertGroup = $this->alertGroupsRepository->all();
 
         return view('websites.add')
             ->with([
@@ -96,12 +90,6 @@ class WebsitesController extends Controller
         if (empty($website)) {
             abort(404);
         }
-
-        $listFrequency = Website::LIST_FREQUENCY;
-
-        $listSensitivity = Website::LIST_SENSITIVITY;
-
-        $listStatus = Website::LIST_STATUS;
 
         $listAlertGroup = $this->alertGroupsRepository->all();
 
