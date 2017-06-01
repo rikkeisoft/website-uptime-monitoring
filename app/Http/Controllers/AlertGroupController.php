@@ -11,85 +11,104 @@ class AlertGroupController extends Controller
 {
     private $alertGroupsRepository;
 
-    public function __construct(alertGroupsRepository $alertGroupsRepository )
+    public function __construct(AlertGroupsRepository $alertGroupsRepository)
     {
         $this->middleware('auth');
         $this->alertGroupsRepository = $alertGroupsRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
-        $result = $this->alertGroupsRepository->all();
-        return view('alert-group.index')->with('items',$result);
+        $alertGroups = $this->alertGroupsRepository->all();
+        return view('alert-group.index')->with('alertGroups', $alertGroups);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string $id
+     *
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function edit($id)
+    public function edit(string $id)
     {
-        $result = $this->alertGroupsRepository->find($id);
-        if (empty($result)){
-            abort(404);
+        $alertGroup = $this->alertGroupsRepository->find($id);
+        if (empty($alertGroup)) {
+            return redirect('/error-edit-AlertGroup');
         }
-        return view('alert-group.edit')->with('items',$result);
+        return view('alert-group.edit')->with('alertGroup', $alertGroup);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return bool
+     * @param \App\Http\Requests\AlertGroupRequest $request
+     * @param string $id
+     *
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function updateAlertGroup(AlertGroupRequest $request)
+    public function update(AlertGroupRequest $request, string $id)
     {
         $data = $request->only('name');
-        $id = $request->input('id');
-        $result = $this->alertGroupsRepository->update($data,$id);
-        return redirect('/alert-group');
+        $alertGroup = $this->alertGroupsRepository->update($data, $id);
+        if ($alertGroup) {
+            return redirect('/alert-group');
+        }
+        return redirect('/error-edit-AlertGroup');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
     {
         return view('alert-group.create');
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
+     * @param  \App\Http\Requests\AlertGroupRequest $request
+     *
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(AlertGroupRequest $request)
     {
         $data = $request->only('name');
         $data['user_id'] = Auth::user()->id;
-        $result = $this->alertGroupsRepository->create($data);
-        return redirect('/alert-group');
+        $created = $this->alertGroupsRepository->create($data);
+        if ($created) {
+            return redirect('/alert-group');
+        }
+        return redirect('/error-create-AlertGroup');
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return string
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function destroyAlertGroup(Request $request)
     {
-        $data = $request->input('chkCat');
-        $result = $this->alertGroupsRepository->delete($data);
-        return redirect('/alert-group');
+        $alertGroupIds = $request->input('alertGroupIds');
+        $numDeleted = $this->alertGroupsRepository->delete($alertGroupIds);
+        if ($numDeleted > 0) {
+            return redirect('/alert-group');
+        }
+        return redirect('/error-delete-AlertGroup');
+    }
+    public function show()
+    {
+
     }
 
 }

@@ -1,10 +1,10 @@
-@extends('../template_Dashboard')s
+@extends('../template_Dashboard')
 @section('title')
     Create Alert Group
 @endsection
 @section('content')
     <div id="page-wrapper">
-        <form action="{{ URL::action('AlertGroupController@store') }}" method="post"  id="form-create">
+        <form action="{{ route('alert-group.store') }}" method="post"  id="form-create">
             {{ csrf_field() }}
             <legend>Create Alert Group</legend>
             <div class="form-group">

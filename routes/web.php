@@ -16,13 +16,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// route administrator
+// Route administrator
 Route::get('/home','HomeController@showStatistics');
 
-//route active user
+//Route active user
 Route::get('/activate', 'Auth\RegisterController@activate');
 
-//route notification
+//Route error activate
 Route::get('/activate-error',function(){
     return view('template-activate-auth.active-error');
 });
@@ -31,12 +31,21 @@ Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
 
-//route alert-group
+// Routes for Alert Group
 Route::resource('/alert-group','AlertGroupController');
-//route deleted alert-group
-Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
-//route update alert-group
-Route::post('/alert-group/updateAlertGroup','AlertGroupController@updateAlertGroup')->name('updateAlertGroup');
-//route return view edit
-Route::get('/alert-group/edit/{id}', 'AlertGroupController@edit');
 
+// Route for mass delete Alert Group
+Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
+
+//Route error edit Alert Group
+Route::get('/error-edit-AlertGroup',function (){
+    return view('alert-group.error.error-edit');
+});
+// Route error create Alert Group
+Route::get('/error-create-AlertGroup',function (){
+    return view('alert-group.error.error-create');
+});
+// Route error delete Alert Group
+Route::get('/error-delete-AlertGroup',function (){
+    return view('alert-group.error.error-delete');
+});
