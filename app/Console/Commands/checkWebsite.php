@@ -56,7 +56,7 @@ class checkWebsite extends Command
 
         try {
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
-            $res = $client->request('GET', $url);
+            $res = $client->request('HEAD', $url);
             $status = $res->getStatusCode();
 
             //Log::info('check alert'.json_encode([$status, $url]));
