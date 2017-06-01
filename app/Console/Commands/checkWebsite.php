@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Contracts\Constants;
 use App\Contracts\DBTable;
 use App\Events\SendMailGroup;
 use App\Models\AlertMethodAlertGroup;
@@ -49,9 +50,14 @@ class checkWebsite extends Command
      */
     public function checkStatusWebsite($url)
     {
-        $headers = get_headers($url);
 
-        if (substr($headers[0], 9, 3) < 400) {
+        $client = new \GuzzleHttp\Client(['http_errors' => false]);
+        $res = $client->request('GET', $url);
+        $status = $res->getStatusCode();
+
+        Log::info('check alert'.json_encode([$status, $url]));
+
+        if ($status < 400) {
             return true;
         }
 
@@ -67,24 +73,23 @@ class checkWebsite extends Command
     {
 
         //1: Success, 2: Failed
-        $check = 2;
+        $check = Constants::CHECK_FAILED;
 
         if ($this->checkStatusWebsite($website->url)) {
-            $check = 1;
+            $check = Constants::CHECK_SUCCESS;
         } else {
             for ($i = 0; $i < $website->sensitivity; $i++) {
                 if ($this->checkStatusWebsite($website->url)) {
-                    $check = 1;
+                    $check = Constants::CHECK_SUCCESS;
                     break;
                 } else {
-                    sleep(10);
+                    sleep(Constants::TIME_DELAY_SENSITIVITY);
                 }
             }
         }
         $monitor = Monitor::where('website_id', $website->id)->first();
         //website down => send mesage
         if ($check != $monitor->result) {
-
             //update monitor
             $monitor['result'] = $check;
             $monitor->save();
@@ -106,11 +111,12 @@ class checkWebsite extends Command
             $data['url'] = $website->url;
             $data['name'] = $website->name;
             $data['email'] = [];
-            $data['status'] = $check == 2?'Down':'Up';
+            $data['status'] = $check == Constants::CHECK_FAILED?'Down':'Up';
 
             foreach ($listmethods as $value) {
                 array_push($data['email'], $value->email);
             }
+
             Log::info('check alert'.json_encode($data));
 
             //event send list mail group
