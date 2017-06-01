@@ -14,15 +14,5 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    <script type="text/javascript">
-        $("#form-create").validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 3,
-                    maxlength:100,
-                }
-            }
-        })
-    </script>
+    <script type="text/javascript" src="{{ asset('js/validator-CreateAlertGroup.js')}}"></script>
 @endsection
