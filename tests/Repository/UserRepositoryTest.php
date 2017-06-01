@@ -4,43 +4,47 @@ namespace Tests\Repository;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Models\User;
 use App\Repositories\UserRepository;
-use App\Events\UserCreated;
+use Illuminate\Support\Facades\Mail;
 
 class UserRepositoryTest extends TestCase
 {
     use DatabaseTransactions;
 
     /**
-     * Test request function CreateUser
-     * @param array $user
+     * Test request Repository function CreateUser
      * @return bool
+     * @internal param array $data
      */
-    public function testCreateUser($user = [])
+    public function testCreateUser()
     {
-        //TODO USER NULL
-        if (empty($user)){
-            return false;
-        }
-        //TODO USER NOT ARRAY
-        //TODO USER INCONSONANT
-
-        //TODO USER FIT
-        $user = factory(User::class)->create();
-        $this->assertDatabaseHas('users', [
+        Mail::fake();
+        $data = [
             'username' => 'Mr Test',
-            'email' => 'khanhpoly@gmail.com',
-            'status' => '0'
-        ]);
+            'email' => 'mrtest124@gmail.com',
+            'password' => bcrypt('password'),
+        ];
+        $createdUser = app(UserRepository::class)->createUser($data);
+        if ($createdUser === false){
+            $this->assertFalse($createdUser);
+        }
+        $this->assertTrue($createdUser);
     }
 
     /**
-     *
+     * Test request Repository function Activate
+     * @return bool
      */
     public function testActivateUser()
     {
-
+        $token = [
+            'access_token' => "D0NaNVz43YzjitVlekIU"
+        ];
+        $updated = app(UserRepository::class)->activateUser($token);
+        if ($updated === false){
+            $this->assertFalse($updated);
+        }
+        $this->assertTrue($updated);
     }
 
 
