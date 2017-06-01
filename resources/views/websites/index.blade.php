@@ -40,7 +40,7 @@
                                 <tbody>
                                 @foreach($listWebsite as $website)
                                     <tr class="odd gradeX">
-                                        <td><input type="checkbox" name="chkCat[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
+                                        <td><input type="checkbox" name="chkWeb[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
                                         <td>{{ $website->name }}</td>
                                         <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                         <td>{{ $website->updated_at }}</td>

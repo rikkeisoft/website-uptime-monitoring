@@ -188,7 +188,7 @@ class WebsitesController extends Controller
      */
     public function deleteWebsite(Request $request)
     {
-        $data = $request->input('chkCat');
+        $data = $request->input('chkWeb');
 
         $deleteWebsite = $this->websiteRepository->delete($data);
 
