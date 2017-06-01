@@ -25,7 +25,7 @@ class AlertGroupController extends Controller
     {
         $result = $this->alertGroupsRepository->all();
         if (empty($result)){
-            return false;
+            abort(404);
         }
         return view('alert-group.index')->with('items',$result);
     }
@@ -40,7 +40,7 @@ class AlertGroupController extends Controller
     {
         $result = $this->alertGroupsRepository->find($id);
         if (empty($result)){
-            return 'Error';
+            abort(404);
         }
         return view('alert-group.edit')->with('items',$result);
     }
@@ -57,7 +57,7 @@ class AlertGroupController extends Controller
         $data = $request->only('name');
         $id = $request->input('id');
         if (empty($data)){
-            return false;
+            abort(404);
         }
         $result = $this->alertGroupsRepository->update($data,$id);
         return redirect('/alert-group');
@@ -83,7 +83,7 @@ class AlertGroupController extends Controller
         $data = $request->only('name');
         $data['user_id'] = Auth::user()->id;
         if (empty($data)){
-            return false;
+            abort(404);
         }
         $result = $this->alertGroupsRepository->create($data);
         return redirect('/alert-group');
@@ -98,7 +98,7 @@ class AlertGroupController extends Controller
     {
         $data = $request->input('chkCat');
         if (empty($data)){
-            return false;
+            abort(404);
         }
         $result = $this->alertGroupsRepository->delete($data);
         return redirect('/alert-group');

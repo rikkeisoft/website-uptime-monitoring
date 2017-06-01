@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div id="page-wrapper">
-        <form action="{{ route('updateAlertGroup') }}" method="POST" role="form" id="form-create">
+        <form action="{{ route('updateAlertGroup') }}" method="POST" role="form" id="form-edit">
             {{ csrf_field() }}
             <legend>Edit Alert Group</legend>
                 <div class="form-group">
@@ -15,15 +15,5 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    <script type="text/javascript">
-        $("#form-create").validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 3,
-                    maxlength:100,
-                }
-            }
-        })
-    </script>
+    <script type="text/javascript" src="{{ asset('js/validator-EditAlertGroup.js')}}"></script>
 @endsection

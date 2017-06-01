@@ -9,7 +9,7 @@ Alert Group
         <div class="row">
             <div class="col-md-6">
                 <div class="btn-group">
-                    <a class="btn green btn-success" href="{{asset('/alert-group/create')}}"><span>Add New </span><i class="fa fa-plus"></i></a>
+                    <a class="btn green btn-success" href="{{ $url=action('AlertGroupController@create') }}"><span>Add New </span><i class="fa fa-plus"></i></a>
                     <button class="btn red btn btn-danger" id="SubmitDelete" disabled>Remove selected</button>
                 </div>
             </div>
@@ -32,7 +32,7 @@ Alert Group
             <td>{{ $key->created_at }}</td>
             <td>{{ $key->updated_at }}</td>
             <td>
-                <a type="button" class="btn btn-primary btn-sm"href="alert-group/{!! $key->id !!}/edit">Edit</a>
+                <a type="button" class="btn btn-primary btn-sm" href="{{ $url=action('AlertGroupController@edit',$key->id) }}">Edit</a>
             </td>
         </tr>
         @endforeach
@@ -40,29 +40,5 @@ Alert Group
     </table>
     </form>
 </div>
-    <script>
-        $('#select_all').change(function() {
-            var checkboxes = $(this).closest('table').find('td').find(':checkbox');
-            if($(this).is(':checked')) {
-                checkboxes.not(this).prop('checked', this.checked);
-                $('#SubmitDelete').prop('disabled', false);
-            } else {
-                checkboxes.not(this).prop('checked', false);
-                $('#SubmitDelete').prop('disabled', true);
-            }
-        });
-        function clickCheckbox(){
-            if($('input[name="chkCat[]"]:checked').length > 0){
-                $('#SubmitDelete').prop('disabled', false);
-            }else{
-                $('#SubmitDelete').prop('disabled', true);
-            }
-        }
-        $('#SubmitDelete').on('click', function (e) {
-            if (!confirm('Are you sure you want to delete?')) return;
-            e.preventDefault();
-            $('#destroyAlertGroupForm').submit();
-        });
-
-    </script>
+    <script type="text/javascript" src="{{ asset('js/checkAllButton.js')}}"></script>
 @endsection

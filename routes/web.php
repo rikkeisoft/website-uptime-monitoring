@@ -35,5 +35,8 @@ Route::get('/activate/successfully',function(){
 Route::resource('/alert-group','AlertGroupController');
 //route deleted alert-group
 Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
-//route edit alert-group
+//route update alert-group
 Route::post('/alert-group/updateAlertGroup','AlertGroupController@updateAlertGroup')->name('updateAlertGroup');
+//route return view edit
+Route::get('/alert-group/edit/{id}', 'AlertGroupController@edit');
+
