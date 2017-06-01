@@ -9,8 +9,11 @@ use App\Models\AlertMethodAlertGroup;
 use App\Models\Monitor;
 use App\Models\Website;
 use App\Repositories\MonitorRepository;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Mockery\CountValidator\Exception;
 
 class checkWebsite extends Command
 {
@@ -51,16 +54,27 @@ class checkWebsite extends Command
     public function checkStatusWebsite($url)
     {
 
-        $client = new \GuzzleHttp\Client(['http_errors' => false]);
-        $res = $client->request('GET', $url);
-        $status = $res->getStatusCode();
+        try {
+            $client = new \GuzzleHttp\Client(['http_errors' => false]);
+            $res = $client->request('GET', $url);
+            $status = $res->getStatusCode();
 
-        Log::info('check alert'.json_encode([$status, $url]));
+            //Log::info('check alert'.json_encode([$status, $url]));
 
-        if ($status < 400) {
-            return true;
+            if ($status < 400) {
+                return true;
+            }
+        } catch (ClientException $e) {
+            Log::info("client error" . $e);
+            return false;
+        } catch (RequestException $e) {
+            Log::info("Server error" . $e);
+            return false;
+        } catch (\Exception $e) {
+            //do some thing here
+            Log::info("error" . $e);
+            return false;
         }
-
         return false;
     }
 
