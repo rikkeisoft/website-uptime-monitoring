@@ -44,7 +44,11 @@
                                         <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                         <td>{{ $website->updated_at }}</td>
                                         <td>{{ isset($website->monitor->alertGroup->name)?$website->monitor->alertGroup->name:'' }}</td>
-                                        <td><button type="button" onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')" class="btn btn-sm {{ $website->status == 1?'btn-primary':'btn-danger' }}" >{{ $listStatus[$website->status] }}</button></td>
+                                        <td>
+                                            <a onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')">
+                                                <input type="checkbox"  {{ $website->status == 1?'checked':'' }} data-toggle="toggle" data-style="ios" data-on="Enable" data-off="Disable" data-size="mini">
+                                            </a>
+                                        </td>
                                         <td>{{ $website->created_at }}</td>
                                         <td class="center"><a href="{{ $url=action('WebsitesController@update',$website->id) }}"><i class="fa fa-edit"></i></a></td>
                                     </tr>
@@ -65,6 +69,12 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
+        <style>
+            .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+            .toggle.ios .toggle-handle { border-radius: 20px; }
+        </style>
         <script src="{{ asset('js/website.js')}}"></script>
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     </div>
 @endsection

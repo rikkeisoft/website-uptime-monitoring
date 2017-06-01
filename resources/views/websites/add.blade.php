@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('url'))
                                     <span class="help-block">
                                 <strong>{{ $errors->first('url') }}</strong>
                             </span>
