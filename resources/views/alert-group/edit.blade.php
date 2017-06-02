@@ -8,13 +8,17 @@
             {{ csrf_field() }}
             {{ method_field('PUT') }}
             <legend>Edit Alert Group</legend>
-            <div class="form-group">
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="">Name</label>
                 <input type="hidden" id="id" name="id" value="{{ $alertGroup->id }}">
                 <input type="text" value="{{ $alertGroup->name }}" class="form-control" name="name" id="name" placeholder="Name...">
+                @if ($errors->has('name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                @endif
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    <script type="text/javascript" src="{{ asset('js/validator-EditAlertGroup.js')}}"></script>
 @endsection
