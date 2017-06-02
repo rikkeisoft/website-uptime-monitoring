@@ -18,7 +18,7 @@
                 <thead>
                 <tr>
                     <th>
-                        <input type="checkbox" id="select_all" name="checkbox[]" data-id="checkbox" value="option3">
+                        <input type="checkbox" value="option3" id="select_all"  name="checkbox[]" data-id="checkbox">
                     </th>
                     <th>Name</th>
                     <th>Created at</th>

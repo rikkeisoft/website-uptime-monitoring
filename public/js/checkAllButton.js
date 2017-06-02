@@ -9,7 +9,7 @@ $('#select_all').change(function() {
     }
 });
 function clickCheckbox(){
-    if($('input[name="chkCat[]"]:checked').length > 0){
+    if($('input[name="alertGroupIds[]"]:checked').length > 0){
         $('#SubmitDelete').prop('disabled', false);
     }else{
         $('#SubmitDelete').prop('disabled', true);
