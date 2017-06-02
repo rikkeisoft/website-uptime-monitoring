@@ -30,3 +30,8 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
+
+//resource router alert method
+Route::resource('alertmethods', 'AlertMethodsController');
+
+Route::post('/alertmethods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
