@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div id="page-wrapper">
-        <form id="destroyForm" role="form" method="POST" action="{{ route('destroyMethodofGroup') }}">
+        <form id="destroyForm" role="form" method="POST" action="{{ route('destroyMethodOfGroup') }}">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-6">
@@ -29,7 +29,7 @@
                 <tbody>
                 @foreach($alertMethodOfGroups as $alertMethodOfGroup)
                     <tr>
-                        <td><input class="checkbox" value="{!! $alertMethodOfGroup->id !!}" type="checkbox" name="Arrayids[]" onclick="clickCheckbox();"></td>
+                        <td><input class="checkbox" value="{!! $alertMethodOfGroup->id !!}" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();"></td>
                         <td>{{ $alertMethodOfGroup->alertGroup->name }}</td>
                         <td>{{ $alertMethodOfGroup->alertMethod->name }}</td>
                         <td>{{ $alertMethodOfGroup->created_at }}</td>

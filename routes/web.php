@@ -35,7 +35,7 @@ Route::get('/activate/successfully',function(){
 Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
 
 //Route for deleted alert method of a group
-Route::post('/alert-method-of-group/destroy-Method-of-Group','AlertMethodAlertGroupController@destroyMethodofGroup')->name('destroyMethodofGroup');
+Route::post('/alert-method-of-group/destroy-Method-of-Group','AlertMethodAlertGroupController@destroyMethodOfGroup')->name('destroyMethodOfGroup');
 
 //Route for error edit AlertMethodOfGroup
 Route::get('/error-edit-alertMethodOfGroup',function (){
