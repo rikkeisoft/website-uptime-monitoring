@@ -27,15 +27,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($alertMethodOfGroups as $alertMethodOfGroup)
+                @foreach($alertMethodOfGroup as $alertMethodOfGroups)
                     <tr>
-                        <td><input class="checkbox" value="{!! $alertMethodOfGroup->id !!}" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();"></td>
-                        <td>{{ $alertMethodOfGroup->alertGroup->name }}</td>
-                        <td>{{ $alertMethodOfGroup->alertMethod->name }}</td>
-                        <td>{{ $alertMethodOfGroup->created_at }}</td>
-                        <td>{{ $alertMethodOfGroup->updated_at }}</td>
+                        <td><input class="checkbox" value="{!! $alertMethodOfGroups->id !!}" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();"></td>
+                        <td>{{ $alertMethodOfGroups->alertGroup->name }}</td>
+                        <td>{{ $alertMethodOfGroups->alertMethod->name }}</td>
+                        <td>{{ $alertMethodOfGroups->created_at }}</td>
+                        <td>{{ $alertMethodOfGroups->updated_at }}</td>
                         <td>
-                            <a type="button" class="btn btn-primary btn-sm"href="{{ route('alert-method-of-group.edit', ['alert_method_of_group' => $alertMethodOfGroup->id]) }}">Edit</a>
+                            <a type="button" class="btn btn-primary btn-sm"href="{{ route('alert-method-of-group.edit', ['alert_method_of_group' => $alertMethodOfGroups->id]) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach

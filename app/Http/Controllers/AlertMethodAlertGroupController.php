@@ -37,7 +37,7 @@ class AlertMethodAlertGroupController extends Controller
     public function index()
     {
         $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->all();
-        return view('/alert-method-of-group.index')->with('alertMethodOfGroups', $alertMethodOfGroup);
+        return view('/alert-method-of-group.index')->with('alertMethodOfGroup', $alertMethodOfGroup);
     }
 
     /**
@@ -83,9 +83,9 @@ class AlertMethodAlertGroupController extends Controller
             return redirect('/error-edit-alertMethodOfGroup');
         }
         return view('/alert-method-of-group.edit')->with([
-            'alertMethodOfGroups' => $alertMethodOfGroup,
-            'alertGroups' => $alertGroup,
-            'alertMethods' => $alertMethod
+            'alertMethodOfGroup' => $alertMethodOfGroup,
+            'alertGroup' => $alertGroup,
+            'alertMethod' => $alertMethod
         ]);
     }
 
