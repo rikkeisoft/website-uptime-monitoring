@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="btn-group">
-                        <a class="btn green btn-success" href="{{ asset('alert-method-of-group/create')}}"><span>Add New </span><i class="fa fa-plus"></i></a>
+                        <a class="btn green btn-success" href="{{ route('alert-method-of-group.create') }}"><span>Add New </span><i class="fa fa-plus"></i></a>
                         <button class="btn red btn btn-danger" id="SubmitDelete" disabled>Remove selected</button>
                     </div>
                 </div>
@@ -27,15 +27,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($items as $key)
+                @foreach($alertMethodOfGroups as $alertMethodOfGroup)
                     <tr>
-                        <td><input class="checkbox" type="checkbox" name="chkCat[]" onclick="clickCheckbox();" value="{!! $key->id !!}"></td>
-                        <td>{{ $key->alertGroup->name }}</td>
-                        <td>{{ $key->alertMethod->name }}</td>
-                        <td>{{ $key->created_at }}</td>
-                        <td>{{ $key->updated_at }}</td>
+                        <td><input class="checkbox" value="{!! $alertMethodOfGroup->id !!}" type="checkbox" name="Arrayids[]" onclick="clickCheckbox();"></td>
+                        <td>{{ $alertMethodOfGroup->alertGroup->name }}</td>
+                        <td>{{ $alertMethodOfGroup->alertMethod->name }}</td>
+                        <td>{{ $alertMethodOfGroup->created_at }}</td>
+                        <td>{{ $alertMethodOfGroup->updated_at }}</td>
                         <td>
-                            <a type="button" class="btn btn-primary btn-sm"href="/alert-method-of-group/{!! $key->id !!}/edit">Edit</a>
+                            <a type="button" class="btn btn-primary btn-sm"href="{{ route('alert-method-of-group.edit', ['alert_method_of_group' => $alertMethodOfGroup->id]) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -43,29 +43,5 @@
             </table>
         </form>
     </div>
-    <script>
-        $('#select_all').change(function() {
-            var checkboxes = $(this).closest('table').find('td').find(':checkbox');
-            if($(this).is(':checked')) {
-                checkboxes.not(this).prop('checked', this.checked);
-                $('#SubmitDelete').prop('disabled', false);
-            } else {
-                checkboxes.not(this).prop('checked', false);
-                $('#SubmitDelete').prop('disabled', true);
-            }
-        });
-        function clickCheckbox(){
-            if($('input[name="chkCat[]"]:checked').length > 0){
-                $('#SubmitDelete').prop('disabled', false);
-            }else{
-                $('#SubmitDelete').prop('disabled', true);
-            }
-        }
-        $('#SubmitDelete').on('click', function (e) {
-            if (!confirm('Are you sure you want to delete?')) return;
-            e.preventDefault();
-            $('#destroyForm').submit();
-        });
-
-    </script>
-@endsection
+    <script type="text/javascript" src="{{ asset('js/check-all-buton.js')}}"></script>
+ @endsection

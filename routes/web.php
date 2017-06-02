@@ -30,11 +30,22 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
-//route alert method of a group
+
+//Route for alert method of a group
 Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
 
-//route deleted alert method of a group
+//Route for deleted alert method of a group
 Route::post('/alert-method-of-group/destroy-Method-of-Group','AlertMethodAlertGroupController@destroyMethodofGroup')->name('destroyMethodofGroup');
 
-////route edit alert method of a group
-Route::post('/alert-method-of-group/update-Method-of-Group','AlertMethodAlertGroupController@updateMethodofGroup')->name('updateMethodofGroup');
+//Route for error edit AlertMethodOfGroup
+Route::get('/error-edit-alertMethodOfGroup',function (){
+    return view('alert-method-of-group.error.error-edit');
+});
+// Route for error create AlertMethodOfGroup
+Route::get('/error-create-alertMethodOfGroup',function (){
+    return view('alert-method-of-group.error.error-create');
+});
+// Route for error delete AlertMethodOfGroup
+Route::get('/error-delete-alertMethodOfGroup',function (){
+    return view('alert-method-of-group.error.error-delete');
+});
