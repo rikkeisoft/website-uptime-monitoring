@@ -49,15 +49,15 @@
                                             <td>{{ $alert->webhook }}</td>
                                             <td>{{ $alert->user->username }}</td>
                                             <td>{{ $alert->created_at }}</td>
-                                            <td class="center"><a href="{{ route('alertmethods.edit', [$alert->id]) }}"><i class="fa fa-edit"></i></a></td>
+                                            <td class="center"><a href="{{ route('alertmethods.edit', ['alert_method_id' => $alert->id]) }}"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
 
                         <form id="deleteListSelectForm" method="post" action="{{ route('deleteAlertMethods') }}">
-                            <input id="checkdelete" name="selectedIds[]" type="hidden">
                             {{ csrf_field() }}
+                            <input id="checkdelete" name="selectedIds" type="hidden">
                         </form>
                     </div>
                     <!-- /.panel-body -->

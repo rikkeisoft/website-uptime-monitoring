@@ -21,7 +21,6 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('alertmethods.update', [$alertMethod->id]) }}">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <input type="hidden" name="id" value="{{ $alertMethod->id }}">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-1 control-label">Methods Name</label>
 
