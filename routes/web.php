@@ -49,3 +49,7 @@ Route::get('/error-create-AlertGroup',function (){
 Route::get('/error-delete-AlertGroup',function (){
     return view('alert-group.error.error-delete');
 });
+//resource router alert method
+Route::resource('alertmethods', 'AlertMethodsController');
+
+Route::post('/alertmethods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
