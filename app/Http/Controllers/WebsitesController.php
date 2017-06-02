@@ -188,7 +188,14 @@ class WebsitesController extends Controller
      */
     public function deleteWebsite(Request $request)
     {
-        $data = $request->input('chkWeb');
+        $data = $request->input('selectedIds');
+
+        $data = explode(",", $data[0]);
+
+        if(empty($data)) {
+            $request->session()->flash('alert-error', 'Add Error');
+            return redirect()->back();
+        }
 
         $deleteWebsite = $this->websiteRepository->delete($data);
 
