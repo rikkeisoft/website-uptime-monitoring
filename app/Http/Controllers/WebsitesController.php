@@ -27,17 +27,11 @@ class WebsitesController extends Controller
     public function __construct(WebsiteRepository $websiteRepository, MonitorRepository $monitorRepository, AlertGroupsRepository $alertGroupsRepository)
     {
         $this->middleware('auth');
-
         $this->websiteRepository = $websiteRepository;
-
         $this->monitorRepository = $monitorRepository;
-
         $this->alertGroupsRepository = $alertGroupsRepository;
-
         $this->listFrequency = Website::LIST_FREQUENCY;
-
         $this->listSensitivity = Website::LIST_SENSITIVITY;
-
         $this->listStatus = Website::LIST_STATUS;
     }
 
@@ -48,9 +42,7 @@ class WebsitesController extends Controller
     public function index()
     {
         $listWebsite = $this->websiteRepository->all();
-
         $listAlertGroup = $this->alertGroupsRepository->all();
-
         return view('websites.index')
             ->with([
                 'listWebsite' => $listWebsite,
@@ -67,8 +59,7 @@ class WebsitesController extends Controller
      */
     public function create()
     {
-       $listAlertGroup = $this->alertGroupsRepository->all();
-
+        $listAlertGroup = $this->alertGroupsRepository->all();
         return view('websites.create')
             ->with([
                 'listFrequency' => $this->listFrequency,
@@ -91,11 +82,9 @@ class WebsitesController extends Controller
     public function edit(string $id)
     {
         $website = $this->websiteRepository->find($id);
-
         if (empty($website)) {
             abort(404);
         }
-
         $listAlertGroup = $this->alertGroupsRepository->all();
 
         return view('websites.edit')
@@ -115,11 +104,8 @@ class WebsitesController extends Controller
      */
     public function store(AddWebsitesRequest $request)
     {
-
         $data = $request->only('url', 'name', 'sensitivity', 'status', 'frequency');
-
         $data['user_id'] = Auth::user()->id;
-
         $createWebsite = $this->websiteRepository->create($data);
 
         if ($createWebsite) {
@@ -127,7 +113,6 @@ class WebsitesController extends Controller
             $dataMonitor = $request->only('alert_group_id');
             $dataMonitor['website_id'] = $createWebsite->id;
             $dataMonitor['result'] = 2;
-
             $createMonitor = $this->monitorRepository->create($dataMonitor);
 
             if ($createMonitor) {
@@ -135,12 +120,10 @@ class WebsitesController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'Add Monitor Error');
             }
-
             return redirect()->route('websites.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Add Error');
-
             return redirect()->back();
         }
     }
@@ -154,16 +137,12 @@ class WebsitesController extends Controller
     public function update(UpdateWebsitesRequest $request, string $id)
     {
         $data = $request->only('url', 'name', 'sensitivity', 'status', 'frequency');
-
-        //$id = $request->input('id');
-
         $update = $this->websiteRepository->update($data, $id);
 
         if ($update) {
             //update monitor with website
             $dataMonitor = $request->only('alert_group_id');
             $monitorId = $update->monitor->id;
-
             $updateMonitor = $this->monitorRepository->update($dataMonitor, $monitorId);
 
             if ($updateMonitor) {
@@ -171,12 +150,10 @@ class WebsitesController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'Update Monitor Error');
             }
-
             return redirect()->route('websites.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Update Error');
-
             return redirect()->back();
         }
     }
@@ -188,26 +165,22 @@ class WebsitesController extends Controller
      */
     public function deleteWebsite(Request $request)
     {
-        $data = $request->input('selectedIds');
+        $selectedIds = $request->input('selectedIds');
+        $selectedIds = explode(",", $selectedIds);
 
-        $data = explode(",", $data[0]);
-
-        if(empty($data)) {
+        if(empty($selectedIds)) {
             $request->session()->flash('alert-error', 'Add Error');
             return redirect()->back();
         }
-
-        $deleteWebsite = $this->websiteRepository->delete($data);
+        $deleteWebsite = $this->websiteRepository->delete($selectedIds);
 
         if ($deleteWebsite) {
             //messgae alert success
             $request->session()->flash('alert-success', 'Delete Success');
-
             return redirect()->route('websites.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Add Error');
-
             return redirect()->back();
         }
     }
@@ -230,9 +203,7 @@ class WebsitesController extends Controller
                 'status' => 1
             ];
         }
-
         $id = $request->input('id');
-
         $update = $this->websiteRepository->update($data, $id);
 
         $listStatus = Website::LIST_STATUS;

@@ -21,7 +21,6 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('websites.update', [$website->id]) }}">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
-                        <input type="hidden" name="id" value="{{ $website->id }}">
                         <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-1 control-label">Url</label>
 

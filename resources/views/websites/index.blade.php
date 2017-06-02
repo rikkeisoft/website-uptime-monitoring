@@ -61,8 +61,8 @@
                             {{ csrf_field() }}
                         </form>
                         <form id="deleteListSelectForm" method="post" action="{{ route('deleteWebsite') }}">
-                            <input id="checkdelete" name="selectedIds[]" type="hidden">
                             {{ csrf_field() }}
+                            <input id="checkdelete" name="selectedIds" type="hidden">
                         </form>
                     </div>
                     <!-- /.panel-body -->
