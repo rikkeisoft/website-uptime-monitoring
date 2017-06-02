@@ -108,7 +108,5 @@ class AlertGroupController extends Controller
     }
     public function show()
     {
-
     }
-
 }
