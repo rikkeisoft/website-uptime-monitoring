@@ -23,8 +23,8 @@ class AlertGroupRequest extends FormRequest
      */
     public function rules()
     {
-        return array(
+        return [
             'name' => 'required|string|max:100|min:3',
-        );
+        ];
     }
 }
