@@ -103,16 +103,7 @@
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Methods<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{ route('viewListAlertMethods') }}">Alert Methods</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('viewAddAlertMethods') }}">Add New Alert Methods</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="{{ route('alertmethods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups<span class="fa arrow"></span></a>

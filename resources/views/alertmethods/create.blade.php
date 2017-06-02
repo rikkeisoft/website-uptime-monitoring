@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div id="page-wrapper" style="padding-top: 20px;">
+    <div id="page-wrapper">
         <div class="row">
             @component('flash_alert_message')
 
@@ -13,12 +13,12 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Add Alert Methods</h1>
             </div>
-            <div style="margin: 20px 0">
-                <a href="{{ route('viewListAlertMethods') }}"><button type="button" class="btn btn-primary" >List Alert Methods</button></a>
+            <div class="col-lg-12" style="margin: 20px 0">
+                <a href="{{ route('alertmethods.index') }}"><button type="button" class="btn btn-primary" >List Alert Methods</button></a>
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-default col-lg-12" style="margin: 0 15px">
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('addAlertMethods') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('alertmethods.store') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-1 control-label">Methods Name</label>

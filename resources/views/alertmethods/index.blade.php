@@ -12,7 +12,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">List Alert Methods</h1>
                 <div style="margin: 20px 0">
-                    <a href="{{ route('viewAddAlertMethods') }}"><button type="button" class="btn btn-primary" >Add Alert Methods</button></a>
+                    <a href="{{ route('alertmethods.create') }}"><button type="button" class="btn btn-primary" >Add Alert Methods</button></a>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                                 <tbody>
                                     @foreach($listAlertMethod as $alert)
                                         <tr class="odd gradeX">
-                                            <td><input type="checkbox" name="chkCat[]" value="{{ $alert->id }}" onclick="clickCheckbox();"></td>
+                                            <td><input type="checkbox" name="chkWeb[]" value="{{ $alert->id }}" onclick="clickCheckbox();"></td>
                                             <td>{{ $alert->name }}</td>
                                             <td>{{ $alert->alertmethodalertgroup->alertGroup->name }}</td>
                                             <td>{{ $listType[$alert->type] }}</td>
@@ -50,7 +50,7 @@
                                             <td>{{ $alert->webhook }}</td>
                                             <td>{{ $alert->user->username }}</td>
                                             <td>{{ $alert->created_at }}</td>
-                                            <td class="center"><a href="{{ $url=action('AlertMethodsController@update',$alert->id) }}"><i class="fa fa-edit"></i></a></td>
+                                            <td class="center"><a href="{{ route('alertmethods.edit', [$alert->id]) }}"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

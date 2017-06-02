@@ -51,13 +51,13 @@ class AlertMethodsController extends Controller
      * show view add alert method
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function add()
+    public function create()
     {
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
 
         $listAlertGroup = $this->alertGroupsRepository->all();
 
-        return view('alertmethods.add', compact('listType', 'listAlertGroup'));
+        return view('alertmethods.create', compact('listType', 'listAlertGroup'));
     }
 
     /**
@@ -65,7 +65,7 @@ class AlertMethodsController extends Controller
      * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function update($id)
+    public function edit(string $id)
     {
         $alertMethod = $this->alertMethodsRepository->find($id);
 
@@ -80,12 +80,14 @@ class AlertMethodsController extends Controller
         return view('alertmethods.edit', compact('listType', 'alertMethod', 'listAlertGroup'));
     }
 
+    public function show(){}
+
     /**
      * api add form add alert method
      * @param CreateAlertMethodsRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addAlertMethod(CreateAlertMethodsRequest $request)
+    public function store(CreateAlertMethodsRequest $request)
     {
 
         $data = $request->only('name', 'type', 'email', 'phone_number', 'webhook');
@@ -106,7 +108,7 @@ class AlertMethodsController extends Controller
                 $request->session()->flash('alert-error', 'Add Alert Method Alert Group Error');
             }
 
-            return redirect()->route('viewListAlertMethods');
+            return redirect()->route('alertmethods.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Add Error');
@@ -120,7 +122,7 @@ class AlertMethodsController extends Controller
      * @param UpdateAlertMethodsRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateAlertMethod(UpdateAlertMethodsRequest $request)
+    public function update(UpdateAlertMethodsRequest $request)
     {
         $data = $request->only('name', 'type', 'email', 'phone_number', 'webhook');
 
@@ -130,6 +132,7 @@ class AlertMethodsController extends Controller
 
         if ($update) {
             $dataAlertMethodGroup = $request->only('alert_group_id');
+
             $dataAlertMethodGroupId = $update->alertmethodalertgroup->id;
 
             $updateMethodGroup = $this->alertMethodAlertGroupRepository->update($dataAlertMethodGroup, $dataAlertMethodGroupId);
@@ -140,7 +143,7 @@ class AlertMethodsController extends Controller
                 $request->session()->flash('alert-error', 'update Alert Method Alert Group Error');
             }
 
-            return redirect()->route('viewListAlertMethods');
+            return redirect()->route('alertmethods.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Update Error');
@@ -156,7 +159,7 @@ class AlertMethodsController extends Controller
      */
     public function deleteAlertMethods(Request $request)
     {
-        $data = $request->input('chkCat');
+        $data = $request->input('chkWeb');
 
         $deleteAlertMethod = $this->alertMethodsRepository->delete($data);
 
@@ -164,7 +167,7 @@ class AlertMethodsController extends Controller
             //messgae alert success
             $request->session()->flash('alert-success', 'Add Success');
 
-            return redirect()->route('viewListAlertMethods');
+            return redirect()->route('alertmethods.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Add Error');
