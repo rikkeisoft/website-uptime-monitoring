@@ -80,7 +80,9 @@ class AlertMethodsController extends Controller
         return view('alertmethods.edit', compact('listType', 'alertMethod', 'listAlertGroup'));
     }
 
-    public function show(){}
+    public function show()
+    {
+    }
 
     /**
      * api add form add alert method
@@ -163,7 +165,7 @@ class AlertMethodsController extends Controller
 
         $data = explode(",", $data[0]);
 
-        if(empty($data)) {
+        if (empty($data)) {
             $request->session()->flash('alert-error', 'Add Error');
             return redirect()->back();
         }

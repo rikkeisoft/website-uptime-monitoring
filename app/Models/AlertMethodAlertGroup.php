@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Contracts\DBTable;
 
 class AlertMethodAlertGroup extends BaseModel
