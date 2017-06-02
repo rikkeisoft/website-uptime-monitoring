@@ -106,7 +106,4 @@ class AlertGroupController extends Controller
         }
         return redirect('/error-delete-AlertGroup');
     }
-    public function show()
-    {
-    }
 }
