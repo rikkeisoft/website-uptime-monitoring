@@ -3,21 +3,19 @@
 namespace App\Console\Commands;
 
 use App\Contracts\Constants;
-use App\Contracts\DBTable;
 use App\Events\SendMailGroup;
-use App\Models\AlertMethodAlertGroup;
-use App\Models\Monitor;
-use App\Models\Website;
+use App\Repositories\AlertMethodAlertGroupRepository;
 use App\Repositories\MonitorRepository;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Mockery\CountValidator\Exception;
 
 class checkWebsite extends Command
 {
     public $website;
+
+    protected $monitorRepository;
     /**
      * The name and signature of the console command.
      *
@@ -51,16 +49,13 @@ class checkWebsite extends Command
      * @param $url
      * @return bool
      */
-    public function checkStatusWebsite($url)
+    public function checkStatusWebsite(string $url)
     {
 
         try {
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
             $res = $client->request('HEAD', $url);
             $status = $res->getStatusCode();
-
-            //Log::info('check alert'.json_encode([$status, $url]));
-
             if ($status < 400) {
                 return true;
             }
@@ -85,7 +80,6 @@ class checkWebsite extends Command
      */
     public function checkSensitivity($website)
     {
-
         //1: Success, 2: Failed
         $check = Constants::CHECK_FAILED;
 
@@ -101,24 +95,20 @@ class checkWebsite extends Command
                 }
             }
         }
-        $monitor = Monitor::where('website_id', $website->id)->first();
-        //website down => send mesage
-        if ($check != $monitor->result) {
-            //update monitor
-            $monitor['result'] = $check;
-            $monitor->save();
 
-            $listmethods = AlertMethodAlertGroup::where('alert_group_id', $monitor->alertGroup->id)
-                ->leftJoin(
-                    DBTable::ALERT_METHOD,
-                    DBTable::ALERT_METHOD_ALERT_GROUP.'.alert_method_id',
-                    '=',
-                    DBTable::ALERT_METHOD.'.id'
-                )
-                ->select([
-                    DBTable::ALERT_METHOD.'.email',
-                ])
-                ->get();
+        //get monitor for wwebsite
+        $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
+
+        $result = $monitor->result;
+//        Log::info('check $result'.json_encode([$result, $check]));
+        //update monitor
+        $monitor['result'] = $check;
+        $monitor->save();
+
+        //website result change => send mesage
+        if ($check != $result) {
+
+            $listmethods = app(AlertMethodAlertGroupRepository::class)->getListEmail($monitor->alertGroup->id);
 
             //get list email to send
             $data = [];
@@ -128,13 +118,17 @@ class checkWebsite extends Command
             $data['status'] = $check == Constants::CHECK_FAILED?'Down':'Up';
 
             foreach ($listmethods as $value) {
-                array_push($data['email'], $value->email);
+                if(!empty($value->email)) {
+                    array_push($data['email'], $value->email);
+                }
             }
 
             Log::info('check alert'.json_encode($data));
 
             //event send list mail group
-            event(new SendMailGroup($data));
+            if(!empty($data['email'])) {
+                event(new SendMailGroup($data));
+            }
         }
     }
 }

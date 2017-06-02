@@ -15,4 +15,9 @@ class MonitorRepository extends BaseRepository
     {
         return Monitor::class;
     }
+
+    public function findByWebsiteId(string $webID)
+    {
+        return $this->model->where('website_id', $webID)->first();
+    }
 }

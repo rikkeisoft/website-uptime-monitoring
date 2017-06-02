@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\checkWebsite;
 use DB;
+use App\Repositories\WebsiteRepository;
 use App\Contracts\DBTable;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -36,6 +37,7 @@ class Kernel extends ConsoleKernel
             $schedule->call(function () use ($website) {
 
                 new checkWebsite($website);
+
             })->cron('*/'.$website->frequency.' * * * * *');
         }
     }
@@ -46,6 +48,6 @@ class Kernel extends ConsoleKernel
      */
     public function getAllWebsite()
     {
-        return  DB::table(DBTable::WEBSITE)->where('status', 1)->get();
+        return app(WebsiteRepository::class)->findAllBy('status', 1);
     }
 }
