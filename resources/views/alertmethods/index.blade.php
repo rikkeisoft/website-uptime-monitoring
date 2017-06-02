@@ -13,6 +13,7 @@
                 <h1 class="page-header">List Alert Methods</h1>
                 <div style="margin: 20px 0">
                     <a href="{{ route('alertmethods.create') }}"><button type="button" class="btn btn-primary" >Add Alert Methods</button></a>
+                    <button type="button" class="btn btn-danger btn-danger-website" id="SubmitDelete" disabled >Delete</button>
                 </div>
             </div>
 
@@ -21,8 +22,6 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <form id="deleteAlertMethodForm" role="form" method="POST" action="{{ route('deleteAlertMethods') }}">
-                            {{ csrf_field() }}
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
@@ -41,7 +40,7 @@
                                 <tbody>
                                     @foreach($listAlertMethod as $alert)
                                         <tr class="odd gradeX">
-                                            <td><input type="checkbox" name="chkWeb[]" value="{{ $alert->id }}" onclick="clickCheckbox();"></td>
+                                            <td><input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}" onclick="clickCheckbox();"></td>
                                             <td>{{ $alert->name }}</td>
                                             <td>{{ $alert->alertmethodalertgroup->alertGroup->name }}</td>
                                             <td>{{ $listType[$alert->type] }}</td>
@@ -55,7 +54,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-danger" id="SubmitDelete" disabled >Delete</button>
+
+                        <form id="deleteListSelectForm" method="post" action="{{ route('deleteAlertMethods') }}">
+                            <input id="checkdelete" name="selectedIds[]" type="hidden">
+                            {{ csrf_field() }}
                         </form>
                     </div>
                     <!-- /.panel-body -->

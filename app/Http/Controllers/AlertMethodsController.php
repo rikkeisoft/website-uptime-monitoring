@@ -159,7 +159,14 @@ class AlertMethodsController extends Controller
      */
     public function deleteAlertMethods(Request $request)
     {
-        $data = $request->input('chkWeb');
+        $data = $request->input('selectedIds');
+
+        $data = explode(",", $data[0]);
+
+        if(empty($data)) {
+            $request->session()->flash('alert-error', 'Add Error');
+            return redirect()->back();
+        }
 
         $deleteAlertMethod = $this->alertMethodsRepository->delete($data);
 
