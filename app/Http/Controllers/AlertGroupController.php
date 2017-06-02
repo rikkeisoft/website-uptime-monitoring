@@ -39,17 +39,15 @@ class AlertGroupController extends Controller
     {
         $alertGroup = $this->alertGroupsRepository->find($id);
         if (empty($alertGroup)) {
-            return redirect('/error-edit-AlertGroup');
+            abort(404);
         }
         return view('alert-group.edit')->with('alertGroup', $alertGroup);
     }
 
     /**
      * Update the specified resource in storage.
-     *
      * @param \App\Http\Requests\AlertGroupRequest $request
      * @param string $id
-     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function update(AlertGroupRequest $request, string $id)
@@ -57,14 +55,14 @@ class AlertGroupController extends Controller
         $data = $request->only('name');
         $alertGroup = $this->alertGroupsRepository->update($data, $id);
         if ($alertGroup) {
+            $request->session()->flash('alert-success', 'Update Success');
             return redirect('/alert-group');
         }
-        return redirect('/error-edit-AlertGroup');
+        $request->session()->flash('alert-error', 'Update Alert Group Error');
     }
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
@@ -74,9 +72,7 @@ class AlertGroupController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \App\Http\Requests\AlertGroupRequest $request
-     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(AlertGroupRequest $request)
@@ -85,25 +81,26 @@ class AlertGroupController extends Controller
         $data['user_id'] = Auth::user()->id;
         $created = $this->alertGroupsRepository->create($data);
         if ($created) {
+            $request->session()->flash('alert-success', 'Add Success');
             return redirect('/alert-group');
         }
-        return redirect('/error-create-AlertGroup');
+        $request->session()->flash('alert-error', 'Add Alert Group Error');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  \Illuminate\Http\Request $request
-     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function destroyAlertGroup(Request $request)
     {
-        $alertGroupIds = $request->input('alertGroupIds');
-        $numDeleted = $this->alertGroupsRepository->delete($alertGroupIds);
+        $selectedIds = $request->input('selectedIds');
+        $selectedIds = explode(",", $selectedIds);
+        $numDeleted = $this->alertGroupsRepository->delete($selectedIds);
         if ($numDeleted > 0) {
+            $request->session()->flash('alert-success', 'Delete Success');
             return redirect('/alert-group');
         }
-        return redirect('/error-delete-AlertGroup');
+        $request->session()->flash('alert-error', 'Add Alert Group Error');
     }
 }

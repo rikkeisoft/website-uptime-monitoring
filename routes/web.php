@@ -37,18 +37,6 @@ Route::resource('/alert-group','AlertGroupController');
 // Route for mass delete Alert Group
 Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
 
-//Route for error edit Alert Group
-Route::get('/error-edit-AlertGroup',function (){
-    return view('alert-group.error.error-edit');
-});
-// Route for error create Alert Group
-Route::get('/error-create-AlertGroup',function (){
-    return view('alert-group.error.error-create');
-});
-// Route for error delete Alert Group
-Route::get('/error-delete-AlertGroup',function (){
-    return view('alert-group.error.error-delete');
-});
 //resource router alert method
 Route::resource('alertmethods', 'AlertMethodsController');
 

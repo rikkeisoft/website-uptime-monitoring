@@ -5,44 +5,54 @@
 @section('content')
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-md-6">
-                <div class="btn-group">
-                    <a class="btn green btn-success" href="{{ route('alert-group.create') }}"><span>Add New </span><i class="fa fa-plus"></i></a>
-                    <button class="btn red btn btn-danger" id="SubmitDelete" disabled>Remove selected</button>
+            @component('flash_alert_message')
+            @endcomponent
+            <div class="col-lg-12">
+                <h1 class="page-header">List Alert Groups</h1>
+                <div style="margin: 20px 0">
+                    <a href="{{ route('alert-group.create') }}">
+                        <button type="button" class="btn btn-primary">Add Alert Group</button>
+                    </a>
+                    <button type="button" class="btn btn-danger btn-danger-website" id="SubmitDelete" disabled>Delete</button>
                 </div>
             </div>
-        </div>
-        <form id="destroyAlertGroupForm" role="form" method="POST" action="{{ route('destroyAlertGroup') }}">
-            {{ csrf_field() }}
-            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <thead>
-                <tr>
-                    <th>
-                        <input type="checkbox" value="option3" id="select_all"  name="checkbox[]" data-id="checkbox">
-                    </th>
-                    <th>Name</th>
-                    <th>Created at</th>
-                    <th>Updated at</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($alertGroups as $alertGroup)
-                    <tr>
-                        <td>
-                            <input class="checkbox" type="checkbox" name="alertGroupIds[]" onclick="clickCheckbox();" value="{!! $alertGroup->id !!}">
-                        </td>
-                        <td>{{ $alertGroup->name }}</td>
-                        <td>{{ $alertGroup->created_at }}</td>
-                        <td>{{ $alertGroup->updated_at }}</td>
-                        <td>
-                            <a type="button" class="btn btn-primary btn-sm" href="{{ route('alert-group.edit', ['alert_group' => $alertGroup->id]) }}">Edit</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </form>
-    </div>
-    <script type="text/javascript" src="{{ asset('js/checkAllButton.js')}}"></script>
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" value="option3" id="select_all" name="checkbox[]" data-id="checkbox">
+                                </th>
+                                <th>Name</th>
+                                <th>Created at</th>
+                                <th>Updated at</th>
+                                <th class="center">Update</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($alertGroups as $alertGroup)
+                                <tr>
+                                    <td>
+                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();" value="{!! $alertGroup->id !!}">
+                                    </td>
+                                    <td>{{ $alertGroup->name }}</td>
+                                    <td>{{ $alertGroup->created_at }}</td>
+                                    <td>{{ $alertGroup->updated_at }}</td>
+                                    <td class="center">
+                                        <a href="{{ route('alert-group.edit', ['alert_group' => $alertGroup->id]) }}"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <form id="deleteListSelectForm" method="post" action="{{ route('destroyAlertGroup') }}">
+                            {{ csrf_field() }}
+                            <input id="checkdelete" name="selectedIds" type="hidden">
+                        </form>
+                    </div>
+                </div>
+            </div>
 @endsection
