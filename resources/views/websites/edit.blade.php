@@ -102,7 +102,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-1">
                                 <button type="submit" class="btn btn-primary">
-                                    Add Website
+                                    Update Website
                                 </button>
                             </div>
                         </div>

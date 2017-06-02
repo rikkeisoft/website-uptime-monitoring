@@ -41,7 +41,7 @@
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
                                     <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
-                                    <td>{{ $website->updated_at }}</td>
+                                    <td>{{ $website->monitor->updated_at }}</td>
                                     <td>{{ isset($website->monitor->alertGroup->name)?$website->monitor->alertGroup->name:'' }}</td>
                                     <td>
                                         <a onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')">
