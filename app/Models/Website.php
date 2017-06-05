@@ -16,7 +16,7 @@ class Website extends BaseModel
         '2' => 'Disabled',
     ];
 
-    const LIST_FREQUENCY = [
+    const LIST_FREQUENCYS = [
         '5' => '5 minutes',
         '10' => '10 minutes',
         '15' => '15 minutes',
@@ -25,7 +25,7 @@ class Website extends BaseModel
         '60' => '60 minutes',
     ];
 
-    const LIST_SENSITIVITY = [
+    const LIST_SENSITIVITYS = [
         '1' => 'Low: Retry 1 times',
         '3' => 'Medium: Retry 3 times',
         '5' => 'High: Retry 5 times',
@@ -59,6 +59,6 @@ class Website extends BaseModel
 
     public function monitor()
     {
-        return $this->hasOne(Monitor::class, 'website_id', 'id');
+        return $this->hasMany(Monitor::class, 'website_id', 'id');
     }
 }

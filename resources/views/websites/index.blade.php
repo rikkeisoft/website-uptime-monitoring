@@ -36,13 +36,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($listWebsite as $website)
+                            @foreach($listWebsites as $website)
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
                                     <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
-                                    <td>{{ $website->monitor->updated_at }}</td>
-                                    <td>{{ isset($website->monitor->alertGroup->name)?$website->monitor->alertGroup->name:'' }}</td>
+                                    <td>{{ $website->monitor->first()->updated_at }}</td>
+                                    <td>{{ isset($website->monitor->first()->alertGroup['name'])?$website->monitor->first()->alertGroup['name']:'' }}</td>
                                     <td>
                                         <a onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')">
                                             <input type="checkbox"  {{ $website->status == 1?'checked':'' }} data-toggle="toggle" data-style="ios" data-on="Enable" data-off="Disable" data-size="mini">
@@ -54,13 +54,13 @@
                             @endforeach
                             </tbody>
                         </table>
-
+                        {!! $listWebsites->render() !!}
                         <form id="checkEnableDisable" method="post" action="{{ route('setStatusWebsite') }}">
                             <input id="checkEnableDisableID" name="id" type="hidden">
                             <input id="checkEnableDisableStatus" name="status" type="hidden">
                             {{ csrf_field() }}
                         </form>
-                        <form id="deleteListSelectForm" method="post" action="{{ route('deleteWebsite') }}">
+                        <form id="deleteListSelectForm" method="post" action="{{ route('websites.destroy') }}">
                             {{ csrf_field() }}
                             <input id="checkdelete" name="selectedIds" type="hidden">
                         </form>

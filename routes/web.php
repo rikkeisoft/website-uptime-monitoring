@@ -34,7 +34,7 @@ Route::get('/activate/successfully',function(){
 Route::resource('websites', 'WebsitesController');
 
 //router delete list website
-Route::post('/websites/delete_website', 'WebsitesController@deleteWebsite')->name('deleteWebsite');
+Route::post('/websites/destroy', 'WebsitesController@destroy')->name('websites.destroy');
 //router change status website
 Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
 

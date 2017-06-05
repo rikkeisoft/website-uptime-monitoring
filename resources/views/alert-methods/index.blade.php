@@ -38,12 +38,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($listAlertMethod as $alert)
+                                    @foreach($listAlertMethods as $alert)
                                         <tr class="odd gradeX">
                                             <td><input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}" onclick="clickCheckbox();"></td>
                                             <td>{{ $alert->name }}</td>
                                             <td>{{ isset($alert->alertmethodalertgroup->alertGroup['name'])?$alert->alertmethodalertgroup->alertGroup['name']:'' }}</td>
-                                            <td>{{ $listType[$alert->type] }}</td>
+                                            <td>{{ $listTypes[$alert->type] }}</td>
                                             <td>{{ $alert->email }}</td>
                                             <td>{{ $alert->phone_number }}</td>
                                             <td>{{ $alert->webhook }}</td>
@@ -54,7 +54,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
+                            {!! $listAlertMethods->render() !!}
                         <form id="deleteListSelectForm" method="post" action="{{ route('deleteAlertMethods') }}">
                             {{ csrf_field() }}
                             <input id="checkdelete" name="selectedIds" type="hidden">

@@ -68,7 +68,7 @@
 
                             <div class="col-md-6">
                                 <select id="type" class="form-control" name="frequency" value="{{ old('frequency') }}">
-                                    @foreach($listFrequency as $key => $value)
+                                    @foreach($listFrequencys as $key => $value)
                                         <option value="{{ $key }}" {{ $website->frequency== $key?'selected':''  }}>{{ $value }}</option>
                                     @endforeach
                                 </select>
@@ -80,7 +80,7 @@
 
                             <div class="col-md-6">
                                 <select id="sensitivity" class="form-control" name="sensitivity" value="{{ old('sensitivity') }}">
-                                    @foreach($listSensitivity as $key => $value)
+                                    @foreach($listSensitivitys as $key => $value)
                                         <option value="{{ $key }}" {{ $website->sensitivity== $key?'selected':''  }}>{{ $value }}</option>
                                     @endforeach
                                 </select>

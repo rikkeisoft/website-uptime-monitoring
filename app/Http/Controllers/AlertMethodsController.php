@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Contracts\Constants;
 use App\Models\AlertMethod;
 use App\Repositories\AlertGroupsRepository;
 use App\Repositories\AlertMethodAlertGroupRepository;
@@ -43,9 +44,10 @@ class AlertMethodsController extends Controller
      */
     public function index()
     {
-        $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
-        $listAlertMethod = $this->alertMethodsRepository->all();
-        return view('alert-methods.index', compact('listAlertMethod', 'listType'));
+        $listTypes = AlertMethod::LIST_TYPE_ALERT_METHOD;
+        $listAlertMethods = $this->alertMethodsRepository->paginate(Constants::LIMIT_PAGINATE);
+
+        return view('alert-methods.index', compact('listAlertMethods', 'listTypes'));
     }
 
     /**
