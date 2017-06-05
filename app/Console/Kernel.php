@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\checkWebsite;
 use DB;
+use App\Console\Commands\CheckWebsite;
 use App\Repositories\WebsiteRepository;
 use App\Contracts\DBTable;
 use Illuminate\Console\Scheduling\Schedule;
@@ -35,8 +35,7 @@ class Kernel extends ConsoleKernel
 
         foreach ($this->website as $website) {
             $schedule->call(function () use ($website) {
-
-                new checkWebsite($website);
+                new CheckWebsite($website);
             })->cron('*/'.$website->frequency.' * * * * *');
         }
     }

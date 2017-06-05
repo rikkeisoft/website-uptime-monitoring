@@ -11,7 +11,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class checkWebsite extends Command
+class CheckWebsite extends Command
 {
     public $website;
 
@@ -21,14 +21,14 @@ class checkWebsite extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'command:CheckWebsite';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Command Check Website Status';
 
     /**
      * Create a new command instance.
@@ -41,9 +41,32 @@ class checkWebsite extends Command
 
         $this->website = $website;
 
-        $this->checkSensitivity($this->website);
+        $this->check($this->website);
     }
+    /**
+     * check request sensitivity
+     * @param $website
+     * @return array
+     */
+    public function check($website)
+    {
+        //1: Success, 2: Failed
+        $check = Constants::CHECK_FAILED;
 
+        if ($this->checkStatusWebsite($website->url)) {
+            $check = Constants::CHECK_SUCCESS;
+        } else {
+            for ($i = 0; $i < $website->sensitivity; $i++) {
+                if ($this->checkStatusWebsite($website->url)) {
+                    $check = Constants::CHECK_SUCCESS;
+                    break;
+                } else {
+                    sleep(Constants::TIME_DELAY_SENSITIVITY);
+                }
+            }
+        }
+        $this->updateMonitorAndSendMailGroup($website, $check);
+    }
     /**
      * check status website with url
      * @param $url
@@ -72,42 +95,25 @@ class checkWebsite extends Command
         }
         return false;
     }
-
     /**
-     * check request sensitivity
-     * @param $website
-     * @return array
+     * update monitor and send mail group
+     *
+     * @param array $website
+     * @param integer $checkStatus
      */
-    public function checkSensitivity($website)
+    private function updateMonitorAndSendMailGroup($website, $checkStatus)
     {
-        //1: Success, 2: Failed
-        $check = Constants::CHECK_FAILED;
-
-        if ($this->checkStatusWebsite($website->url)) {
-            $check = Constants::CHECK_SUCCESS;
-        } else {
-            for ($i = 0; $i < $website->sensitivity; $i++) {
-                if ($this->checkStatusWebsite($website->url)) {
-                    $check = Constants::CHECK_SUCCESS;
-                    break;
-                } else {
-                    sleep(Constants::TIME_DELAY_SENSITIVITY);
-                }
-            }
-        }
-
-        //get monitor for website
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
 
         $result = $monitor->result;
         //update monitor
-        $monitor['result'] = $check;
+        $monitor['result'] = $checkStatus;
         $monitor->save();
 
         //website result change => send mesage
-        if ($check != $result) {
+        if ($checkStatus != $result) {
             //send mail to group
-            $this->sendMailGroup($monitor->alertGroup->id, $website, $check);
+            $this->sendMailGroup($monitor->alertGroup->id, $website, $checkStatus);
         }
     }
 
@@ -118,7 +124,7 @@ class checkWebsite extends Command
      * @param array $website
      * @param integer $checkStatus
      */
-    public function sendMailGroup($group_id, $website, $checkStatus)
+    private function sendMailGroup($group_id, $website, $checkStatus)
     {
         $listMethods = app(AlertMethodAlertGroupRepository::class)->getListEmail($group_id);
 
