@@ -64,10 +64,10 @@ class AlertMethodAlertGroupController extends Controller
         $data = $request->only('alert_method_id', 'alert_group_id');
         $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->create($data);
         if ($alertMethodOfGroup) {
-            $request->session()->flash('alert-success', 'Add Success');
+            $request->session()->flash('alert-success', 'Add Alert Method Of Group Success');
             return redirect('/alert-method-of-group');
         }
-        $request->session()->flash('alert-error', 'Add Alert Method Of Group Error');
+        $request->session()->flash('alert-error', 'Add Alert Method Of Group False');
     }
 
     /**
@@ -108,10 +108,10 @@ class AlertMethodAlertGroupController extends Controller
         //Update
         $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->update($data, $id);
         if ($alertMethodOfGroup) {
-            $request->session()->flash('alert-success', 'Update Success');
+            $request->session()->flash('alert-success', 'Update Alert Method Of Group Success');
             return redirect('/alert-method-of-group');
         }
-        $request->session()->flash('alert-error', 'Update Alert Method Of Group Error');
+        $request->session()->flash('alert-error', 'Update Alert Method Of Group False');
     }
 
     /**
@@ -119,15 +119,15 @@ class AlertMethodAlertGroupController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroyMethodOfGroup(Request $request)
+    public function destroy(Request $request)
     {
         $selectedIds = $request->input('selectedIds');
         $selectedIds = explode(",", $selectedIds);
         $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->delete($selectedIds);
         if ($alertMethodOfGroup > 0) {
-            $request->session()->flash('alert-success', 'Delete Success');
+            $request->session()->flash('alert-success', 'Delete Alert Method Of Group Success');
             return redirect('/alert-method-of-group');
         }
-        $request->session()->flash('alert-error', 'Delete Alert Method Of Group Error');
+        $request->session()->flash('alert-error', 'Delete Alert Method Of Group False');
     }
 }

@@ -48,8 +48,9 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <form id="deleteListSelectForm" method="post" action="{{ route('destroyAlertGroup') }}">
+                        <form id="deleteListSelectForm" method="post" action="{{ route('alert-group.destroy') }}">
                             {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                             <input id="checkdelete" name="selectedIds" type="hidden">
                         </form>
                     </div>

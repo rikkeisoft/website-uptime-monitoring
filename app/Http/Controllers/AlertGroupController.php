@@ -92,7 +92,7 @@ class AlertGroupController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function destroyAlertGroup(Request $request)
+    public function destroy(Request $request)
     {
         $selectedIds = $request->input('selectedIds');
         $selectedIds = explode(",", $selectedIds);
