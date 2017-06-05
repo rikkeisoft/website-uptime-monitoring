@@ -47,7 +47,10 @@
                                     <td>{{ isset($website->monitor->first()->alertGroup['name'])?$website->monitor->first()->alertGroup['name']:'' }}</td>
                                     <td>
                                         <a onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')">
-                                            <input type="checkbox"  {{ $website->status == 1?'checked':'' }} data-toggle="toggle" data-style="ios" data-on="Enable" data-off="Disable" data-size="mini">
+                                            <label class="switch">
+                                                <input type="checkbox" {{ $website->status == 1?'checked':'' }}>
+                                                <div class="slider round"></div>
+                                            </label>
                                         </a>
                                     </td>
                                     <td>{{ $website->created_at }}</td>
@@ -76,7 +79,5 @@
         </div>
         <link href="{{ asset('css/style-button-website.css')}}" rel="stylesheet" type="text/css">
         <script src="{{ asset('js/website.js')}}"></script>
-        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     </div>
 @endsection
