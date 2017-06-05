@@ -30,7 +30,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
     <script src="{{ asset('js/metisMenu.min.js')}}"></script>
 
     <!-- Morris Charts JavaScript -->
@@ -92,51 +91,25 @@
                         <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                         </div>
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Methods<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Alert Methods</a>
-                            </li>
-                            <li>
-                                <a href="#">Add New Alert Methods</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="{{ route('alertmethods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Alert Groups</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Add New</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Groups</a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Alert Method of a Group</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Add New</a>
-                            </li>
-                        </ul>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Method of a Group</a>
                     </li>
 
                     <li>
@@ -144,15 +117,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Monitor<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Monitor</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Add New</a>
-                            </li>
-                        </ul>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>  Monitor</a>
                         <!-- /.nav-second-level -->
                     </li>
                 </ul>
@@ -163,6 +128,7 @@
     </nav>
     @yield('content')
             <!-- /.panel-body -->
+
     <div class="panel-footer">
 
     </div>

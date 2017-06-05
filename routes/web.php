@@ -16,13 +16,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// route administrator
+// Route administrator
 Route::get('/home','HomeController@showStatistics');
 
-//route active user
+//Route active user
 Route::get('/activate', 'Auth\RegisterController@activate');
 
-//route notification
+//Route error activate
 Route::get('/activate-error',function(){
     return view('template-activate-auth.active-error');
 });
@@ -37,3 +37,14 @@ Route::resource('websites', 'WebsitesController');
 Route::post('/websites/delete_website', 'WebsitesController@deleteWebsite')->name('deleteWebsite');
 //router change status website
 Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
+
+// Routes for Alert Group
+Route::resource('/alert-group','AlertGroupController');
+
+// Route for mass delete Alert Group
+Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
+
+//resource router alert method
+Route::resource('alertmethods', 'AlertMethodsController');
+
+Route::post('/alertmethods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');

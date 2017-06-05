@@ -1,7 +1,9 @@
 <?php
 namespace App\Repositories;
+
 use App\Repositories\Eloquent\BaseRepository;
 use App\Models\AlertMethodAlertGroup;
+
 class AlertMethodAlertGroupRepository extends BaseRepository
 {
     /**
@@ -14,3 +16,4 @@ class AlertMethodAlertGroupRepository extends BaseRepository
         return AlertMethodAlertGroup::class;
     }
 }
+
