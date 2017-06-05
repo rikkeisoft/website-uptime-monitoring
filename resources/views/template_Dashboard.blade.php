@@ -111,7 +111,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Method of a Group</a>
+                        <a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group</a>
                     </li>
 
                     <li>

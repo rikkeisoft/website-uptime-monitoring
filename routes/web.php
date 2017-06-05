@@ -39,13 +39,20 @@ Route::post('/websites/destroy', 'WebsitesController@destroy')->name('websites.d
 Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
 
 
+//Route for alert method of a group
+Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
+
+//Route for deleted alert method of a group
+Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');
+
 // Routes for Alert Group
 Route::resource('/alert-group','AlertGroupController');
 
 // Route for mass delete Alert Group
-Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
+Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
 
 //resource router alert method
 Route::resource('alert-methods', 'AlertMethodsController');
 
 Route::post('/alert-methods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
+
