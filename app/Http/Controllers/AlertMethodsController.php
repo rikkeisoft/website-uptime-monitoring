@@ -45,7 +45,7 @@ class AlertMethodsController extends Controller
     {
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
         $listAlertMethod = $this->alertMethodsRepository->all();
-        return view('alertmethods.index', compact('listAlertMethod', 'listType'));
+        return view('alert-methods.index', compact('listAlertMethod', 'listType'));
     }
 
     /**
@@ -56,7 +56,7 @@ class AlertMethodsController extends Controller
     {
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
         $listAlertGroup = $this->alertGroupsRepository->all();
-        return view('alertmethods.create', compact('listType', 'listAlertGroup'));
+        return view('alert-methods.create', compact('listType', 'listAlertGroup'));
     }
 
     /**
@@ -73,7 +73,7 @@ class AlertMethodsController extends Controller
         }
         $listAlertGroup = $this->alertGroupsRepository->all();
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
-        return view('alertmethods.edit', compact('listType', 'alertMethod', 'listAlertGroup'));
+        return view('alert-methods.edit', compact('listType', 'alertMethod', 'listAlertGroup'));
     }
 
     public function show()
@@ -101,7 +101,7 @@ class AlertMethodsController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'Add Alert Method Alert Group Error');
             }
-            return redirect()->route('alertmethods.index');
+            return redirect()->route('alert-methods.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Add Error');
@@ -130,7 +130,7 @@ class AlertMethodsController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'update Alert Method Alert Group Error');
             }
-            return redirect()->route('alertmethods.index');
+            return redirect()->route('alert-methods.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Update Error');
@@ -157,7 +157,7 @@ class AlertMethodsController extends Controller
         if ($deleteAlertMethod) {
             //messgae alert success
             $request->session()->flash('alert-success', 'Deleted Success');
-            return redirect()->route('alertmethods.index');
+            return redirect()->route('alert-methods.index');
         } else {
             //message alsert error
             $request->session()->flash('alert-error', 'Deleted Error');

@@ -38,6 +38,6 @@ Route::resource('/alert-group','AlertGroupController');
 Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
 
 //resource router alert method
-Route::resource('alertmethods', 'AlertMethodsController');
+Route::resource('alert-methods', 'AlertMethodsController');
 
-Route::post('/alertmethods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
+Route::post('/alert-methods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');

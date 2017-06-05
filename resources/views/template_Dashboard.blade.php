@@ -104,7 +104,7 @@
                         <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ route('alertmethods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
+                        <a href="{{ route('alert-methods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
                     </li>
                     <li>
                         <a href="{{ route('alert-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups</a>

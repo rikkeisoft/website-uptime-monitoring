@@ -12,7 +12,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">List Alert Methods</h1>
                 <div style="margin: 20px 0">
-                    <a href="{{ route('alertmethods.create') }}"><button type="button" class="btn btn-primary" >Add Alert Methods</button></a>
+                    <a href="{{ route('alert-methods.create') }}"><button type="button" class="btn btn-primary" >Add Alert Methods</button></a>
                     <button type="button" class="btn btn-danger btn-danger-website" id="SubmitDelete" disabled >Delete</button>
                 </div>
             </div>
@@ -42,14 +42,14 @@
                                         <tr class="odd gradeX">
                                             <td><input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}" onclick="clickCheckbox();"></td>
                                             <td>{{ $alert->name }}</td>
-                                            <td>{{ $alert->alertmethodalertgroup->alertGroup->name }}</td>
+                                            <td>{{ isset($alert->alertmethodalertgroup->alertGroup['name'])?$alert->alertmethodalertgroup->alertGroup['name']:'' }}</td>
                                             <td>{{ $listType[$alert->type] }}</td>
                                             <td>{{ $alert->email }}</td>
                                             <td>{{ $alert->phone_number }}</td>
                                             <td>{{ $alert->webhook }}</td>
                                             <td>{{ $alert->user->username }}</td>
                                             <td>{{ $alert->created_at }}</td>
-                                            <td class="center"><a href="{{ route('alertmethods.edit', ['alert_method_id' => $alert->id]) }}"><i class="fa fa-edit"></i></a></td>
+                                            <td class="center"><a href="{{ route('alert-methods.edit', ['alert_method_id' => $alert->id]) }}"><i class="fa fa-edit"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
