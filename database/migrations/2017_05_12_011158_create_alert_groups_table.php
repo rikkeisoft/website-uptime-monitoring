@@ -30,7 +30,8 @@ class CreateAlertGroupsTable extends Migration
         Schema::table(
             DBTable::ALERT_GROUP,
             function (Blueprint $table) {
-                $table->foreign('user_id', 'fk__users__alert_groups')->references('id')->on(DBTable::USER)->onDelete('cascade');
+                $table->foreign('user_id', 'fk__users__alert_groups')->references('id')
+                    ->on(DBTable::USER)->onDelete('cascade');
             }
         );
     }

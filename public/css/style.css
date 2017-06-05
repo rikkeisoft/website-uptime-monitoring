@@ -1,3 +1,4 @@
+
 /*fix margin right button Add New*/
 .green
 {
@@ -6,4 +7,7 @@
 .red
 {
     border-top-left-radius: 5px !important;
+}
+.center {
+    text-align: center;
 }

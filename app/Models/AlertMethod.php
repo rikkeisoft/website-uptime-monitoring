@@ -6,6 +6,12 @@ use App\Scopes\UserIdScope;
 
 class AlertMethod extends BaseModel
 {
+    const LIST_TYPE_ALERT_METHOD = [
+        '1' => 'Email',
+        '2' => 'SMS',
+        '3' => 'Webhook'
+    ];
+
     /**
      * The "booting" method of the model.
      *
@@ -30,5 +36,10 @@ class AlertMethod extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function alertmethodalertgroup()
+    {
+        return $this->hasOne(AlertMethodAlertGroup::class);
     }
 }
