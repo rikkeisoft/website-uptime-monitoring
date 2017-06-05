@@ -81,7 +81,7 @@ class AlertMethodAlertGroupController extends Controller
         $alertGroup = $this->AlertGroupsRepository->all();
         $alertMethod = $this->AlertMethodsRepository->all();
         if (empty($alertMethodOfGroup)) {
-            return redirect('/error-edit-alertMethodOfGroup');
+            abort(404);
         }
         return view('/alert-method-of-group.edit')->with([
             'alertMethodOfGroup' => $alertMethodOfGroup,
