@@ -101,6 +101,6 @@ class AlertGroupController extends Controller
             $request->session()->flash('alert-success', 'Delete Success');
             return redirect('/alert-group');
         }
-        $request->session()->flash('alert-error', 'Add Alert Group Error');
+        $request->session()->flash('alert-error', 'Delete Alert Group Error');
     }
 }
