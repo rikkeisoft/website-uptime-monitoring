@@ -55,7 +55,7 @@ class AlertGroupController extends Controller
         $data = $request->only('name');
         $alertGroup = $this->alertGroupsRepository->update($data, $id);
         if ($alertGroup) {
-            $request->session()->flash('alert-success', 'Update Alert Group Successfully');
+            $request->session()->flash('alert-success', 'Update  Successfully');
             return redirect('/alert-group');
         }
         $request->session()->flash('alert-error', 'Update Alert Group Failed');
@@ -95,7 +95,7 @@ class AlertGroupController extends Controller
     public function destroy(Request $request)
     {
         $selectedIds = $request->input('selectedIds');
-        $selectedIds = explode(",", $selectedIds);
+        $selectedIds = explode(',', $selectedIds);
         $numDeleted = $this->alertGroupsRepository->delete($selectedIds);
         if ($numDeleted > 0) {
             $request->session()->flash('alert-success', 'Delete Alert Group Successfully');
