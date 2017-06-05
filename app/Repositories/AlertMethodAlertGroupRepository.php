@@ -16,7 +16,6 @@ class AlertMethodAlertGroupRepository extends BaseRepository
     {
         return AlertMethodAlertGroup::class;
     }
-
     /**
      * get lisst email alert group
      * @param string $alertGroupId

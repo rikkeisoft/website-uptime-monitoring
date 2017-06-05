@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseModel extends Model
 {
-    use UuidModelTrait, SoftDeletes;
+    use UuidModelTrait;
 
     public $incrementing = false;
 }

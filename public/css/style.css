@@ -1,0 +1,16 @@
+
+/*fix margin right button Add New*/
+.green
+{
+    margin-right: 1em !important;
+}
+.red
+{
+    border-top-left-radius: 5px !important;
+}
+.center {
+    text-align: center;
+}
+.btn-danger-website {
+    margin-left: 20px;
+}
