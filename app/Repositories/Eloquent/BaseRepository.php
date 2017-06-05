@@ -73,7 +73,7 @@ abstract class BaseRepository implements RepositoryInterface
      * Find data by id
      * @param string $id
      * @param array $columns
-     * @return object
+     * @return array
      */
     public function find(string $id, $columns = ['*'])
     {
@@ -122,7 +122,7 @@ abstract class BaseRepository implements RepositoryInterface
      * @param string $id
      * @return int
      */
-    public function delete($id)
+    public function delete(string $id)
     {
         return $this->model->destroy($id);
     }

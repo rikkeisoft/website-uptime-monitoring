@@ -30,10 +30,8 @@ class CreateAlertMethodAlertGroupTable extends Migration
         Schema::table(
             DBTable::ALERT_METHOD_ALERT_GROUP,
             function (Blueprint $table) {
-                $table->foreign('alert_method_id', 'fk__alert_methods__alert_method_alert_group')->references('id')
-                    ->on(DBTable::ALERT_METHOD)->onDelete('cascade');
-                $table->foreign('alert_group_id', 'fk__alert_groups__alert_method_alert_group')->references('id')
-                    ->on(DBTable::ALERT_GROUP)->onDelete('cascade');
+                $table->foreign('alert_method_id', 'fk__alert_methods__alert_method_alert_group')->references('id')->on(DBTable::ALERT_METHOD)->onDelete('cascade');
+                $table->foreign('alert_group_id', 'fk__alert_groups__alert_method_alert_group')->references('id')->on(DBTable::ALERT_GROUP)->onDelete('cascade');
             }
         );
     }

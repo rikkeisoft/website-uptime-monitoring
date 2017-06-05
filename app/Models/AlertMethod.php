@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Scopes\UserIdScope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AlertMethod extends BaseModel
 {
+    use SoftDeletes;
     const LIST_TYPE_ALERT_METHOD = [
         '1' => 'Email',
         '2' => 'SMS',

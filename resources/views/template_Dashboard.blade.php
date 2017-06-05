@@ -5,20 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <!-- MetisMenu CSS -->
-    <link href="{{asset('css/metisMenu.min.css')}}" rel="stylesheet">
-
+    <link href="{{asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
-
+    <link href="{{asset('dist/css/sb-admin-2.css')}}" rel="stylesheet">
     <!-- Morris Charts CSS -->
-    <link href="{{asset('css/morris.css')}}" rel="stylesheet">
-
+    <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
+    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
     <link href="{{ asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Custom style -->
@@ -152,8 +149,8 @@
         </div>
         <!-- /.navbar-static-side -->
     </nav>
-@yield('content')
-<!-- /.panel-body -->
+    @yield('content')
+    <!-- /.panel-body -->
     <div class="panel-footer">
 
     </div>

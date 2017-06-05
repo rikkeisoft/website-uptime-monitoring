@@ -26,10 +26,8 @@ class CreateMonitorsTable extends Migration
         });
 
         Schema::table(DBTable::MONITOR, function (Blueprint $table) {
-            $table->foreign('website_id', 'fk__websites__monitors')->references('id')->on(DBTable::WEBSITE)
-                ->onDelete('cascade');
-            $table->foreign('alert_group_id', 'fk__alert_groups__monitors')->references('id')
-                ->on(DBTable::ALERT_GROUP)->onDelete('cascade');
+            $table->foreign('website_id', 'fk__websites__monitors')->references('id')->on(DBTable::WEBSITE)->onDelete('cascade');
+            $table->foreign('alert_group_id', 'fk__alert_groups__monitors')->references('id')->on(DBTable::ALERT_GROUP)->onDelete('cascade');
         });
     }
 
