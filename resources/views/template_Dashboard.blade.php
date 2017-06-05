@@ -111,15 +111,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Alert Method of a Group</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Add New</a>
-                            </li>
-                        </ul>
+                        <a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group</a>
                     </li>
 
                     <li>
