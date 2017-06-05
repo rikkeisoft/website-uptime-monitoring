@@ -16,13 +16,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// route administrator
+// Route administrator
 Route::get('/home','HomeController@showStatistics');
 
-//route active user
+//Route active user
 Route::get('/activate', 'Auth\RegisterController@activate');
 
-//route notification
+//Route error activate
 Route::get('/activate-error',function(){
     return view('template-activate-auth.active-error');
 });
@@ -30,3 +30,21 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
+
+//Route for alert method of a group
+Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
+
+//Route for deleted alert method of a group
+Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');
+
+// Routes for Alert Group
+Route::resource('/alert-group','AlertGroupController');
+
+// Route for mass delete Alert Group
+Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
+
+//resource router alert method
+Route::resource('alertmethods', 'AlertMethodsController');
+
+Route::post('/alertmethods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
+

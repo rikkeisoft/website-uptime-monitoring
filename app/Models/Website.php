@@ -2,9 +2,12 @@
 namespace App\Models;
 
 use App\Scopes\UserIdScope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Website extends BaseModel
 {
+    use SoftDeletes;
+
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 2;
   

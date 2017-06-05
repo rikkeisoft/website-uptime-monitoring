@@ -34,7 +34,8 @@ class CreateAlertMethodsTable extends Migration
         Schema::table(
             DBTable::ALERT_METHOD,
             function (Blueprint $table) {
-                $table->foreign('user_id', 'fk__users__alert_methods')->references('id')->on(DBTable::USER)->onDelete('cascade');
+                $table->foreign('user_id', 'fk__users__alert_methods')->references('id')
+                    ->on(DBTable::USER)->onDelete('cascade');
             }
         );
     }
