@@ -42,6 +42,7 @@ class WebsitesController extends Controller
             ->with([
                 'listWebsites' => $listWebsite,
                 'listFrequencys' => Website::LIST_FREQUENCYS,
+                'listResults' => Website::LIST_RESULTS,
                 'listSensitivitys' => Website::LIST_SENSITIVITYS,
                 'listStatus' => Website::LIST_STATUS,
                 'listAlertGroup' => $listAlertGroup
