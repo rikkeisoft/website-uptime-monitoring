@@ -42,3 +42,4 @@ Route::resource('alert-methods', 'AlertMethodsController');
 
 Route::post('/alert-methods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
 
+
