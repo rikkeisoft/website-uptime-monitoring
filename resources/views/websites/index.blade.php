@@ -42,7 +42,7 @@
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
                                     <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
-                                    <td><div class="btn btn-xs {{ $website->monitor->first()->result==1?'btn-primary':'btn-danger' }}">{{ $listResults[$website->monitor->first()->result] }}</div></td>
+                                    <td><div class="btn btn-xs {{ $website->monitor->first()->result==1?'btn-success':'btn-danger' }}">{{ $listResults[$website->monitor->first()->result] }}</div></td>
                                     <td>{{ $website->monitor->first()->updated_at }}</td>
                                     <td>{{ isset($website->monitor->first()->alertGroup['name'])?$website->monitor->first()->alertGroup['name']:'' }}</td>
                                     <td>
