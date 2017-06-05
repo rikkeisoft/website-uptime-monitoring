@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAlertMethodsRequest extends FormRequest
+class AddWebsitesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,9 @@ class UpdateAlertMethodsRequest extends FormRequest
     public function rules()
     {
         return [
+            'url' => 'required|string|url|max:255',
             'name' => 'required|string|max:255',
-            'alert_group_id' => 'required|string|max:255',
-            'type' => 'required|integer|min:1',
-            'email' => 'sometimes|required|string|email|max:255',
-            'phone_number' => 'sometimes|required|string|max:255',
-            'webhook' => 'sometimes|required|string|max:255',
+            'alert_group_id' => 'required|string|max:255'
         ];
     }
 }

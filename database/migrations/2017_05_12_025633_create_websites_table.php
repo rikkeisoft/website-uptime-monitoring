@@ -34,8 +34,7 @@ class CreateWebsitesTable extends Migration
         Schema::table(
             DBTable::WEBSITE,
             function (Blueprint $table) {
-                $table->foreign('user_id', 'fk__users__websites')->references('id')
-                    ->on(DBTable::USER)->onDelete('cascade');
+                $table->foreign('user_id', 'fk__users__websites')->references('id')->on(DBTable::USER)->onDelete('cascade');
             }
         );
     }

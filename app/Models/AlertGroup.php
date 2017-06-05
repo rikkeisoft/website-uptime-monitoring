@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use App\Scopes\UserIdScope;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AlertGroup extends BaseModel
 {
-    use SoftDeletes;
+
     /**
      * The "booting" method of the model.
      *

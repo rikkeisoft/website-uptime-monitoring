@@ -30,6 +30,13 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
+//resource router website
+Route::resource('websites', 'WebsitesController');
+
+//router delete list website
+Route::post('/websites/delete_website', 'WebsitesController@deleteWebsite')->name('deleteWebsite');
+//router change status website
+Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
 
 // Routes for Alert Group
 Route::resource('/alert-group','AlertGroupController');

@@ -73,7 +73,7 @@ abstract class BaseRepository implements RepositoryInterface
      * Find data by id
      * @param string $id
      * @param array $columns
-     * @return object
+     * @return array
      */
     public function find(string $id, $columns = ['*'])
     {

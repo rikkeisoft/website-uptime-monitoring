@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AlertGroupRequest extends FormRequest
+class UpdateWebsitesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class AlertGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100|min:3',
+            'url' => 'required|string|url|max:255',
+            'name' => 'required|string|max:255',
+            'alert_group_id' => 'required|string|max:255'
         ];
     }
 }
