@@ -66,7 +66,6 @@ class WebsitesController extends Controller
 
     public function show()
     {
-
     }
 
     /**
@@ -137,7 +136,7 @@ class WebsitesController extends Controller
         if ($update) {
             //update monitor with website
             $dataMonitor = $request->only('alert_group_id');
-            $monitorId = $update->monitor->id;
+            $monitorId = $update->monitor->first()->id;
             $updateMonitor = $this->monitorRepository->update($dataMonitor, $monitorId);
 
             if ($updateMonitor) {
@@ -163,7 +162,7 @@ class WebsitesController extends Controller
         $selectedIds = $request->input('selectedIds');
         $selectedIds = explode(",", $selectedIds);
 
-        if(empty($selectedIds)) {
+        if (empty($selectedIds)) {
             $request->session()->flash('alert-error', 'Delete Websites Failed');
             return redirect()->back();
         }

@@ -37,7 +37,6 @@ class Kernel extends ConsoleKernel
             $schedule->call(function () use ($website) {
 
                 new checkWebsite($website);
-
             })->cron('*/'.$website->frequency.' * * * * *');
         }
     }

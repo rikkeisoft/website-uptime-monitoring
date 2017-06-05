@@ -107,7 +107,6 @@ class checkWebsite extends Command
 
         //website result change => send mesage
         if ($check != $result) {
-
             $listmethods = app(AlertMethodAlertGroupRepository::class)->getListEmail($monitor->alertGroup->id);
 
             //get list email to send
@@ -118,7 +117,7 @@ class checkWebsite extends Command
             $data['status'] = $check == Constants::CHECK_FAILED?'Down':'Up';
 
             foreach ($listmethods as $value) {
-                if(!empty($value->email)) {
+                if (!empty($value->email)) {
                     array_push($data['email'], $value->email);
                 }
             }
@@ -126,7 +125,7 @@ class checkWebsite extends Command
             Log::info('check alert'.json_encode($data));
 
             //event send list mail group
-            if(!empty($data['email'])) {
+            if (!empty($data['email'])) {
                 event(new SendMailGroup($data));
             }
         }
