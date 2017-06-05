@@ -99,14 +99,14 @@ class AlertMethodsController extends Controller
             $createAlertMethodGroup = $this->alertMethodAlertGroupRepository->create($dataAlertMethodGroup);
 
             if ($createAlertMethodGroup) {
-                $request->session()->flash('alert-success', 'Add Success');
+                $request->session()->flash('alert-success', 'Add Alert Method Successfully');
             } else {
-                $request->session()->flash('alert-error', 'Add Alert Method Alert Group Error');
+                $request->session()->flash('alert-error', 'Add Alert Method Of Group Failed');
             }
             return redirect()->route('alert-methods.index');
         } else {
             //message alsert error
-            $request->session()->flash('alert-error', 'Add Error');
+            $request->session()->flash('alert-error', 'Add Alert Method Failed');
             return redirect()->back();
         }
     }
@@ -128,14 +128,14 @@ class AlertMethodsController extends Controller
                 ->update($dataAlertMethodGroup, $dataAlertMethodGroupId);
 
             if ($updateMethodGroup) {
-                $request->session()->flash('alert-success', 'update Success');
+                $request->session()->flash('alert-success', 'update Alert Method Successfully');
             } else {
-                $request->session()->flash('alert-error', 'update Alert Method Alert Group Error');
+                $request->session()->flash('alert-error', 'update Alert Method Alert Group Failed');
             }
             return redirect()->route('alert-methods.index');
         } else {
             //message alsert error
-            $request->session()->flash('alert-error', 'Update Error');
+            $request->session()->flash('alert-error', 'Update Alert Method Failed');
             return redirect()->back();
         }
     }
@@ -158,11 +158,11 @@ class AlertMethodsController extends Controller
 
         if ($deleteAlertMethod) {
             //messgae alert success
-            $request->session()->flash('alert-success', 'Deleted Success');
+            $request->session()->flash('alert-success', 'Deleted Alert Method Successfully');
             return redirect()->route('alert-methods.index');
         } else {
             //message alsert error
-            $request->session()->flash('alert-error', 'Deleted Error');
+            $request->session()->flash('alert-error', 'Deleted Alert Method Failed');
             return redirect()->back();
         }
     }

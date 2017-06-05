@@ -111,14 +111,14 @@ class WebsitesController extends Controller
             $createMonitor = $this->monitorRepository->create($dataMonitor);
 
             if ($createMonitor) {
-                $request->session()->flash('alert-success', 'Add Successfully');
+                $request->session()->flash('alert-success', 'Add Websites Successfully');
             } else {
-                $request->session()->flash('alert-error', 'Add Monitor Error');
+                $request->session()->flash('alert-error', 'Add Monitor Websites Failed');
             }
             return redirect()->route('websites.index');
         } else {
             //message alsert error
-            $request->session()->flash('alert-error', 'Add Error');
+            $request->session()->flash('alert-error', 'Add Websites Failed');
             return redirect()->back();
         }
     }
@@ -141,14 +141,14 @@ class WebsitesController extends Controller
             $updateMonitor = $this->monitorRepository->update($dataMonitor, $monitorId);
 
             if ($updateMonitor) {
-                $request->session()->flash('alert-success', 'Update Successfully');
+                $request->session()->flash('alert-success', 'Update Websites Successfully');
             } else {
-                $request->session()->flash('alert-error', 'Update Monitor Error');
+                $request->session()->flash('alert-error', 'Update Monitor Websites Failed');
             }
             return redirect()->route('websites.index');
         } else {
             //message alsert error
-            $request->session()->flash('alert-error', 'Update Error');
+            $request->session()->flash('alert-error', 'Update Websites Failed');
             return redirect()->back();
         }
     }
@@ -164,18 +164,18 @@ class WebsitesController extends Controller
         $selectedIds = explode(",", $selectedIds);
 
         if(empty($selectedIds)) {
-            $request->session()->flash('alert-error', 'Add Error');
+            $request->session()->flash('alert-error', 'Delete Websites Failed');
             return redirect()->back();
         }
         $deleteWebsite = $this->websiteRepository->delete($selectedIds);
 
         if ($deleteWebsite) {
             //messgae alert success
-            $request->session()->flash('alert-success', 'Delete Successfully');
+            $request->session()->flash('alert-success', 'Delete Websites Successfully');
             return redirect()->route('websites.index');
         } else {
             //message alsert error
-            $request->session()->flash('alert-error', 'Delete Error');
+            $request->session()->flash('alert-error', 'Delete Websites Failed');
             return redirect()->back();
         }
     }
