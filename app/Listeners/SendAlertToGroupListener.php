@@ -31,6 +31,7 @@ class SendAlertToGroupListener
         $subject = 'Send alert completed, please check mail!!';
         Mail::send('mail-template/mail-template-send-alert', [
             'name' => $data['name'],
+            'url' => $data['url'],
             'result'=> $data['result']
         ], function ($message) use ($data, $subject) {
             $message->to($data['email'])->subject($subject);
