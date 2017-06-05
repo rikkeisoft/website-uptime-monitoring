@@ -31,6 +31,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
+
     <script src="{{ asset('js/metisMenu.min.js')}}"></script>
 
     <!-- Morris Charts JavaScript -->
@@ -45,27 +46,27 @@
 
 </head>
 <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Website Uptime Monitoring</a>
-            </div>
-            <!-- /.navbar-header -->
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Website Uptime Monitoring</a>
+        </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-top-links navbar-right">
+            <!-- Authentication Links -->
+            @if (Auth::guest())
                 <li><a href="{{ route('login') }}">Login</a>
                 </li>
                 <li><a href="{{ route('register') }}">Register</a>
                 </li>
-                @else
+            @else
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         {{ Auth::user()->username }} <span class="caret"></span>
@@ -82,90 +83,81 @@
                         </li>
                     </ul>
                 </li>
-                @endif
-            </ul>
-            <!-- /.navbar-top-links -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
+            @endif
+        </ul>
+        <!-- /.navbar-top-links -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('alertmethods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Alert Groups</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Add New</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+                    <li>
+                        <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('alertmethods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups</a>
+                    </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Alert Method of a Group</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Add New</a>
-                                </li>
-                            </ul>
-                        </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Alert Method of a Group</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Add New</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Website<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Website</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Add New</a>
-                                </li>
-                            </ul>
-                        </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Website<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Website</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Add New</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Monitor<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Monitor</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Add New</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Monitor<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Monitor</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Add New</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </ul>
             </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-        @yield('content')
-        <!-- /.panel-body -->
-        <div class="panel-footer">
-
+            <!-- /.sidebar-collapse -->
         </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+@yield('content')
+<!-- /.panel-body -->
+    <div class="panel-footer">
+
     </div>
+</div>
 </body>
 
 </html>
