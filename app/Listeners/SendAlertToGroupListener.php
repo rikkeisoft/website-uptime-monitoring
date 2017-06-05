@@ -28,7 +28,7 @@ class SendAlertToGroupListener
     {
         $data = $event->data;
         //send mail
-        $subject = 'Send alert completed, please check mail!!';
+        $subject = 'Website status alert';
         Mail::send('mail-template/mail-template-send-alert', [
             'name' => $data['name'],
             'url' => $data['url'],
