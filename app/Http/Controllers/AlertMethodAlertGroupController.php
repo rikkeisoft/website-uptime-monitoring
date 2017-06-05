@@ -25,9 +25,9 @@ class AlertMethodAlertGroupController extends Controller
         AlertMethodsRepository $alertMethodsRepository
     ) {
         $this->middleware('auth');
-        $this->AlertMethodAlertGroupRepository = $alertMethodAlertGroupRepository;
-        $this->AlertGroupsRepository = $alertGroupsRepository;
-        $this->AlertMethodsRepository = $alertMethodsRepository;
+        $this->alertMethodAlertGroupRepository = $alertMethodAlertGroupRepository;
+        $this->alertGroupsRepository = $alertGroupsRepository;
+        $this->alertMethodsRepository = $alertMethodsRepository;
     }
 
     /**
@@ -36,7 +36,7 @@ class AlertMethodAlertGroupController extends Controller
      */
     public function index()
     {
-        $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->all();
+        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->all();
         return view('/alert-method-of-group.index')->with('alertMethodOfGroup', $alertMethodOfGroup);
     }
 
@@ -46,8 +46,8 @@ class AlertMethodAlertGroupController extends Controller
      */
     public function create()
     {
-        $alertGroup = $this->AlertGroupsRepository->all();
-        $alertMethod = $this->AlertMethodsRepository->all();
+        $alertGroup = $this->alertGroupsRepository->all();
+        $alertMethod = $this->alertMethodsRepository->all();
         return view('alert-method-of-group.create')->with([
             'alertGroup' => $alertGroup,
             'alertMethod' => $alertMethod
@@ -62,12 +62,12 @@ class AlertMethodAlertGroupController extends Controller
     public function store(Request $request)
     {
         $data = $request->only('alert_method_id', 'alert_group_id');
-        $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->create($data);
+        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->create($data);
         if ($alertMethodOfGroup) {
-            $request->session()->flash('alert-success', 'Add Alert Method Of Group Success');
+            $request->session()->flash('alert-success', 'Add Alert Method Of Group Successfully');
             return redirect('/alert-method-of-group');
         }
-        $request->session()->flash('alert-error', 'Add Alert Method Of Group False');
+        $request->session()->flash('alert-error', 'Add Alert Method Of Group Failed');
     }
 
     /**
@@ -77,9 +77,9 @@ class AlertMethodAlertGroupController extends Controller
      */
     public function edit(string $id)
     {
-        $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->find($id);
-        $alertGroup = $this->AlertGroupsRepository->all();
-        $alertMethod = $this->AlertMethodsRepository->all();
+        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->find($id);
+        $alertGroup = $this->alertGroupsRepository->all();
+        $alertMethod = $this->alertMethodsRepository->all();
         if (empty($alertMethodOfGroup)) {
             abort(404);
         }
@@ -106,12 +106,12 @@ class AlertMethodAlertGroupController extends Controller
         }
         $data = $request->only('alert_group_id', 'alert_method_id');
         //Update
-        $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->update($data, $id);
+        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->update($data, $id);
         if ($alertMethodOfGroup) {
-            $request->session()->flash('alert-success', 'Update Alert Method Of Group Success');
+            $request->session()->flash('alert-success', 'Update Alert Method Of Group Successfully');
             return redirect('/alert-method-of-group');
         }
-        $request->session()->flash('alert-error', 'Update Alert Method Of Group False');
+        $request->session()->flash('alert-error', 'Update Alert Method Of Group Failed');
     }
 
     /**
@@ -122,12 +122,12 @@ class AlertMethodAlertGroupController extends Controller
     public function destroy(Request $request)
     {
         $selectedIds = $request->input('selectedIds');
-        $selectedIds = explode(",", $selectedIds);
-        $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->delete($selectedIds);
+        $selectedIds = explode(',', $selectedIds);
+        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->delete($selectedIds);
         if ($alertMethodOfGroup > 0) {
-            $request->session()->flash('alert-success', 'Delete Alert Method Of Group Success');
+            $request->session()->flash('alert-success', 'Delete Alert Method Of Group Successfully');
             return redirect('/alert-method-of-group');
         }
-        $request->session()->flash('alert-error', 'Delete Alert Method Of Group False');
+        $request->session()->flash('alert-error', 'Delete Alert Method Of Group Failed');
     }
 }

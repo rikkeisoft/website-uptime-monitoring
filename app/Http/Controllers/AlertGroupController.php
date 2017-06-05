@@ -55,10 +55,10 @@ class AlertGroupController extends Controller
         $data = $request->only('name');
         $alertGroup = $this->alertGroupsRepository->update($data, $id);
         if ($alertGroup) {
-            $request->session()->flash('alert-success', 'Update Success');
+            $request->session()->flash('alert-success', 'Update Alert Group Successfully');
             return redirect('/alert-group');
         }
-        $request->session()->flash('alert-error', 'Update Alert Group Error');
+        $request->session()->flash('alert-error', 'Update Alert Group Failed');
     }
 
     /**
@@ -81,10 +81,10 @@ class AlertGroupController extends Controller
         $data['user_id'] = Auth::user()->id;
         $created = $this->alertGroupsRepository->create($data);
         if ($created) {
-            $request->session()->flash('alert-success', 'Add Success');
+            $request->session()->flash('alert-success', 'Add Alert Group Successfully');
             return redirect('/alert-group');
         }
-        $request->session()->flash('alert-error', 'Add Alert Group Error');
+        $request->session()->flash('alert-error', 'Add Alert Group Failed');
     }
 
     /**
@@ -98,9 +98,9 @@ class AlertGroupController extends Controller
         $selectedIds = explode(",", $selectedIds);
         $numDeleted = $this->alertGroupsRepository->delete($selectedIds);
         if ($numDeleted > 0) {
-            $request->session()->flash('alert-success', 'Delete Success');
+            $request->session()->flash('alert-success', 'Delete Alert Group Successfully');
             return redirect('/alert-group');
         }
-        $request->session()->flash('alert-error', 'Delete Alert Group Error');
+        $request->session()->flash('alert-error', 'Delete Alert Group Failed');
     }
 }
