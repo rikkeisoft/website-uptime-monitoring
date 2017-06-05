@@ -16,3 +16,4 @@ class AlertMethodAlertGroupRepository extends BaseRepository
         return AlertMethodAlertGroup::class;
     }
 }
+

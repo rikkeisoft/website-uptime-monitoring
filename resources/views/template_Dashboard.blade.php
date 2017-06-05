@@ -92,11 +92,11 @@
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                         </div>
                         <!-- /input-group -->
                     </li>
@@ -104,10 +104,10 @@
                         <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ route('alertmethods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
+                        <a href="{{ route('alert-methods.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Methods</a>
                     </li>
                     <li>
-                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups</a>
+                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Groups</a>
                     </li>
 
                     <li>
@@ -115,28 +115,11 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Website<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Website</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Add New</a>
-                            </li>
-                        </ul>
+                        <a href="{{ route('websites.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Website</a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Monitor<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Monitor</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Add New</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Monitor</a>
                     </li>
                 </ul>
             </div>
@@ -144,8 +127,8 @@
         </div>
         <!-- /.navbar-static-side -->
     </nav>
-@yield('content')
-<!-- /.panel-body -->
+    @yield('content')
+    <!-- /.panel-body -->
     <div class="panel-footer">
 
     </div>

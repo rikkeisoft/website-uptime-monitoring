@@ -18,6 +18,9 @@ class UserIdScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('user_id', Auth::user()->id);
+        if(isset(Auth::user()->id)){
+            $builder->where('user_id', Auth::user()->id);
+        }
+
     }
 }
