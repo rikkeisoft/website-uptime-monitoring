@@ -1,5 +1,4 @@
 @extends('../template_Dashboard')
-
 @section('title')
     Create Alert Group - Alert Method
 @endsection

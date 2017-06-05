@@ -13,16 +13,12 @@
     <link href="{{asset('css/metisMenu.min.css')}}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{asset('dist/css/sb-admin-2.css')}}" rel="stylesheet">
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
+
     <!-- Morris Charts CSS -->
     <link href="{{asset('css/morris.css')}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link href="{{ asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- Custom style -->
@@ -47,6 +43,7 @@
     <script src="{{ asset('js/sb-admin-2.js')}}"></script>
 
     <script src="{{ asset('js/website-uptime-monitoring.js')}}"></script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -100,60 +97,6 @@
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Methods<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Alert Groups</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Add New</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Alert Groups</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Add New</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{ asset('alert-method-of-group')}}">Alert Method of a Group</a>
-                                </li>
-                                <li>
-                                    <a href="{{ asset('alert-method-of-group')}}">Add New</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Website<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Website</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Add New</a>
-                                </li>
-                            </ul>
-                        </li>
                         </div>
                         <!-- /input-group -->
                     </li>
@@ -166,16 +109,9 @@
                     <li>
                         <a href="{{ route('alert-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Groups</a>
                     </li>
+
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Alert Method of a Group</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Add New</a>
-                            </li>
-                        </ul>
+                        <a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Alert Method of a Group</a>
                     </li>
 
                     <li>
@@ -206,38 +142,12 @@
             </div>
             <!-- /.sidebar-collapse -->
         </div>
-        <!-- /.panel-footer -->
-    </div>
-    <!-- /.panel .chat-panel -->
-    </div>
-    <!-- /.col-lg-4 -->
-    </div>
-    <!-- /.row -->
-    </div>
-    <!-- /#page-wrapper -->
-
-
-    <!-- /#wrapper -->
-
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{ asset('vendor/metisMenu/metisMenu.min.js')}}"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="{{ asset('vendor/raphael/raphael.min.js')}}"></script>
-    <script src="{{ asset('vendor/morrisjs/morris.min.js')}}"></script>
-    <script src="{{ asset('js/morris-data.js')}}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('dist/js/sb-admin-2.js')}}"></script>
         <!-- /.navbar-static-side -->
     </nav>
 @yield('content')
 <!-- /.panel-body -->
     <div class="panel-footer">
+
     </div>
 </div>
 </body>

@@ -64,9 +64,10 @@ class AlertMethodAlertGroupController extends Controller
         $data = $request->only('alert_method_id', 'alert_group_id');
         $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->create($data);
         if ($alertMethodOfGroup) {
+            $request->session()->flash('alert-success', 'Add Success');
             return redirect('/alert-method-of-group');
         }
-        return redirect('/error-create-alertMethodOfGroup');
+        $request->session()->flash('alert-error', 'Add Alert Method Of Group Error');
     }
 
     /**
@@ -107,9 +108,10 @@ class AlertMethodAlertGroupController extends Controller
         //Update
         $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->update($data, $id);
         if ($alertMethodOfGroup) {
+            $request->session()->flash('alert-success', 'Update Success');
             return redirect('/alert-method-of-group');
         }
-        return redirect('/error-edit-alertMethodOfGroup');
+        $request->session()->flash('alert-error', 'Update Alert Method Of Group Error');
     }
 
     /**
@@ -119,14 +121,13 @@ class AlertMethodAlertGroupController extends Controller
      */
     public function destroyMethodOfGroup(Request $request)
     {
-        $data = $request->input('selectedIds');
-        if (empty($data)) {
-            return redirect('/error-delete-alertMethodOfGroup');
-        }
-        $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->delete($data);
+        $selectedIds = $request->input('selectedIds');
+        $selectedIds = explode(",", $selectedIds);
+        $alertMethodOfGroup = $this->AlertMethodAlertGroupRepository->delete($selectedIds);
         if ($alertMethodOfGroup > 0) {
+            $request->session()->flash('alert-success', 'Delete Success');
             return redirect('/alert-method-of-group');
         }
-        return redirect('/error-delete-alertMethodOfGroup');
+        $request->session()->flash('alert-error', 'Delete Alert Method Of Group Error');
     }
 }
