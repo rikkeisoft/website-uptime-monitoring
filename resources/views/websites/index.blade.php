@@ -62,6 +62,7 @@
                         </form>
                         <form id="deleteListSelectForm" method="post" action="{{ route('websites.destroy') }}">
                             {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                             <input id="checkdelete" name="selectedIds" type="hidden">
                         </form>
                     </div>

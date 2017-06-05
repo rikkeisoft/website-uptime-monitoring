@@ -145,10 +145,10 @@ class AlertMethodsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteAlertMethods(Request $request)
+    public function destroy(Request $request)
     {
         $selectedIds = $request->input('selectedIds');
-        $selectedIds = explode(",", $selectedIds);
+        $selectedIds = explode(',', $selectedIds);
 
         if (empty($selectedIds)) {
             $request->session()->flash('alert-error', 'Add Error');
