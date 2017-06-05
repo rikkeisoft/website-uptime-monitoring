@@ -56,7 +56,7 @@ class checkWebsite extends Command
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
             $res = $client->request('HEAD', $url);
             $status = $res->getStatusCode();
-            if ($status < 400) {
+            if ($status >= 200 && $status < 400) {
                 return true;
             }
         } catch (ClientException $e) {
@@ -96,38 +96,50 @@ class checkWebsite extends Command
             }
         }
 
-        //get monitor for wwebsite
+        //get monitor for website
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
 
         $result = $monitor->result;
-//        Log::info('check $result'.json_encode([$result, $check]));
         //update monitor
         $monitor['result'] = $check;
         $monitor->save();
 
         //website result change => send mesage
         if ($check != $result) {
-            $listmethods = app(AlertMethodAlertGroupRepository::class)->getListEmail($monitor->alertGroup->id);
+            //send mail to group
+            $this->sendMailGroup($monitor->alertGroup->id, $website, $check);
+        }
+    }
 
-            //get list email to send
-            $data = [];
-            $data['url'] = $website->url;
-            $data['name'] = $website->name;
-            $data['email'] = [];
-            $data['status'] = $check == Constants::CHECK_FAILED?'Down':'Up';
+    /**
+     * send mail to group
+     *
+     * @param string $group_id
+     * @param array $website
+     * @param integer $checkStatus
+     */
+    public function sendMailGroup($group_id, $website, $checkStatus)
+    {
+        $listMethods = app(AlertMethodAlertGroupRepository::class)->getListEmail($group_id);
 
-            foreach ($listmethods as $value) {
-                if (!empty($value->email)) {
-                    array_push($data['email'], $value->email);
-                }
+        //get list email to send
+        $data = [];
+        $data['url'] = $website->url;
+        $data['name'] = $website->name;
+        $data['email'] = [];
+        $data['status'] = $checkStatus;
+
+        foreach ($listMethods as $value) {
+            if (!empty($value->email)) {
+                array_push($data['email'], $value->email);
             }
+        }
 
-            Log::info('check alert'.json_encode($data));
+        Log::info('check alert'.json_encode($data));
 
-            //event send list mail group
-            if (!empty($data['email'])) {
-                event(new SendMailGroup($data));
-            }
+        //event send list mail group
+        if (!empty($data['email'])) {
+            event(new SendMailGroup($data));
         }
     }
 }
