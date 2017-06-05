@@ -35,7 +35,7 @@
 <div class="container">
     <h1>Alert</h1>
     <h2>Service {{ $result }}</h2>
-    <h3>Your service <a href="{{ $result }}">{{ $name }}</a>!</h3>
+    <h3>Your service <a href="{{ $url }}">{{ $name }}</a>!</h3>
     <p>If you need help, call: 04123613461</p>
 </div>
 </body>
