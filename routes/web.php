@@ -38,6 +38,7 @@ Route::post('/websites/delete_website', 'WebsitesController@deleteWebsite')->nam
 //router change status website
 Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
 
+
 // Routes for Alert Group
 Route::resource('/alert-group','AlertGroupController');
 
@@ -45,6 +46,6 @@ Route::resource('/alert-group','AlertGroupController');
 Route::post('/alert-group/destroyAlertGroup','AlertGroupController@destroyAlertGroup')->name('destroyAlertGroup');
 
 //resource router alert method
-Route::resource('alertmethods', 'AlertMethodsController');
+Route::resource('alert-methods', 'AlertMethodsController');
 
-Route::post('/alertmethods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
+Route::post('/alert-methods/delete_alert_method', 'AlertMethodsController@deleteAlertMethods')->name('deleteAlertMethods');
