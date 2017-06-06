@@ -22,6 +22,10 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+    /**
+     * @param RegistrationRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
     public function register(RegistrationRequest $request)
     {
         $formData = $request->input();
@@ -33,14 +37,20 @@ class RegisterController extends Controller
         return redirect('/login');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function activate(Request $request)
     {
         $token = $request->input('access_token', null);
         $result = $this->userRepository->activateUser($token);
 
-        if ($result === false) {
-            return redirect('/activate-error');
+        if ($result) {
+            $request->session()->flash('alert-success', 'Authentication Successfully, please login!');
+        } else {
+            $request->session()->flash('alert-error', 'Account does not exist or not activate.Please try again');
         }
-        return redirect('/activate/successfully');
+        return redirect('/login');
     }
 }
