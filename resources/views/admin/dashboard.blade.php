@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">{{ $alert_methods }}</div>
-                                <div class="text-title">Alert Detail</div>
+                                <div class="text-title">Alert Method</div>
                             </div>
                         </div>
                     </div>
