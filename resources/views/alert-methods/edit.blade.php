@@ -1,7 +1,7 @@
 @extends('template_Dashboard')
 
 @section('title')
-    Edit Alert Methods|Website Uptime Monitor
+    Update Alert Method
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
 
             @endcomponent
             <div class="col-lg-12">
-                <h1 class="page-header">Edit Alert Methods</h1>
+                <h1 class="page-header">Update Alert Method</h1>
             </div>
             <div class="col-lg-12" style="margin: 20px 0">
                 <a href="{{ route('alert-methods.index') }}"><button type="button" class="btn btn-primary" >List Alert Methods</button></a>

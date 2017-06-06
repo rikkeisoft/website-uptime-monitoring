@@ -1,14 +1,14 @@
 @extends('../template_Dashboard')
 
 @section('title')
-    Edit Alert Group of Method
+    Update Alert Method Of Group
 @endsection
 @section('content')
     <div id="page-wrapper">
         <form action="{{ route('alert-method-of-group.update', ['alert_method_of_group' => $alertMethodOfGroup->id]) }}" method="POST"  id="form-create">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
-            <legend>  Edit Alert Group of Method </legend>
+            <legend>Update Alert Method Of Group</legend>
             <div class="form-group">
                 <label for="">Alert Group</label>
                 <select class="form-control" id="alert_group_id" name="alert_group_id">

@@ -1,7 +1,7 @@
 @extends('../template_Dashboard')
 
 @section('title')
-    Admin|Website Uptime Monitor
+    Dashboard
 @endsection
 @section('content')
     <div id="page-wrapper">

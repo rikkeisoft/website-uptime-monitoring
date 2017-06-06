@@ -1,7 +1,7 @@
 @extends('template_Dashboard')
 
 @section('title')
-    Update Website|Website Uptime Monitor
+    Update Website
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
 
             @endcomponent
             <div class="col-lg-12">
-                <h1 class="page-header">Update Websites</h1>
+                <h1 class="page-header">Update Website</h1>
             </div>
             <div style="margin: 20px 0">
                 <a href="{{ route('websites.index') }}"><button type="button" class="btn btn-primary" >List Websites</button></a>

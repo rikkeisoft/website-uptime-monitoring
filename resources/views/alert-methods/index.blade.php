@@ -1,7 +1,7 @@
 @extends('template_Dashboard')
 
 @section('title')
-    List Alert Methos|Website Uptime Monitor
+    List Alert Methods
 @endsection
 @section('content')
     <div id="page-wrapper">

@@ -1,16 +1,15 @@
 @extends('template_Dashboard')
 
 @section('title')
-    List Website|Website Uptime Monitor
+    List Websites
 @endsection
 @section('content')
     <div id="page-wrapper">
         <div class="row">
             @component('flash_alert_message')
-
             @endcomponent
             <div class="col-lg-12">
-                <h1 class="page-header">List Website</h1>
+                <h1 class="page-header">List Websites</h1>
                 <div style="margin: 20px 0">
                     <a href="{{ route('websites.create') }}">
                         <button type="button" class="btn btn-primary">Add Website</button>

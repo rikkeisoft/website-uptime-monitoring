@@ -1,13 +1,13 @@
 @extends('../template_Dashboard')
 @section('title')
-    Edit Alert Group
+    Update Alert Group
 @endsection
 @section('content')
     <div id="page-wrapper">
         <form action="{{ route('alert-group.update', ['alert_group' => $alertGroup->id]) }}" method="POST" role="form" id="form-edit">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
-            <legend>Edit Alert Group</legend>
+            <legend>Update Alert Group</legend>
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="">Name</label>
                 <input type="hidden" id="id" name="id" value="{{ $alertGroup->id }}">

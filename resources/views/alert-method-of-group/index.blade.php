@@ -1,6 +1,6 @@
 @extends('../template_Dashboard')
 @section('title')
-    Alert Method Of Group
+    List Alert Method Of Groups
 @endsection
 @section('content')
     <div id="page-wrapper">
@@ -8,7 +8,7 @@
             @component('flash_alert_message')
             @endcomponent
             <div class="col-lg-12">
-                <h1 class="page-header">List Alert Method Of Group</h1>
+                <h1 class="page-header">List Alert Method Of Groups</h1>
                 <div style="margin: 20px 0">
                     <a href="{{ route('alert-method-of-group.create') }}">
                         <button type="button" class="btn btn-primary">Add New</button>
