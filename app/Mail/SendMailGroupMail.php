@@ -34,7 +34,7 @@ class SendMailGroupMail extends Mailable implements ShouldQueue
     public function build()
     {
         return $this
-            ->subject('Send alert completed, please check mail!!')
+            ->subject('Alert Service')
             ->view('mail-template.mail-template-send-alert', [
                 'name' => $this->data['name'],
                 'url' => $this->data['url'],
