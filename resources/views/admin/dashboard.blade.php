@@ -28,7 +28,7 @@
                     </div>
                     <a href="{{ route('alert-group.index') }}">
                         <div class="panel-footer">
-                            <span class="pull-left">View Detailsl</span>
+                            <span class="pull-left">View Detail</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
@@ -44,13 +44,13 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">{{ $alert_methods }}</div>
-                                <div class="text-title">Alert Methods</div>
+                                <div class="text-title">Alert Detail</div>
                             </div>
                         </div>
                     </div>
                     <a href="{{ route('alert-methods.index') }}">
                         <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
+                            <span class="pull-left">View Detail</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
@@ -72,7 +72,7 @@
                     </div>
                     <a href="{{ route('websites.index') }}">
                         <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
+                            <span class="pull-left">View Detail</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
@@ -94,7 +94,7 @@
                     </div>
                     <a href="{{ route('websites.index') }}">
                         <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
+                            <span class="pull-left">View Detail</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
