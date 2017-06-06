@@ -1,11 +1,11 @@
 <div id="footer" class="block-short-wrapper">
-    <div id="footerIn" class="block-short-inner container">
-        <div class="footerInL">
+    <div class="block-short-inner container">
+        <div class="footerLeft">
             <div class="footer-add-top">
-                <div class="footerInLLogo">
+                <div class="footerLogo">
                     <a href="http://rikkeisoft.com">
-                        <img src="http://rikkeisoft.com/wp-content/themes/rikkei/images/common/footer_logo.png"
-                             alt="ベトナムオフショア開発 Rikkeisoft" width="120">
+                        <img src="{{ asset('../img/footer_logo.png') }}"
+                             alt="Rikkeisoft" width="120">
                     </a>
                 </div>
                 <p class="rk-address">
@@ -14,9 +14,6 @@
                 </p>
                 <address class="address-general">© Rikkeisoft Co.,Ltd All Rights Reserved.</address>
             </div>
-
-        </div>
-        <div class="footerInR">
 
         </div>
     </div>

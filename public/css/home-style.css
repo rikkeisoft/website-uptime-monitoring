@@ -61,25 +61,18 @@
     background: #222;
 }
 
-#footerIn {
-    width: 1000px;
-    margin: 0 auto;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.footerInL {
+.footerLeft {
     float: left;
     overflow: hidden;
 }
 
-.footerInLLogo {
+.footerLogo {
     float: left;
     width: 155px;
     vertical-align: middle;
 }
 
-.footerInL p {
+.footerLeft p {
     display: block;
     float: left;
     color: #fff;
