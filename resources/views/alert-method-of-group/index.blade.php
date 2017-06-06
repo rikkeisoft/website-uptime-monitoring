@@ -39,8 +39,8 @@
                                     <td>
                                         <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();" value="{!! $alertMethodOfGroups->id !!}">
                                     </td>
-                                    <td>{{ isset($alertMethodOfGroups->alertGroup['name'])?$alertMethodOfGroups->alertGroup['name']:'' }}</td>
-                                    <td>{{ isset($alertMethodOfGroups->alertMethod['name'])?$alertMethodOfGroups->alertMethod['name']:'' }}</td>
+                                    <td>{{ $alertMethodOfGroups->alertGroup['name'] }}</td>
+                                    <td>{{ $alertMethodOfGroups->alertMethod['name'] }}</td>
                                     <td>{{ $alertMethodOfGroups->created_at }}</td>
                                     <td>{{ $alertMethodOfGroups->updated_at }}</td>
                                     <td class="center">
@@ -50,6 +50,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {!! $alertMethodOfGroup->render() !!}
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-method-of-group.destroy') }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\AlertMethodAlertGroupRepository;
 use App\Repositories\AlertGroupsRepository;
 use App\Repositories\AlertMethodsRepository;
+use Illuminate\Support\Facades\Auth;
 
 class AlertMethodAlertGroupController extends Controller
 {
@@ -36,7 +37,8 @@ class AlertMethodAlertGroupController extends Controller
      */
     public function index()
     {
-        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->all();
+        $user_id = Auth::user()->id;
+        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->getAllAlertMethodAlertGroupByUserId($user_id);
         return view('/alert-method-of-group.index')->with('alertMethodOfGroup', $alertMethodOfGroup);
     }
 

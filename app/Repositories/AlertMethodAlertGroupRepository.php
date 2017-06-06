@@ -1,9 +1,11 @@
 <?php
 namespace App\Repositories;
 
+use App\Contracts\Constants;
 use App\Contracts\DBTable;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Models\AlertMethodAlertGroup;
+use App\Models\AlertGroup;
 
 class AlertMethodAlertGroupRepository extends BaseRepository
 {
@@ -34,5 +36,16 @@ class AlertMethodAlertGroupRepository extends BaseRepository
                 DBTable::ALERT_METHOD.'.email',
             ])
             ->get();
+    }
+
+    /**
+     * @param string $user_id
+     * @return array
+     */
+    public function getAllAlertMethodAlertGroupByUserId($user_id)
+    {
+        return $this->model->whereHas('alertGroup', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->paginate(Constants::LIMIT_PAGINATE);
     }
 }
