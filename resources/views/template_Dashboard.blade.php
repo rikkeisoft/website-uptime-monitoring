@@ -74,7 +74,8 @@
 
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -90,35 +91,36 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     {{--<li class="sidebar-search">--}}
-                        {{--<div class="input-group custom-search-form">--}}
-                            {{--<input type="text" class="form-control" placeholder="Search...">--}}
-                                {{--<span class="input-group-btn">--}}
-                                    {{--<button class="btn btn-default" type="button">--}}
-                                        {{--<i class="fa fa-search"></i>--}}
-                                    {{--</button>--}}
-                                {{--</span>--}}
-                        {{--</div>--}}
-                        {{--<!-- /input-group -->--}}
+                    {{--<div class="input-group custom-search-form">--}}
+                    {{--<input type="text" class="form-control" placeholder="Search...">--}}
+                    {{--<span class="input-group-btn">--}}
+                    {{--<button class="btn btn-default" type="button">--}}
+                    {{--<i class="fa fa-search"></i>--}}
+                    {{--</button>--}}
+                    {{--</span>--}}
+                    {{--</div>--}}
+                    {{--<!-- /input-group -->--}}
                     {{--</li>--}}
                     <li>
                         <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-comments fa-fw"></i>  Alert Groups</a>
+                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-comments fa-fw"></i> Alert Groups</a>
                     </li>
                     <li>
-                        <a href="{{ route('alert-methods.index') }}"><i class="fa fa-tasks fa-fw"></i>  Alert Methods</a>
+                        <a href="{{ route('alert-methods.index') }}"><i class="fa fa-tasks fa-fw"></i> Alert Methods</a>
                     </li>
                     <li>
-                        <a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Method of a Group</a>
+                        <a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>
+                            Alert Method of a Group</a>
                     </li>
 
                     <li>
-                        <a href="{{ route('websites.index') }}"><i class="fa fa-support fa-fw"></i>  Website</a>
+                        <a href="{{ route('websites.index') }}"><i class="fa fa-support fa-fw"></i> Website</a>
                     </li>
 
                     {{--<li>--}}
-                        {{--<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Monitor</a>--}}
+                    {{--<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Monitor</a>--}}
                     {{--</li>--}}
                 </ul>
             </div>
@@ -127,7 +129,7 @@
         <!-- /.navbar-static-side -->
     </nav>
     @yield('content')
-    <!-- /.panel-body -->
+            <!-- /.panel-body -->
     <div class="panel-footer">
 
     </div>

@@ -18,9 +18,9 @@
         </style>
     </head>
     <body>
-        <h2>Hello:{{$name}}</h2>
-        <h1>Welcome to website uptime monitor, please active accout with you!</h1>
-        <p> <a  class="btn btn-primary btn-lg" href="http://localhost:8000/activate?access_token={{$access_token}}">Active now</a></p>
+        <h2>Hi {{$name}}</h2>
+        <h1>Welcome to Website Uptime Monitor system, please activate your account by clicking the below url:</h1>
+        <p><a  class="btn btn-primary btn-lg" href="{{ url('/activate?access_token='.$access_token) }}">Active now</a></p>
     </body>
 </html>
 
