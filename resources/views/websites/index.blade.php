@@ -49,7 +49,7 @@
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                     @if($website->monitor->first()->result== 0)
                                         <td>
-                                            <div class="btn btn-xs btn-success">pendding</div>
+                                            <div class="btn btn-xs btn-success">pending</div>
                                         </td>
                                     @else
                                         <td>

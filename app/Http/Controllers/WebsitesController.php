@@ -107,7 +107,7 @@ class WebsitesController extends Controller
             //create monitor with website
             $dataMonitor = $request->only('alert_group_id');
             $dataMonitor['website_id'] = $createWebsite->id;
-            $dataMonitor['result'] = Constants::CHECK_PENDDING;
+            $dataMonitor['result'] = Constants::CHECK_PENDING;
             $createMonitor = $this->monitorRepository->create($dataMonitor);
 
             if ($createMonitor) {
