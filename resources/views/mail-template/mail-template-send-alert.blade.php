@@ -52,7 +52,6 @@
     <h2>Service {{ $result }}</h2>
     <h3>Your service <a href="{{ $url }}">{{ $name }}</a>!</h3>
     <p>If you need help, call: 04123613461</p>
-    <p>Timestamp: {{ $date }}</p>
     <footer></footer>
 </div>
 </body>

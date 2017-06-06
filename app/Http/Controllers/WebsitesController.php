@@ -107,7 +107,13 @@ class WebsitesController extends Controller
             //create monitor with website
             $dataMonitor = $request->only('alert_group_id');
             $dataMonitor['website_id'] = $createWebsite->id;
-            $dataMonitor['result'] = Constants::CHECK_FAILED;
+            $checkStatus = $this->checkStatusWebsite($createWebsite->url);
+
+            if($checkStatus) {
+                $dataMonitor['result'] = Constants::CHECK_SUCCESS;
+            }else {
+                $dataMonitor['result'] = Constants::CHECK_FAILED;
+            }
             $createMonitor = $this->monitorRepository->create($dataMonitor);
 
             if ($createMonitor) {
@@ -201,5 +207,33 @@ class WebsitesController extends Controller
         } else {
             return json_encode(['success' => false]);
         }
+    }
+
+    /**
+     * check status website with url
+     * @param $url
+     * @return bool
+     */
+    public function checkStatusWebsite(string $url)
+    {
+        try {
+            $client = new \GuzzleHttp\Client(['http_errors' => false]);
+            $res = $client->request('HEAD', $url);
+            $status = $res->getStatusCode();
+            if ($status >= 200 && $status < 400) {
+                return true;
+            }
+        } catch (ClientException $e) {
+            Log::info("client error" . $e);
+            return false;
+        } catch (RequestException $e) {
+            Log::info("Server error" . $e);
+            return false;
+        } catch (\Exception $e) {
+            //do some thing here
+            Log::info("error" . $e);
+            return false;
+        }
+        return false;
     }
 }
