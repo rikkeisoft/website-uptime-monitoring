@@ -18,6 +18,12 @@ class EventServiceProvider extends ServiceProvider
         SendMailGroup::class => [
             SendMailGroupListener::class,
         ],
+         'App\Events\UserCreated' => [
+            'App\Listeners\UserCreatedListener',
+         ],
+         'App\Events\SendAlertToGroup' => [
+            'App\Listeners\SendAlertToGroupListener',
+         ],
     ];
 
     /**
