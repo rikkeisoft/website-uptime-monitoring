@@ -56,7 +56,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Website Uptime Monitoring</a>
+            <a class="navbar-brand" href="/">Website Uptime Monitoring</a>
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right">
@@ -101,15 +101,14 @@
                         {{--<!-- /input-group -->--}}
                     {{--</li>--}}
                     <li>
-                        <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('alert-methods.index') }}"><i class="fa fa-tasks fa-fw"></i>  Alert Methods</a>
+                        <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ route('alert-group.index') }}"><i class="fa fa-comments fa-fw"></i>  Alert Groups</a>
                     </li>
-
+                    <li>
+                        <a href="{{ route('alert-methods.index') }}"><i class="fa fa-tasks fa-fw"></i>  Alert Methods</a>
+                    </li>
                     <li>
                         <a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>  Alert Method of a Group</a>
                     </li>

@@ -40,7 +40,6 @@ class CheckWebsite extends Command
         parent::__construct();
 
         $this->website = $website;
-
         $this->check($this->website);
     }
     /**
@@ -74,7 +73,6 @@ class CheckWebsite extends Command
      */
     public function checkStatusWebsite(string $url)
     {
-
         try {
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
             $res = $client->request('HEAD', $url);
@@ -104,7 +102,6 @@ class CheckWebsite extends Command
     private function updateMonitorAndSendMailGroup($website, $checkStatus)
     {
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
-
         $result = $monitor->result;
         //update monitor
         $monitor['result'] = $checkStatus;
@@ -127,7 +124,6 @@ class CheckWebsite extends Command
     private function sendMailGroup($group_id, $website, $checkStatus)
     {
         $listMethods = app(AlertMethodAlertGroupRepository::class)->getListEmail($group_id);
-
         //get list email to send
         $data = [];
         $data['url'] = $website->url;
@@ -140,7 +136,6 @@ class CheckWebsite extends Command
                 array_push($data['email'], $value->email);
             }
         }
-
         Log::info('check alert'.json_encode($data));
 
         //event send list mail group
