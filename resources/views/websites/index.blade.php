@@ -12,8 +12,11 @@
             <div class="col-lg-12">
                 <h1 class="page-header">List Website</h1>
                 <div style="margin: 20px 0">
-                    <a href="{{ route('websites.create') }}"><button type="button" class="btn btn-primary" >Add Website</button></a>
-                    <button type="button" class="btn btn-danger btn-danger-website" id="SubmitDelete" disabled >Delete</button>
+                    <a href="{{ route('websites.create') }}">
+                        <button type="button" class="btn btn-primary">Add Website</button>
+                    </a>
+                    <button type="button" class="btn btn-danger btn-danger-website" id="SubmitDelete" disabled>Delete
+                    </button>
                 </div>
             </div>
 
@@ -22,7 +25,8 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table width="100%" class="table table-striped table-bordered table-hover"
+                               id="dataTables-example">
                             <thead>
                             <tr>
                                 <th><input type="checkbox" id="select_all"/></th>
@@ -39,10 +43,19 @@
                             <tbody>
                             @foreach($listWebsites as $website)
                                 <tr class="odd gradeX">
-                                    <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
+                                    <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}"
+                                               onclick="clickCheckbox();"></td>
                                     <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
-                                    <td><div class="btn btn-xs {{ $website->monitor->first()->result==1?'btn-success':'btn-danger' }}">{{ $listResults[$website->monitor->first()->result] }}</div></td>
+                                    @if($website->monitor->first()->result== 0)
+                                        <td>
+                                            <div class="btn btn-xs btn-success">pendding</div>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <div class="btn btn-xs {{ $website->monitor->first()->result==1?'btn-success':'btn-danger' }}">{{ $listResults[$website->monitor->first()->result] }}</div>
+                                        </td>
+                                    @endif
                                     <td>{{ $website->monitor->first()->updated_at }}</td>
                                     <td>{{ isset($website->monitor->first()->alertGroup['name'])?$website->monitor->first()->alertGroup['name']:'' }}</td>
                                     <td>
@@ -54,7 +67,8 @@
                                         </a>
                                     </td>
                                     <td>{{ $website->created_at }}</td>
-                                    <td class="center"><a href="{{ route('websites.edit', [$website->id]) }}"><i class="fa fa-edit"></i></a></td>
+                                    <td class="center"><a href="{{ route('websites.edit', [$website->id]) }}"><i
+                                                    class="fa fa-edit"></i></a></td>
                                 </tr>
                             @endforeach
                             </tbody>

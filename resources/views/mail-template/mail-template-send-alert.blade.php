@@ -48,9 +48,9 @@
 </head>
 <body>
 <div class="container">
-    <h1>Alert</h1>
-    <h2>Service {{ $result }}</h2>
-    <h3>Your service <a href="{{ $url }}">{{ $name }}</a>!</h3>
+    <h1>Website Monitoring Alert</h1>
+    <h2>Service is {{ $result }}</h2>
+    <h3>Your service: {{ $name }} (<a href="{{ $url }}">{{ $url }}</a>)</h3>
     <p>If you need help, call: 04123613461</p>
     <footer></footer>
 </div>
