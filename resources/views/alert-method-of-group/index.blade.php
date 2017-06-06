@@ -50,6 +50,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {!! $alertMethodOfGroup->render() !!}
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-method-of-group.destroy') }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
