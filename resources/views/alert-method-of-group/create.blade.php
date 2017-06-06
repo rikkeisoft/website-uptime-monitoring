@@ -1,12 +1,12 @@
 @extends('../template_Dashboard')
 @section('title')
-    Create Alert Group - Alert Method
+    Add Alert Method Of Group
 @endsection
 @section('content')
     <div id="page-wrapper">
         <form action="{{ route('alert-method-of-group.store') }}" method="post"  id="form-create">
             {{ csrf_field() }}
-            <legend>Create Alert Group - Alert Method</legend>
+            <legend>Add Alert Method Of Group</legend>
             <div class="form-group">
                 <label for="">Alert Group</label>
                 <select class="form-control" id="alert_group_id" name="alert_group_id">

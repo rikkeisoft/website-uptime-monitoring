@@ -1,6 +1,6 @@
 @extends('../template_Dashboard')
 @section('title')
-    Alert Group
+    List Alert Groups
 @endsection
 @section('content')
     <div id="page-wrapper">

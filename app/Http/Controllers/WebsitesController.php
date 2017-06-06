@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Auth;
 class WebsitesController extends Controller
 {
 
-    protected $websiteRepository,
-        $monitorRepository,
-        $alertGroupsRepository;
+    protected $websiteRepository;
+    protected $monitorRepository;
+    protected $alertGroupsRepository;
     /**
      * WebsitesController constructor.
      * @param WebsiteRepository $websiteRepository
