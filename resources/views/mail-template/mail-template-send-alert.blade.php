@@ -9,14 +9,22 @@
             width: 100%;
             margin: 0 auto;
             padding: 0;
-            border: 1px solid #eee;
         }
 
         h1 {
-            color: white;
-            text-align: center;
             background-color: rgb(80, 187, 110);
             margin: 0 auto;
+            width: 100%;
+            height: 4em;
+            padding-top: 5%;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 34px;
+            line-height: 38px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid inherit;
+            border-radius: 25px;
         }
 
         h2 {
@@ -24,11 +32,18 @@
             margin-top: 1em;
         }
 
-        h3, p {
+        h3, p, a {
             text-align: center;
-
+            text-decoration: none;
+            color: #222;
         }
 
+        footer {
+            background-color: #2F3133;
+            width: 100%;
+            height: 4em;
+            clear: both;
+        }
     </style>
 </head>
 <body>
@@ -37,6 +52,8 @@
     <h2>Service {{ $result }}</h2>
     <h3>Your service <a href="{{ $url }}">{{ $name }}</a>!</h3>
     <p>If you need help, call: 04123613461</p>
+    <p>Timestamp: {{ $date }}</p>
+    <footer></footer>
 </div>
 </body>
 </html>

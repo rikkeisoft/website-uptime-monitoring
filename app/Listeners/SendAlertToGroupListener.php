@@ -21,18 +21,19 @@ class SendAlertToGroupListener
     /**
      * Handle the event.
      *
-     * @param  SendAlertToGroup  $event
+     * @param  SendAlertToGroup $event
      * @return void
      */
     public function handle(SendAlertToGroup $event)
     {
         $data = $event->data;
         //send mail
-        $subject = 'Website status alert';
+        $subject = 'Alert Service';
         Mail::send('mail-template/mail-template-send-alert', [
             'name' => $data['name'],
             'url' => $data['url'],
-            'result'=> $data['result']
+            'result' => $data['result'],
+            'date' => $data['date']
         ], function ($message) use ($data, $subject) {
             $message->to($data['email'])->subject($subject);
         });
