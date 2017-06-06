@@ -129,10 +129,6 @@
         <!-- /.navbar-static-side -->
     </nav>
     @yield('content')
-            <!-- /.panel-body -->
-    <div class="panel-footer">
-
-    </div>
 </div>
 </body>
 
