@@ -87,11 +87,11 @@
             @endif
         </ul>
         <!-- /.navbar-top-links -->
-        <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ route('alert-group.index') }}"><i class="fa fa-comments fa-fw"></i> Alert Groups</a>

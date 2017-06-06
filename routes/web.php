@@ -10,14 +10,14 @@
   |
  */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
 // Route administrator
-Route::get('/','HomeController@showStatistics');
+Route::get('/dashboard','HomeController@showStatistics');
 
 //Route active user
 Route::get('/activate', 'Auth\RegisterController@activate');
