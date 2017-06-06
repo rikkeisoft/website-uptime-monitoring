@@ -28,6 +28,7 @@
                                 <th><input type="checkbox" id="select_all"/></th>
                                 <th>Name</th>
                                 <th>Url</th>
+                                <th>Last status</th>
                                 <th>Time of the last request</th>
                                 <th>Alert Group</th>
                                 <th>Disable/Enable</th>
@@ -41,11 +42,15 @@
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}" onclick="clickCheckbox();"></td>
                                     <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
+                                    <td><div class="btn btn-xs {{ $website->monitor->first()->result==1?'btn-success':'btn-danger' }}">{{ $listResults[$website->monitor->first()->result] }}</div></td>
                                     <td>{{ $website->monitor->first()->updated_at }}</td>
                                     <td>{{ isset($website->monitor->first()->alertGroup['name'])?$website->monitor->first()->alertGroup['name']:'' }}</td>
                                     <td>
                                         <a onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')">
-                                            <input type="checkbox"  {{ $website->status == 1?'checked':'' }} data-toggle="toggle" data-style="ios" data-on="Enable" data-off="Disable" data-size="mini">
+                                            <label class="switch">
+                                                <input type="checkbox" {{ $website->status == 1?'checked':'' }}>
+                                                <div class="slider round"></div>
+                                            </label>
                                         </a>
                                     </td>
                                     <td>{{ $website->created_at }}</td>
@@ -62,6 +67,7 @@
                         </form>
                         <form id="deleteListSelectForm" method="post" action="{{ route('websites.destroy') }}">
                             {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                             <input id="checkdelete" name="selectedIds" type="hidden">
                         </form>
                     </div>
@@ -73,7 +79,5 @@
         </div>
         <link href="{{ asset('css/style-button-website.css')}}" rel="stylesheet" type="text/css">
         <script src="{{ asset('js/website.js')}}"></script>
-        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     </div>
 @endsection

@@ -16,6 +16,11 @@ class Website extends BaseModel
         '2' => 'Disabled',
     ];
 
+    const LIST_RESULTS = [
+        '1'=>'Success',
+        '2'=>'Failed'
+    ];
+
     const LIST_FREQUENCYS = [
         '5' => '5 minutes',
         '10' => '10 minutes',

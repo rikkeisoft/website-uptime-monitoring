@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+use DB;
+use App\Console\Commands\CheckWebsite;
+use App\Repositories\WebsiteRepository;
+use App\Contracts\DBTable;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,6 +20,8 @@ class Kernel extends ConsoleKernel
         //
     ];
 
+    protected $website;
+
     /**
      * Define the application's command schedule.
      *
@@ -24,17 +30,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        //get website from database
+        $this->website = $this->getAllWebsite();
+
+        foreach ($this->website as $website) {
+            $schedule->call(function () use ($website) {
+                new CheckWebsite($website);
+            })->cron('*/'.$website->frequency.' * * * * *');
+        }
     }
 
     /**
-     * Register the Closure based commands for the application.
-     *
-     * @return void
+     * get all website enable
+     * @return array
      */
-    protected function commands()
+    public function getAllWebsite()
     {
-        include base_path('routes/console.php');
+        return app(WebsiteRepository::class)->findAllBy('status', 1);
     }
 }

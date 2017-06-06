@@ -56,7 +56,7 @@
                                 <div class="col-md-6">
                                     <select id="alertGroupId" class="form-control" name="alert_group_id" value="{{ old('alert_group_id') }}">
                                         @foreach($listAlertGroup as $value)
-                                            <option value="{{ $value->id }}" {{ $website->monitor->alert_group_id == $value->id?'selected':''  }}>{{ $value->name }}</option>
+                                            <option value="{{ $value->id }}" {{ $website->monitor->first()->alert_group_id == $value->id?'selected':''  }}>{{ $value->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
