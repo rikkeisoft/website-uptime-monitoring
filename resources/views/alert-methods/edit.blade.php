@@ -42,7 +42,7 @@
                                 <div class="col-md-6">
                                     <select id="alertGroupId" class="form-control" name="alert_group_id" value="{{ old('alert_group_id') }}">
                                         @foreach($listAlertGroup as $value)
-                                            <option value="{{ $value->id }}" {{ $alertMethod->alertmethodalertgroup['alert_group_id'] == $value->id?'selected':''  }}>{{ $value->name }}</option>
+                                            <option value="{{ $value->id }}" {{ isset($alertMethod->alertmethodalertgroup['alert_group_id'])&&$alertMethod->alertmethodalertgroup['alert_group_id'] == $value->id?'selected':''  }}>{{ $value->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

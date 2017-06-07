@@ -10,6 +10,8 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
+use Webpatser\Uuid\Uuid;
 
 class CheckWebsite extends Command
 {
@@ -51,12 +53,13 @@ class CheckWebsite extends Command
     {
         //1: Success, 2: Failed
         $check = Constants::CHECK_FAILED;
-
-        if ($this->checkStatusWebsite($website->url)) {
+        $statusWebsite = $this->checkStatusWebsite($website->url);
+        if ($statusWebsite['sucess']) {
             $check = Constants::CHECK_SUCCESS;
         } else {
             for ($i = 0; $i < $website->sensitivity; $i++) {
-                if ($this->checkStatusWebsite($website->url)) {
+                $statusWebsite = $this->checkStatusWebsite($website->url);
+                if ($statusWebsite['sucess']) {
                     $check = Constants::CHECK_SUCCESS;
                     break;
                 } else {
@@ -64,7 +67,7 @@ class CheckWebsite extends Command
                 }
             }
         }
-        $this->updateMonitorAndSendMailGroup($website, $check);
+        $this->updateMonitorAndSendMailGroup($website, $check, $statusWebsite);
     }
     /**
      * check status website with url
@@ -75,23 +78,28 @@ class CheckWebsite extends Command
     {
         try {
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
+
+            //check time bfore request
+            $timeBefore = microtime(true);
             $res = $client->request('HEAD', $url);
+            //check time after request
+            $timeAfter = microtime(true);
             $status = $res->getStatusCode();
             if ($status >= 200 && $status < 400) {
-                return true;
+                return ['sucess' => true, 'time_request' => ($timeAfter - $timeBefore)];
             }
         } catch (ClientException $e) {
             Log::info("client error" . $e);
-            return false;
+            return ['sucess' => false, 'time_request' => 0];
         } catch (RequestException $e) {
             Log::info("Server error" . $e);
-            return false;
+            return ['sucess' => false, 'time_request' => 0];
         } catch (\Exception $e) {
             //do some thing here
             Log::info("error" . $e);
-            return false;
+            return ['sucess' => false, 'time_request' => 0];
         }
-        return false;
+        return ['sucess' => false, 'time_request' => 0];
     }
     /**
      * update monitor and send mail group
@@ -99,13 +107,18 @@ class CheckWebsite extends Command
      * @param array $website
      * @param integer $checkStatus
      */
-    private function updateMonitorAndSendMailGroup($website, $checkStatus)
+    private function updateMonitorAndSendMailGroup($website, $checkStatus, $statusWebsite)
     {
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
         $result = $monitor->result;
         //update monitor
         $monitor['result'] = $checkStatus;
         $monitor->save();
+
+        $redis = Redis::connection();
+        $redis->rpush('stat_' . $website->id, $statusWebsite['time_request']);
+
+        Log::info('List Monitor / '.$website->id.'/'.json_encode($redis->lrange('stat_'.$website->id, 0, -1)));
 
         //website result change => send mesage
         if ($checkStatus != $result) {

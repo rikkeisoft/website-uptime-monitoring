@@ -18,6 +18,6 @@ class MonitorRepository extends BaseRepository
 
     public function findByWebsiteId(string $webID)
     {
-        return $this->model->where('website_id', $webID)->first();
+        return $this->model->where('website_id', $webID)->orderBy('created_at', 'DESC')->first();
     }
 }
