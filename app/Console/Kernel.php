@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        if(Schema::hasTable(DBTable::WEBSITE)){
+        if (Schema::hasTable(DBTable::WEBSITE)) {
             //get website from database
             $this->website = $this->getAllWebsite();
 
