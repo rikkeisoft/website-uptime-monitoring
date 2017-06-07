@@ -51,7 +51,7 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
         Auth::logout();
-        Session::put('alert-danger', 'Account does not exist or not activate.Please try again!');
+        Session::put('alert-danger', 'Account does not activate.Please try again!');
         return redirect('/login');
     }
 }
