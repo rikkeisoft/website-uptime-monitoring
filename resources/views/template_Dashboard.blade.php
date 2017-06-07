@@ -107,9 +107,6 @@
                     <li>
                         <a href="{{ route('websites.index') }}"><i class="fa fa-support fa-fw"></i> Website</a>
                     </li>
-                    <li>
-                        <a href=""><i class="fa fa-wrench fa-fw"></i>Change Password</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
