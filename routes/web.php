@@ -56,3 +56,4 @@ Route::resource('alert-methods', 'AlertMethodsController');
 
 Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');
 
+//Route::get('/for')
