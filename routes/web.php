@@ -56,3 +56,5 @@ Route::resource('alert-methods', 'AlertMethodsController');
 
 Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');
 
+Route::get('/user-profile','ProfileController@index')->name('user-profile.index');
+Route::post('/user-profile','ProfileController@update')->name('user-profile.update');

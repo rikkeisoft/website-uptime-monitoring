@@ -74,6 +74,10 @@
 
                     <ul class="dropdown-menu" role="menu">
                         <li>
+                            <a href="{{ route('user-profile.index') }}">
+                                Change Password
+                            </a>
+
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 Logout
