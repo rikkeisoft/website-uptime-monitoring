@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -39,13 +40,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function authenticated(Request $request, $user)
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function authenticated(Request $request)
     {
+
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'status' => 1])) {
             // Authentication passed...
             return redirect()->intended('/dashboard');
         }
         Auth::logout();
-        return redirect('/activate-error');
+        Session::put('alert-danger', 'Account does not exist or not activate.Please try again!');
+        return redirect('/login');
     }
 }
