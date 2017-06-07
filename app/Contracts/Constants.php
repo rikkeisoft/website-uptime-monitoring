@@ -13,4 +13,6 @@ class Constants
     const CHECK_FAILED = 2;
     const TIME_DELAY_SENSITIVITY = 10;
     const LIMIT_PAGINATE = 20;
+
+    const LIMIT_LIST_REDIS = 20;
 }
