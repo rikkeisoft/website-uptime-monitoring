@@ -122,9 +122,10 @@ class CheckWebsite extends Command
 
             $listLength = $redis->llen($key);
             // Get list redis last
-            Log::info('List Monitor / ' . $website->id . '/' . json_encode($redis->lrange($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
-            $redis->ltrim($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
-
+            Log::info('List Monitor / ' . $website->id . '/' .$listLength.'/'. json_encode($redis->lrange($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
+            if ($listLength > Constants::LIMIT_LIST_REDIS) {
+                $redis->ltrim($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+            }
         } catch (Exception $e) {
             Log::info("error Redis" . $e);
         }
