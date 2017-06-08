@@ -2,12 +2,13 @@
 
 namespace App\Console;
 
+use App\Contracts\DBTable;
 use DB;
 use App\Console\Commands\CheckWebsite;
 use App\Repositories\WebsiteRepository;
-use App\Contracts\DBTable;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Schema;
 
 class Kernel extends ConsoleKernel
 {
@@ -30,13 +31,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //get website from database
-        $this->website = $this->getAllWebsite();
 
-        foreach ($this->website as $website) {
-            $schedule->call(function () use ($website) {
-                new CheckWebsite($website);
-            })->cron('*/'.$website->frequency.' * * * * *');
+        if (Schema::hasTable(DBTable::WEBSITE)) {
+            //get website from database
+            $this->website = $this->getAllWebsite();
+
+            foreach ($this->website as $website) {
+                $schedule->call(function () use ($website) {
+                    new CheckWebsite($website);
+                })->cron('*/'.$website->frequency.' * * * * *');
+            }
         }
     }
 

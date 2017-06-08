@@ -5,6 +5,7 @@ use Log;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Events\UserCreated;
+use Mockery\Exception;
 
 class UserRepository
 {
@@ -58,5 +59,26 @@ class UserRepository
         $updated = $user->save();
 
         return $updated;
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @return bool
+     */
+    public function changePassword(array $data, $id)
+    {
+        if (empty($data)) {
+            return false;
+        }
+        try {
+            $user = User::find($id);
+            $user->password = bcrypt($data['password']);
+            $updatePass = $user->saveOrFail();
+            return $updatePass;
+        } catch (Exception $ex) {
+            Log::error($ex->getMessage());
+            return false;
+        }
     }
 }
