@@ -103,4 +103,8 @@ class AlertGroupController extends Controller
         }
         $request->session()->flash('alert-error', 'Delete Alert Group Failed');
     }
+     public function searchAlertGroup(Request $request)
+    {
+        
+    }
 }

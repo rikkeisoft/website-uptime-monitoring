@@ -29,20 +29,20 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
-    {
+    // protected function schedule(Schedule $schedule)
+    // {
 
-        if (Schema::hasTable(DBTable::WEBSITE)) {
-            //get website from database
-            $this->website = $this->getAllWebsite();
+    //     if (Schema::hasTable(DBTable::WEBSITE)) {
+    //         //get website from database
+    //         $this->website = $this->getAllWebsite();
 
-            foreach ($this->website as $website) {
-                $schedule->call(function () use ($website) {
-                    new CheckWebsite($website);
-                })->cron('*/'.$website->frequency.' * * * * *');
-            }
-        }
-    }
+    //         foreach ($this->website as $website) {
+    //             $schedule->call(function () use ($website) {
+    //                 new CheckWebsite($website);
+    //             })->cron('*/'.$website->frequency.' * * * * *');
+    //         }
+    //     }
+    // }
 
     /**
      * get all website enable

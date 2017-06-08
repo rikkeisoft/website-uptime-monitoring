@@ -50,6 +50,9 @@ Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@
 // Routes for Alert Group
 Route::resource('/alert-group','AlertGroupController');
 
+Route::get('eloquent/array', 'AlertTestController@index');
+Route::get('eloquent/array-data', 'AlertTestController@data');
+
 // Route for mass delete Alert Group
 Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
 
