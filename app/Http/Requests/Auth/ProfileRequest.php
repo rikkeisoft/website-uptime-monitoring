@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Auth;
 
-class ProFileRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +24,8 @@ class ProFileRequest extends FormRequest
     public function rules()
     {
         return [
+            'current_password' => 'required',
             'password' => 'required|string|min:6|confirmed',
-            'currentPassword' => 'required|currentPassword'. Auth::user()->password,
             'password_confirmation' =>'required'
         ];
     }

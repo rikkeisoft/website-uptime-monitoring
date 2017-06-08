@@ -4,29 +4,28 @@
     Changer Password
 @endsection
 @section('content')
-    <div class="container">
+    <div id="page-wrapper">
         <div class="row">
+            @component('flash_alert_message')
+            @endcomponent
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Changer Password</div>
+                    <div class="panel-heading">Change Password</div>
 
                     <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
 
                         <form class="form-horizontal" action="{{ route('user-profile.update') }}" role="form" method="POST">
                             {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="currentPassword" class="col-md-4 control-label">Current Password</label>
+                                <label for="current_password" class="col-md-4 control-label">Current Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="currentPassword" type="password" class="form-control" name="oldPassword">
-                                    @if ($errors->has('currentPassword'))
+                                    <input id="current_password" type="password" class="form-control" name="current_password">
+                                    @if ($errors->has('current_password'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('currentPassword') }}</strong>
+                                        <strong>{{ $errors->first('current_password') }}</strong>
                                     </span>
                                     @endif
                                 </div>

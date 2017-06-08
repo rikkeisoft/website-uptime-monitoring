@@ -48,9 +48,10 @@ class LoginController extends Controller
     public function authenticated(Request $request)
     {
         if (Auth::attempt([
-            'email' => $request['email'],
-            'password' => $request['password'],
-            'status' => Constants::CHECK_SUCCESS])) {
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'status' => Constants::CHECK_SUCCESS
+        ], $request->input('remember', false))) {
             // Authentication passed...
             return redirect()->intended('/dashboard');
         }

@@ -82,3 +82,9 @@ input:checked + .slider:before {
     font-size: 18px;
     font-weight: bold;
 }
+
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}

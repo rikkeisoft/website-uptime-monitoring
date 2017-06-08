@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Auth;
-use App\Http\Requests\Auth\ProFileRequest;
+use App\Http\Requests\Auth\ProfileRequest;
 use Hash;
 
 class ProfileController extends Controller
@@ -32,21 +32,24 @@ class ProfileController extends Controller
 
     /**
      * Changer password
-     * @param ProFileRequest $request
+     * @param ProfileRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(ProFileRequest $request)
+    public function update(ProfileRequest $request)
     {
         //Request password
-        $data = $request->only('currentPassword', 'password');
+        $data = $request->only('current_password', 'password');
         $id = Auth::user()->id;
+
         // Check oldPassword
-        if (Hash::check($request->input('currentPassword'), Auth::user()->password)) {
+        if (Hash::check($request->input('current_password'), Auth::user()->password)) {
             $user = $this->userRepository->changePassword($data, $id);
             if ($user) {
                 $request->session()->flash('alert-success', 'Change Password Successfully');
-                return redirect('/dashboard');
+                return redirect('/user-profile');
             }
+            $request->session()->flash('alert-error', 'Change Password Failed');
+            return redirect('/user-profile');
         }
         $request->session()->flash('alert-error', 'Change Password Failed');
         return redirect('/user-profile');
