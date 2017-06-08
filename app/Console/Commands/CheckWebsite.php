@@ -116,7 +116,6 @@ class CheckWebsite extends Command
         $monitor['result'] = $checkStatus;
         $monitor->save();
 
-
         try {
             //set data monitor redis
             $redis = Redis::connection();
