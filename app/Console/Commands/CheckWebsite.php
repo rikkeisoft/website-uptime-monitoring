@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
+use Mockery\CountValidator\Exception;
 use Webpatser\Uuid\Uuid;
 
 class CheckWebsite extends Command
@@ -115,14 +116,19 @@ class CheckWebsite extends Command
         $monitor['result'] = $checkStatus;
         $monitor->save();
 
-        //set data monitor redis
-        $redis = Redis::connection();
-        $redis->rpush('stat_' . $website->id, $statusWebsite['time_request']);
 
-        $listLength = $redis->llen('stat_' . $website->id);
-        //get list redis last
-        Log::info('List Monitor / '.$website->id.'/'.json_encode($redis->lrange('stat_'.$website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
-        $redis->ltrim('stat_'.$website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+        try {
+            //set data monitor redis
+            $redis = Redis::connection();
+            $redis->rpush('stat_' . $website->id, $statusWebsite['time_request']);
+
+            $listLength = $redis->llen('stat_' . $website->id);
+            //get list redis last
+            Log::info('List Monitor / '.$website->id.'/'.json_encode($redis->lrange('stat_'.$website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
+            $redis->ltrim('stat_'.$website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+        } catch (Exception $e) {
+            Log::info("error Redis" . $e);
+        }
 
         //website result change => send mesage
         if ($checkStatus != $result) {
