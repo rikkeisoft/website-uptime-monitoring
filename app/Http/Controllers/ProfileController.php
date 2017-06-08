@@ -48,8 +48,6 @@ class ProfileController extends Controller
                 $request->session()->flash('alert-success', 'Change Password Successfully');
                 return redirect('/user-profile');
             }
-            $request->session()->flash('alert-error', 'Change Password Failed');
-            return redirect('/user-profile');
         }
         $request->session()->flash('alert-error', 'Change Password Failed');
         return redirect('/user-profile');
