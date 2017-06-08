@@ -43,6 +43,7 @@
     <script src="{{ asset('js/sb-admin-2.js')}}"></script>
 
     <script src="{{ asset('js/website-uptime-monitoring.js')}}"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico')}}">
 
 </head>
 <body>
