@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class ProFileRequest extends FormRequest
 {
@@ -24,7 +25,9 @@ class ProFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+            'currentPassword' => 'required|currentPassword'. Auth::user()->password,
+            'password_confirmation' =>'required'
         ];
     }
 }

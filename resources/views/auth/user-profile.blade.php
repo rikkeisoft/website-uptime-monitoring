@@ -20,13 +20,13 @@
                         <form class="form-horizontal" action="{{ route('user-profile.update') }}" role="form" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="old-password" class="col-md-4 control-label">Old Password</label>
+                                <label for="currentPassword" class="col-md-4 control-label">Current Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="oldPassword" type="password" class="form-control" name="oldPassword" required>
-                                    @if ($errors->has('password'))
+                                    <input id="currentPassword" type="password" class="form-control" name="oldPassword">
+                                    @if ($errors->has('currentPassword'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('currentPassword') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -36,7 +36,7 @@
                                 <label for="password" class="col-md-4 control-label">New Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" type="password" class="form-control" name="password">
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -49,7 +49,7 @@
                             <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                                 <label for="password-confirm" class="col-md-4 control-label">Confirm New Password</label>
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
 
                                     @if ($errors->has('password_confirmation'))
                                         <span class="help-block">

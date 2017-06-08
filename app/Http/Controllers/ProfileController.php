@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-       return view('auth.user-profile');
+        return view('auth.user-profile');
     }
 
 
@@ -38,16 +38,17 @@ class ProfileController extends Controller
     public function update(ProFileRequest $request)
     {
         //Request password
-        $data = $request->only('oldPassword','password');
-        $id =  Auth::user()->id;
-        if (Hash::check($data['oldPassword'], Auth::user()->password)) {
+        $data = $request->only('currentPassword', 'password');
+        $id = Auth::user()->id;
+        // Check oldPassword
+        if (Hash::check($request->input('currentPassword'), Auth::user()->password)) {
             $user = $this->userRepository->changePassword($data, $id);
+            if ($user) {
+                $request->session()->flash('alert-success', 'Change Password Successfully');
+                return redirect('/dashboard');
+            }
         }
-        if ($user) {
-            $request->session()->flash('alert-success', 'Change Password Successfully');
-            return redirect('/dashboard');
-        }
-        return redirect('/user-profile');
         $request->session()->flash('alert-error', 'Change Password Failed');
+        return redirect('/user-profile');
     }
 }

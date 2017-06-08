@@ -61,17 +61,22 @@ class UserRepository
         return $updated;
     }
 
-    public function changePassword(array $data,$id)
+    /**
+     * @param array $data
+     * @param $id
+     * @return bool
+     */
+    public function changePassword(array $data, $id)
     {
-        if (empty($data)){
+        if (empty($data)) {
             return false;
         }
-        $user = User::find($id);
         try {
+            $user = User::find($id);
             $user->password = bcrypt($data['password']);
             $updatePass = $user->saveOrFail();
             return $updatePass;
-        }catch (Exception $ex){
+        } catch (Exception $ex) {
             Log::error($ex->getMessage());
             return false;
         }
