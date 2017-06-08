@@ -45,6 +45,7 @@ class CheckWebsite extends Command
         $this->website = $website;
         $this->check($this->website);
     }
+
     /**
      * check request sensitivity
      * @param $website
@@ -52,24 +53,21 @@ class CheckWebsite extends Command
      */
     public function check($website)
     {
-        //1: Success, 2: Failed
-        $check = Constants::CHECK_FAILED;
         $statusWebsite = $this->checkStatusWebsite($website->url);
-        if ($statusWebsite['sucess']) {
-            $check = Constants::CHECK_SUCCESS;
-        } else {
+        if ($statusWebsite['success'] === Constants::CHECK_FAILED) {
             for ($i = 0; $i < $website->sensitivity; $i++) {
                 $statusWebsite = $this->checkStatusWebsite($website->url);
-                if ($statusWebsite['sucess']) {
-                    $check = Constants::CHECK_SUCCESS;
+                if ($statusWebsite['success'] === Constants::CHECK_SUCCESS) {
                     break;
                 } else {
                     sleep(Constants::TIME_DELAY_SENSITIVITY);
                 }
             }
         }
-        $this->updateMonitorAndSendMailGroup($website, $check, $statusWebsite);
+
+        $this->updateMonitorAndSendMailGroup($website, $statusWebsite);
     }
+
     /**
      * check status website with url
      * @param $url
@@ -80,40 +78,41 @@ class CheckWebsite extends Command
         try {
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
 
-            //check time bfore request
+            //check time before request
             $timeBefore = microtime(true);
             $res = $client->request('HEAD', $url);
             //check time after request
             $timeAfter = microtime(true);
             $status = $res->getStatusCode();
             if ($status >= 200 && $status < 400) {
-                return ['sucess' => true, 'time_request' => ($timeAfter - $timeBefore)];
+                return ['success' => Constants::CHECK_SUCCESS, 'time_request' => ($timeAfter - $timeBefore)];
             }
         } catch (ClientException $e) {
             Log::info("client error" . $e);
-            return ['sucess' => false, 'time_request' => 0];
+            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
         } catch (RequestException $e) {
             Log::info("Server error" . $e);
-            return ['sucess' => false, 'time_request' => 0];
+            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
         } catch (\Exception $e) {
             //do some thing here
             Log::info("error" . $e);
-            return ['sucess' => false, 'time_request' => 0];
+            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
         }
-        return ['sucess' => false, 'time_request' => 0];
+        return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
     }
+
     /**
      * update monitor and send mail group
      *
      * @param array $website
-     * @param integer $checkStatus
+     * @param array $statusWebsite
      */
-    private function updateMonitorAndSendMailGroup($website, $checkStatus, $statusWebsite)
+    private function updateMonitorAndSendMailGroup($website, $statusWebsite)
     {
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
         $result = $monitor->result;
         //update monitor
-        $monitor['result'] = $checkStatus;
+        $monitor['result'] = $statusWebsite['success'];
         $monitor->save();
 
         try {
@@ -123,16 +122,17 @@ class CheckWebsite extends Command
 
             $listLength = $redis->llen('stat_' . $website->id);
             //get list redis last
-            Log::info('List Monitor / '.$website->id.'/'.json_encode($redis->lrange('stat_'.$website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
-            $redis->ltrim('stat_'.$website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+            Log::info('List Monitor / ' . $website->id . '/' . json_encode($redis->lrange('stat_' . $website->id,
+                    $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
+            $redis->ltrim('stat_' . $website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
         } catch (Exception $e) {
             Log::info("error Redis" . $e);
         }
 
         //website result change => send mesage
-        if ($checkStatus != $result) {
+        if ($monitor['result'] != $result) {
             //send mail to group
-            $this->sendMailGroup($monitor->alertGroup->id, $website, $checkStatus);
+            $this->sendMailGroup($monitor->alertGroup->id, $website, $monitor['result']);
         }
     }
 
@@ -158,7 +158,7 @@ class CheckWebsite extends Command
                 array_push($data['email'], $value->email);
             }
         }
-        Log::info('check alert'.json_encode($data));
+        Log::info('check alert' . json_encode($data));
 
         //event send list mail group
         if (!empty($data['email'])) {
