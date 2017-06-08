@@ -11,8 +11,6 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
-use Mockery\CountValidator\Exception;
-use Webpatser\Uuid\Uuid;
 
 class CheckWebsite extends Command
 {
@@ -36,7 +34,6 @@ class CheckWebsite extends Command
     /**
      * Create a new command instance.
      *
-     * @return void
      */
     public function __construct($website)
     {
@@ -80,10 +77,10 @@ class CheckWebsite extends Command
 
             //check time before request
             $timeBefore = microtime(true);
-            $res = $client->request('HEAD', $url);
+            $response = $client->request('HEAD', $url);
             //check time after request
             $timeAfter = microtime(true);
-            $status = $res->getStatusCode();
+            $status = $response->getStatusCode();
             if ($status >= 200 && $status < 400) {
                 return ['success' => Constants::CHECK_SUCCESS, 'time_request' => ($timeAfter - $timeBefore)];
             }
