@@ -72,6 +72,7 @@ class CheckWebsite extends Command
      */
     public function checkStatusWebsite(string $url)
     {
+        $date =  \date('Y-m-d H:i:s');
         try {
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
 
@@ -81,21 +82,22 @@ class CheckWebsite extends Command
             //check time after request
             $timeAfter = microtime(true);
             $status = $response->getStatusCode();
+
             if ($status >= 200 && $status < 400) {
-                return ['success' => Constants::CHECK_SUCCESS, 'time_request' => ($timeAfter - $timeBefore)];
+                return ['success' => Constants::CHECK_SUCCESS, 'time_request' => ($timeAfter - $timeBefore), 'created_at' => $date];
             }
         } catch (ClientException $e) {
             Log::info("client error" . $e);
-            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
+            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0, 'created_at' => $date];
         } catch (RequestException $e) {
             Log::info("Server error" . $e);
-            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
+            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0, 'created_at' => $date];
         } catch (\Exception $e) {
             //do some thing here
             Log::info("error" . $e);
-            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
+            return ['success' => Constants::CHECK_FAILED, 'time_request' => 0, 'created_at' => $date];
         }
-        return ['success' => Constants::CHECK_FAILED, 'time_request' => 0];
+        return ['success' => Constants::CHECK_FAILED, 'time_request' => 0, 'created_at' => $date];
     }
 
     /**
@@ -113,15 +115,16 @@ class CheckWebsite extends Command
         $monitor->save();
 
         try {
-            //set data monitor redis
+            // Set data monitor redis
+            $key = "statistic_{$website->id}";
             $redis = Redis::connection();
-            $redis->rpush('stat_' . $website->id, $statusWebsite['time_request']);
+            $redis->rpush($key, json_encode($statusWebsite));
 
-            $listLength = $redis->llen('stat_' . $website->id);
-            //get list redis last
-            Log::info('List Monitor / ' . $website->id . '/' . json_encode($redis->lrange('stat_' . $website->id,
-                    $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
-            $redis->ltrim('stat_' . $website->id, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+            $listLength = $redis->llen($key);
+            // Get list redis last
+            Log::info('List Monitor / ' . $website->id . '/' . json_encode($redis->lrange($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength)));
+            $redis->ltrim($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+
         } catch (Exception $e) {
             Log::info("error Redis" . $e);
         }
