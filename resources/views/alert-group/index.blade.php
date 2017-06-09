@@ -20,7 +20,7 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="alert_groups-table">
                             <thead>
                             <tr>
                                 <th>
@@ -29,23 +29,11 @@
                                 <th>Name</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th class="center">Update</th>
+
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($alertGroups as $alertGroup)
-                                <tr>
-                                    <td>
-                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();" value="{!! $alertGroup->id !!}">
-                                    </td>
-                                    <td>{{ $alertGroup->name }}</td>
-                                    <td>{{ $alertGroup->created_at }}</td>
-                                    <td>{{ $alertGroup->updated_at }}</td>
-                                    <td class="center">
-                                        <a href="{{ route('alert-group.edit', ['alert_group' => $alertGroup->id]) }}"><i class="fa fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
+
                             </tbody>
                         </table>
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-group.destroy') }}">
@@ -56,4 +44,13 @@
                     </div>
                 </div>
             </div>
+                <script>
+                    $(function () {
+                        $('#alert_groups-table').DataTable({
+                            serverSide: true,
+                            processing: true,
+                            ajax: '/search-alert-group'
+                        });
+                    });
+                </script>
 @endsection

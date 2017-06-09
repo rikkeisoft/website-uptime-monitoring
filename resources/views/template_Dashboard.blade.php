@@ -23,7 +23,7 @@
 
     <!-- Custom style -->
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" type="text/css">
-
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
@@ -43,6 +43,7 @@
     <script src="{{ asset('js/sb-admin-2.js')}}"></script>
 
     <script src="{{ asset('js/website-uptime-monitoring.js')}}"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
 </head>
 <body>
