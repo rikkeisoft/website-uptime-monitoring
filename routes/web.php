@@ -40,7 +40,6 @@ Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable
 //Router detail charts website
 Route::get('/websites/{website_id}/stat', 'WebsitesController@charts')->name('websites.charts');
 
-
 //Route for alert method of a group
 Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
 
@@ -50,7 +49,7 @@ Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@
 // Routes for Alert Group
 Route::resource('/alert-group','AlertGroupController');
 
-Route::get('/search-alert-group','AlertGroupController@searchAlertGroup');
+Route::get('/search-alert-group','AlertGroupController@searchAlertGroup')->name('alert-group.search');
 
 // Route for mass delete Alert Group
 Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');

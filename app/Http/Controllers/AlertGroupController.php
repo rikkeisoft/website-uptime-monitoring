@@ -6,7 +6,6 @@ use App\Repositories\AlertGroupsRepository;
 use Auth;
 use App\Http\Requests\AlertGroupRequest;
 use Illuminate\Http\Request;
-use App\Models\AlertGroup;
 use Yajra\Datatables\Datatables;
 
 class AlertGroupController extends Controller
@@ -106,15 +105,15 @@ class AlertGroupController extends Controller
         $request->session()->flash('alert-error', 'Delete Alert Group Failed');
     }
 
+    /**
+     * @param Datatables $datatables
+     * @return mixed
+     */
     public function searchAlertGroup(Datatables $datatables)
     {
-        return $datatables->eloquent(AlertGroup::select('name', 'created_at', 'updated_at'))
-            ->addColumn(
-                'action', 'tables.alert_groups-action'
-
-
-                )
+        $result = $this->alertGroupsRepository->searchAlertGroup($datatables);
+        return Datatables::of($result)
             ->rawColumns([5])
-            ->make();
+            ->make(true);
     }
 }

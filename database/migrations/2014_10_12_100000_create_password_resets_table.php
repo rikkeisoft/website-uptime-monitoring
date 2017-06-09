@@ -18,10 +18,11 @@ class CreatePasswordResetsTable extends Migration
         Schema::create(
             DBTable::PASSWORD_RESET,
             function (Blueprint $table) {
-            $table->string('email',100)->index();
-            $table->string('token',100)->index();
-            $table->timestamp('created_at')->nullable();
-        });
+                $table->string('email', 100)->index();
+                $table->string('token', 100)->index();
+                $table->timestamp('created_at')->nullable();
+            }
+        );
     }
 
     /**

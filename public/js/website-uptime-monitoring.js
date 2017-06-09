@@ -12,7 +12,16 @@ function clickCheckbox() {
         $('#SubmitDelete').prop('disabled', true);
     }
 }
-
+function toggleIdCheckbox(id) {
+    var selectedIds = [];
+    var ids = $('#checkdelete').val();
+    if (ids) {
+        ids += (',' + id)
+    } else {
+        ids = id
+    }
+    console.log(ids)
+}
 $(document).ready(function (e) {
     $('#select_all').change(function () {
         var checkboxes = $(this).closest('table').find('td').find(':checkbox');

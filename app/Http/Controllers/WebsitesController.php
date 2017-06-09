@@ -117,8 +117,7 @@ class WebsitesController extends Controller
                     array_push($listDate, $status->created_at);
                 }
             }
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::info('redis error : '.$e);
         }
         return view('websites.charts')
