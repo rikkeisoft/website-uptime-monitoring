@@ -21,22 +21,16 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="alert-groups-table">
+                        <table width="100%" class="display" id="alert-groups-table">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" id="select_all" /></th>
+                               <th class="checkAllButon"><input type="checkbox" id="select_all" /></th>
                                 <th>Name</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th>Update</th>
                             </tr>
-
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>afafaf</td>
-                            </tr>
-                            </tbody>
                         </table>
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-group.destroy') }}">
                             {{ csrf_field() }}
@@ -50,6 +44,7 @@
                 $('#alert-groups-table').DataTable({
                     processing: false,
                     serverSide: true,
+                    ordering:false,
                     ajax: "{{ route('alert-group.search')}}",
                     "columns": [
                         {

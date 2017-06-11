@@ -88,3 +88,7 @@ input:checked + .slider:before {
     background-color: #f2dede;
     border-color: #ebccd1;
 }
+.checkAllButon
+{
+    padding-left: 11px !important;
+}

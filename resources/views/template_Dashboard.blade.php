@@ -17,14 +17,12 @@
 
     <!-- Morris Charts CSS -->
     <link href="{{asset('css/morris.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css"/>
     <!-- Custom Fonts -->
     <link href="{{ asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-
+    <!--Datatable css-->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <!-- Custom style -->
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/autofill/2.2.0/css/autoFill.dataTables.min.css">
-
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
