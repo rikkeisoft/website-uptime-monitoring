@@ -21,6 +21,5 @@ class AlertGroupsRepository extends BaseRepository
     {
         $alertGroups = AlertGroup::select(['id', 'name','created_at', 'updated_at']);
         return $alertGroups;
-
     }
 }

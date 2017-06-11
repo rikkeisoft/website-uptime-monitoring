@@ -51,14 +51,11 @@
                     processing: false,
                     serverSide: true,
                     ajax: "{{ route('alert-group.search')}}",
-                    autoFill: true,
-                    order: false,
-                    aaSorting: false,
                     "columns": [
                         {
-                            "data": "id",
+                            "data": "id","orderable": "false", "searchable": "false",
                             "render": function (id) {
-                                var inputChecbox = '<input type="checkbox" value="' + id + ' name="selectedIds[]" onClick="toggleIdCheckbox(\''+ id + '\');" />';
+                                var inputChecbox = '<input type="checkbox" value="' + id + '" name="selectedIds[]" onClick="toggleIdCheckbox(\''+ id + '\');" />';
                                 return inputChecbox;
                             }
                         },
@@ -73,7 +70,7 @@
                                 return editAlertGroup;
                             }
                         }
-                    ]
+                    ],
                 });
             </script>
 @endsection
