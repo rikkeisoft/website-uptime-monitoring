@@ -37,7 +37,7 @@
                             @foreach($alertMethodOfGroup as $alertMethodOfGroups)
                                 <tr>
                                     <td>
-                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();" value="{!! $alertMethodOfGroups->id !!}">
+                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="toggleIdCheckbox();" value="{!! $alertMethodOfGroups->id !!}">
                                     </td>
                                     <td>{{ $alertMethodOfGroups->alertGroup['name'] }}</td>
                                     <td>{{ $alertMethodOfGroups->alertMethod['name'] }}</td>

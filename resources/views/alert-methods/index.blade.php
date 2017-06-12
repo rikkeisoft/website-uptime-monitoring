@@ -42,7 +42,7 @@
                             @foreach($listAlertMethods as $alert)
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}"
-                                               onclick="clickCheckbox();"></td>
+                                               onclick="toggleIdCheckbox();"></td>
                                     <td>{{ $alert->name }}</td>
                                     <td>{{ isset($alert->alertmethodalertgroup->alertGroup['name'])?$alert->alertmethodalertgroup->alertGroup['name']:'' }}</td>
                                     <td>{{ $listTypes[$alert->type] }} /

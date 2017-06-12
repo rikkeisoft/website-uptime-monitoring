@@ -43,7 +43,7 @@
                             @foreach($listWebsites as $website)
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}"
-                                               onclick="clickCheckbox();"></td>
+                                               onclick="toggleIdCheckbox();"></td>
                                     <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                     @if($website->monitor->first()->result== 0)
