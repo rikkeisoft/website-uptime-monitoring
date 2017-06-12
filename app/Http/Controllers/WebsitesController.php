@@ -24,8 +24,12 @@ class WebsitesController extends Controller
      * WebsitesController constructor.
      * @param WebsiteRepository $websiteRepository
      */
-    public function __construct(WebsiteRepository $websiteRepository, MonitorRepository $monitorRepository, AlertGroupsRepository $alertGroupsRepository)
-    {
+    public function __construct(
+        WebsiteRepository $websiteRepository,
+        MonitorRepository $monitorRepository,
+        AlertGroupsRepository $alertGroupsRepository
+    ) {
+    
         $this->middleware('auth');
         $this->websiteRepository = $websiteRepository;
         $this->monitorRepository = $monitorRepository;

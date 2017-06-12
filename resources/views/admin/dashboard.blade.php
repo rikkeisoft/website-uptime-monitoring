@@ -18,7 +18,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-comments fa-5x"></i>
+                                <i class="fa fa-group fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">{{ $alert_groups }}</div>
@@ -62,7 +62,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-shopping-cart fa-5x"></i>
+                                <i class="fa fa-windows fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">{{ $websites }}</div>
@@ -84,7 +84,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-support fa-5x"></i>
+                                <i class="fa fa-wifi fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">{{ $up_websites }}</div>
