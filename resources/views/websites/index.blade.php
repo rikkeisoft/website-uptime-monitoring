@@ -96,8 +96,9 @@
             $(function() {
                 $('#website-table').DataTable({
                     "processing": true,
-                    "info":     false,
-                    "bLengthChange": false,
+                    "info":true,
+                    "bLengthChange": true,
+                    "ordering":false,
                     columnDefs: [
                         { orderable: false, targets: [0,1,6,8] },
                     ]

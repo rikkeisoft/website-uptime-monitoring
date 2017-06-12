@@ -139,10 +139,10 @@ class AlertMethodAlertGroupController extends Controller
     }
 
     /**
-     * @param Datatables $datatables
+     * @param Datatables $user_id
      * @return mixed
      */
-    public function searchAlertMethodOfGroup(Datatables $datatables)
+    public function searchAlertMethodOfGroup(Datatables $user_id)
     {
         $user_id = Auth::user()->id;
         $result = $this->alertMethodAlertGroupRepository->searchAlertMethodOfGroup($user_id);

@@ -165,6 +165,10 @@ class AlertMethodsController extends Controller
         }
     }
 
+    /**
+     * @param Datatables $datatables
+     * @return mixed
+     */
     public function searchAlertMethod(Datatables $datatables)
     {
         $result = $this->alertMethodsRepository->searchAlertMethod($datatables);

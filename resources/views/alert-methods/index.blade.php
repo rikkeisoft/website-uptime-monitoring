@@ -74,9 +74,9 @@
                 {
                     "data": "id",
                     "render": function (id) {
-                        var editAlertGroup = '<a href="/alert-methods/' + id + '/edit" ' + 'class="btn btn-xs btn-primary">' +
+                        var editAlertMethod = '<a href="/alert-methods/' + id + '/edit" ' + 'class="btn btn-xs btn-primary">' +
                             '<i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                        return editAlertGroup;
+                        return editAlertMethod;
                     }
                 }
             ],
