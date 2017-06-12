@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/home-style.css')}}" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico')}}">
 </head>
 <body>
 <div id="app">

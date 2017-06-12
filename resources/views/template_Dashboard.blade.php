@@ -43,6 +43,7 @@
     <script src="{{ asset('js/sb-admin-2.js')}}"></script>
 
     <script src="{{ asset('js/website-uptime-monitoring.js')}}"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico')}}">
 
 </head>
 <body>
@@ -98,7 +99,7 @@
                         <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-comments fa-fw"></i> Alert Groups</a>
+                        <a href="{{ route('alert-group.index') }}"><i class="fa fa-group fa-fw"></i> Alert Groups</a>
                     </li>
                     <li>
                         <a href="{{ route('alert-methods.index') }}"><i class="fa fa-tasks fa-fw"></i> Alert Methods</a>
@@ -109,7 +110,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('websites.index') }}"><i class="fa fa-support fa-fw"></i> Website</a>
+                        <a href="{{ route('websites.index') }}"><i class="fa fa-windows fa-fw"></i> Website</a>
                     </li>
                 </ul>
             </div>
