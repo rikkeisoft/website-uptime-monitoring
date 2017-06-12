@@ -23,7 +23,7 @@
                         <table width="100%" class="table table-striped table-bordered table-hover" id="alert-MethodOfGroup-table">
                             <thead>
                             <tr>
-                                <th>
+                                <th class="checkAllButon">
                                     <input type="checkbox" value="option3" id="select_all" name="checkbox[]" data-id="checkbox">
                                 </th>
                                 <th>Alert Group</th>
