@@ -27,7 +27,7 @@ class WebsitesController extends Controller
         MonitorRepository $monitorRepository,
         AlertGroupsRepository $alertGroupsRepository
     ) {
-    
+
         $this->middleware('auth');
         $this->websiteRepository = $websiteRepository;
         $this->monitorRepository = $monitorRepository;

@@ -1,4 +1,4 @@
-function clickCheckbox() {
+function toggleIdCheckbox() {
     var selectedIds = [];
     $('input[name="selectedIds[]"]:checked').each(function () {
         selectedIds.push($(this).val());
@@ -41,4 +41,3 @@ $(document).ready(function (e) {
         $('#deleteListSelectForm').submit();
     });
 });
-

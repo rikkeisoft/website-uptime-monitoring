@@ -30,28 +30,31 @@ Route::get('/activate-error',function(){
 Route::get('/activate/successfully',function(){
     return view('template-activate-auth.active');
 });
-//resource router website
+//Resource router website
 Route::resource('websites', 'WebsitesController');
 
-//router delete list website
+//Route delete list website
 Route::delete('/websites/destroy', 'WebsitesController@destroy')->name('websites.destroy');
-//router change status website
+//route change status website
 Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
-
+//Router detail charts website
+Route::get('/websites/{website_id}/stat', 'WebsitesController@charts')->name('websites.charts');
 
 //Route for alert method of a group
 Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
 
+Route::get('/search-alert-method-of-group','AlertMethodAlertGroupController@searchAlertMethodOfGroup')->name('alert-method-of-group.search');
+
 //Route for deleted alert method of a group
 Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');
 
-// Routes for Alert Group
+// Route for Alert Group
 Route::resource('/alert-group','AlertGroupController');
 
 // Route for mass delete Alert Group
 Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
 
-//resource router alert method
+//Route alert method
 Route::resource('alert-methods', 'AlertMethodsController');
 
 Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');

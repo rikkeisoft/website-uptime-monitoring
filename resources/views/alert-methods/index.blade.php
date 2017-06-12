@@ -26,10 +26,10 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover"
-                               id="dataTables-example">
+                               id="alert-method-table">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" id="select_all"/></th>
+                                <th class="checkAllButon"><input type="checkbox" id="select_all"/></th>
                                 <th>Name</th>
                                 <th>Alert Group</th>
                                 <th>Method</th>
@@ -42,7 +42,7 @@
                             @foreach($listAlertMethods as $alert)
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}"
-                                               onclick="clickCheckbox();"></td>
+                                               onclick="toggleIdCheckbox();"></td>
                                     <td>{{ $alert->name }}</td>
                                     <td>{{ isset($alert->alertmethodalertgroup->alertGroup['name'])?$alert->alertmethodalertgroup->alertGroup['name']:'' }}</td>
                                     <td>{{ $listTypes[$alert->type] }} /
@@ -63,7 +63,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $listAlertMethods->render() !!}
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-methods.destroy') }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
@@ -77,4 +76,14 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
+    <script>
+        $(function() {
+            $('#alert-method-table').DataTable({
+                "processing": true,
+                "info":true,
+                "bLengthChange": true,
+                "ordering":false,
+            });
+        });
+    </script>
 @endsection

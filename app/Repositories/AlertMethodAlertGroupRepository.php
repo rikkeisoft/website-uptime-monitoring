@@ -5,7 +5,6 @@ use App\Contracts\Constants;
 use App\Contracts\DBTable;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Models\AlertMethodAlertGroup;
-use App\Models\AlertGroup;
 
 class AlertMethodAlertGroupRepository extends BaseRepository
 {

@@ -31,7 +31,7 @@ class AlertMethodsController extends Controller
         AlertMethodAlertGroupRepository $alertMethodAlertGroupRepository,
         AlertGroupsRepository $alertGroupsRepository
     ) {
-        
+
         $this->middleware('auth');
         $this->alertMethodsRepository = $alertMethodsRepository;
         $this->alertMethodAlertGroupRepository = $alertMethodAlertGroupRepository;

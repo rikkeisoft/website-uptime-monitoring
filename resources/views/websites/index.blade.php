@@ -25,7 +25,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover"
-                               id="dataTables-example">
+                               id="website-table">
                             <thead>
                             <tr>
                                 <th><input type="checkbox" id="select_all"/></th>
@@ -43,7 +43,7 @@
                             @foreach($listWebsites as $website)
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}"
-                                               onclick="clickCheckbox();"></td>
+                                               onclick="toggleIdCheckbox();"></td>
                                     <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                     @if($website->monitor->first()->result== 0)
@@ -92,5 +92,19 @@
         </div>
         <link href="{{ asset('css/style-button-website.css')}}" rel="stylesheet" type="text/css">
         <script src="{{ asset('js/website.js')}}"></script>
+    </div>
+        <script>
+            $(function() {
+                $('#website-table').DataTable({
+                    processing: true,
+                    info:true,
+                    bLengthChange: true,
+                    ordering:false,
+                    columnDefs: [
+                        { orderable: false, targets: [0,1,6,8] },
+                    ]
+                });
+            });
+        </script>
     </div>
 @endsection

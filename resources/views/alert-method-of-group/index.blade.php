@@ -20,10 +20,10 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="alert-MethodOfGroup-table">
                             <thead>
                             <tr>
-                                <th>
+                                <th class="checkAllButon">
                                     <input type="checkbox" value="option3" id="select_all" name="checkbox[]" data-id="checkbox">
                                 </th>
                                 <th>Alert Group</th>
@@ -37,7 +37,7 @@
                             @foreach($alertMethodOfGroup as $alertMethodOfGroups)
                                 <tr>
                                     <td>
-                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();" value="{!! $alertMethodOfGroups->id !!}">
+                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="toggleIdCheckbox();" value="{!! $alertMethodOfGroups->id !!}">
                                     </td>
                                     <td>{{ $alertMethodOfGroups->alertGroup['name'] }}</td>
                                     <td>{{ $alertMethodOfGroups->alertMethod['name'] }}</td>
@@ -59,4 +59,14 @@
                     </div>
                 </div>
             </div>
+            <script>
+                $(function () {
+                    $('#alert-MethodOfGroup-table').DataTable({
+                        "processing": true,
+                        "info": true,
+                        "bLengthChange": true,
+                        "ordering": false,
+                    });
+                });
+            </script>
 @endsection
