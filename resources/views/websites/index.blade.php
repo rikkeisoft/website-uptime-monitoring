@@ -24,12 +24,12 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-bordered"
+                        <table width="100%" class="table table-striped table-bordered table-hover"
                                id="website-table">
                             <thead>
                             <tr>
-                                <th class="checkAllButon"><input type="checkbox" id="select_all"/></th>
-                                <th class="name-website">Name</th>
+                                <th><input type="checkbox" id="select_all"/></th>
+                                <th>Name</th>
                                 <th>Url</th>
                                 <th>Last status</th>
                                 <th>Time of the last request</th>
@@ -44,7 +44,7 @@
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}"
                                                onclick="clickCheckbox();"></td>
-                                    <td><a href="{{ route('websites.charts', [$website->id]) }}">{{ $website->name }}</a></td>
+                                    <td>{{ $website->name }}</td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                     @if($website->monitor->first()->result== 0)
                                         <td>
@@ -92,6 +92,7 @@
         </div>
         <link href="{{ asset('css/style-button-website.css')}}" rel="stylesheet" type="text/css">
         <script src="{{ asset('js/website.js')}}"></script>
+    </div>
         <script>
             $(function() {
                 $('#website-table').DataTable({
