@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repositories;
 
 use App\Contracts\Constants;
@@ -19,7 +18,6 @@ class AlertMethodAlertGroupRepository extends BaseRepository
     {
         return AlertMethodAlertGroup::class;
     }
-
     /**
      * get lisst email alert group
      * @param string $alertGroupId
@@ -30,27 +28,24 @@ class AlertMethodAlertGroupRepository extends BaseRepository
         return $this->model->where('alert_group_id', $alertGroupId)
             ->leftJoin(
                 DBTable::ALERT_METHOD,
-                DBTable::ALERT_METHOD_ALERT_GROUP . '.alert_method_id',
+                DBTable::ALERT_METHOD_ALERT_GROUP.'.alert_method_id',
                 '=',
-                DBTable::ALERT_METHOD . '.id'
+                DBTable::ALERT_METHOD.'.id'
             )
             ->select([
-                DBTable::ALERT_METHOD . '.email',
+                DBTable::ALERT_METHOD.'.email',
             ])
             ->get();
     }
 
     /**
-     * @param $user_id
-     * @return mixed
+     * @param string $user_id
+     * @return array
      */
-    public function searchAlertMethodOfGroup($user_id)
+    public function getAllAlertMethodAlertGroupByUserId($user_id)
     {
-        $alertMethodOfGroup = AlertMethodAlertGroup::with('alertGroup', 'alertMethod')
-            ->select('alert_method_alert_group.*')->whereHas('alertGroup', function ($q) use ($user_id) {
-                $q->where('user_id', $user_id);
-            })->get();
-
-        return $alertMethodOfGroup;
+        return $this->model->whereHas('alertGroup', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->paginate(Constants::LIMIT_PAGINATE);
     }
 }

@@ -15,14 +15,4 @@ class AlertGroupsRepository extends BaseRepository
     {
         return AlertGroup::class;
     }
-
-    /**
-     * @param $alertGroups
-     * @return mixed
-     */
-    public function searchAlertGroup($alertGroups)
-    {
-        $alertGroups = AlertGroup::select(['id', 'name','created_at', 'updated_at']);
-        return $alertGroups;
-    }
 }

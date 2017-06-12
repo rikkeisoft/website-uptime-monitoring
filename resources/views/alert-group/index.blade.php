@@ -16,21 +16,37 @@
                     <button type="button" class="btn btn-danger btn-danger-website" id="SubmitDelete" disabled>Delete</button>
                 </div>
             </div>
-
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="display" id="alert-groups-table">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="alert-group-table">
                             <thead>
                             <tr>
-                               <th class="checkAllButon"><input type="checkbox" id="select_all" /></th>
+                                <th>
+                                    <input type="checkbox" value="option3" id="select_all" name="checkbox[]" data-id="checkbox">
+                                </th>
                                 <th>Name</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th>Update</th>
+                                <th class="center">Update</th>
                             </tr>
                             </thead>
+                            <tbody>
+                            @foreach($alertGroups as $alertGroup)
+                                <tr>
+                                    <td>
+                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();" value="{!! $alertGroup->id !!}">
+                                    </td>
+                                    <td>{{ $alertGroup->name }}</td>
+                                    <td>{{ $alertGroup->created_at }}</td>
+                                    <td>{{ $alertGroup->updated_at }}</td>
+                                    <td class="center">
+                                        <a href="{{ route('alert-group.edit', ['alert_group' => $alertGroup->id]) }}"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                         </table>
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-group.destroy') }}">
                             {{ csrf_field() }}
@@ -41,31 +57,13 @@
                 </div>
             </div>
             <script>
-                $('#alert-groups-table').DataTable({
-                    processing: false,
-                    serverSide: true,
-                    ordering:false,
-                    ajax: "{{ route('alert-group.search')}}",
-                    "columns": [
-                        {
-                            "data": "id","orderable": "false", "searchable": "false",
-                            "render": function (id) {
-                                var inputChecbox = '<input type="checkbox" value="' + id + '" name="selectedIds[]" onClick="toggleIdCheckbox(\''+ id + '\');" />';
-                                return inputChecbox;
-                            }
-                        },
-                        {"data": "name"},
-                        {"data": "created_at"},
-                        {"data": "updated_at"},
-                        {
-                            "data": "id",
-                            "render": function (id) {
-                                var editAlertGroup = '<a href="/alert-group/' + id + '/edit" ' + 'class="btn btn-xs btn-primary">' +
-                                    '<i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                                return editAlertGroup;
-                            }
-                        }
-                    ],
+                $(function () {
+                    $('#alert-group-table').DataTable({
+                        "processing": true,
+                        "info": true,
+                        "bLengthChange": true,
+                        "ordering": false,
+                    });
                 });
             </script>
 @endsection

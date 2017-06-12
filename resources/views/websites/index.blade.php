@@ -95,10 +95,10 @@
         <script>
             $(function() {
                 $('#website-table').DataTable({
-                    "processing": true,
-                    "info":true,
-                    "bLengthChange": true,
-                    "ordering":false,
+                    processing: true,
+                    info:true,
+                    bLengthChange: true,
+                    ordering:false,
                     columnDefs: [
                         { orderable: false, targets: [0,1,6,8] },
                     ]

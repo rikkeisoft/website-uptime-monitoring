@@ -26,7 +26,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover"
-                               id="alert-methods-table">
+                               id="alert-method-table">
                             <thead>
                             <tr>
                                 <th class="checkAllButon"><input type="checkbox" id="select_all"/></th>
@@ -38,6 +38,30 @@
                                 <th class="center">Update</th>
                             </tr>
                             </thead>
+                            <tbody>
+                            @foreach($listAlertMethods as $alert)
+                                <tr class="odd gradeX">
+                                    <td><input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}"
+                                               onclick="clickCheckbox();"></td>
+                                    <td>{{ $alert->name }}</td>
+                                    <td>{{ isset($alert->alertmethodalertgroup->alertGroup['name'])?$alert->alertmethodalertgroup->alertGroup['name']:'' }}</td>
+                                    <td>{{ $listTypes[$alert->type] }} /
+                                        @if($alert->type == 1)
+                                            {{ $alert->email }}
+                                        @elseif($alert->type == 2)
+                                            {{ $alert->phone_number }}
+                                        @else
+                                            {{ $alert->webhook }}
+                                        @endif
+                                    </td>
+                                    <td>{{ $alert->user->username }}</td>
+                                    <td>{{ $alert->created_at }}</td>
+                                    <td class="center"><a
+                                                href="{{ route('alert-methods.edit', ['alert_method_id' => $alert->id]) }}"><i
+                                                    class="fa fa-edit"></i></a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                         </table>
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-methods.destroy') }}">
                             {{ csrf_field() }}
@@ -53,33 +77,13 @@
         </div>
     </div>
     <script>
-        $('#alert-methods-table').DataTable({
-            processing: false,
-            serverSide: true,
-            ordering:false,
-            ajax: "{{ route('alert-method.search')}}",
-            "columns": [
-                {
-                    "data": "id","orderable": "false", "searchable": "false",
-                    "render": function (id) {
-                        var inputChecbox = '<input type="checkbox" value="' + id + '" name="selectedIds[]" onClick="toggleIdCheckbox(\''+ id + '\');" />';
-                        return inputChecbox;
-                    }
-                },
-                {"data": "name"},
-                {"data": "alert_method_alert_group.alert_group_id"},
-                {"data": "email"},
-                {"data": "created_at"},
-                {"data": "updated_at"},
-                {
-                    "data": "id",
-                    "render": function (id) {
-                        var editAlertMethod = '<a href="/alert-methods/' + id + '/edit" ' + 'class="btn btn-xs btn-primary">' +
-                            '<i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                        return editAlertMethod;
-                    }
-                }
-            ],
+        $(function() {
+            $('#alert-method-table').DataTable({
+                "processing": true,
+                "info":true,
+                "bLengthChange": true,
+                "ordering":false,
+            });
         });
     </script>
 @endsection

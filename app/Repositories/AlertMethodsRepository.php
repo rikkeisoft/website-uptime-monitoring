@@ -16,14 +16,4 @@ class AlertMethodsRepository extends BaseRepository
     {
         return AlertMethod::class;
     }
-
-    /**
-     * @param $alertMethods
-     * @return mixed
-     */
-    public function searchAlertMethod($alertMethods)
-    {
-        $alertMethods = AlertMethod::with('alertMethodAlertGroup')->select('alert_methods.*')->get();
-        return $alertMethods;
-    }
 }

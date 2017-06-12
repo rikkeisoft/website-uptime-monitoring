@@ -51,15 +51,11 @@ Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@
 // Route for Alert Group
 Route::resource('/alert-group','AlertGroupController');
 
-Route::get('/search-alert-group','AlertGroupController@searchAlertGroup')->name('alert-group.search');
-
 // Route for mass delete Alert Group
 Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
 
 //Route alert method
 Route::resource('alert-methods', 'AlertMethodsController');
-
-Route::get('/search-alert-method','AlertMethodsController@searchAlertMethod')->name('alert-method.search');
 
 Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');
 
