@@ -20,10 +20,10 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="alert-method-of-group-table">
                             <thead>
                             <tr>
-                                <th>
+                                <th class="checkAllButon">
                                     <input type="checkbox" value="option3" id="select_all" name="checkbox[]" data-id="checkbox">
                                 </th>
                                 <th>Alert Group</th>
@@ -33,24 +33,7 @@
                                 <th class="center">Update</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            @foreach($alertMethodOfGroup as $alertMethodOfGroups)
-                                <tr>
-                                    <td>
-                                        <input class="checkbox" type="checkbox" name="selectedIds[]" onclick="clickCheckbox();" value="{!! $alertMethodOfGroups->id !!}">
-                                    </td>
-                                    <td>{{ $alertMethodOfGroups->alertGroup['name'] }}</td>
-                                    <td>{{ $alertMethodOfGroups->alertMethod['name'] }}</td>
-                                    <td>{{ $alertMethodOfGroups->created_at }}</td>
-                                    <td>{{ $alertMethodOfGroups->updated_at }}</td>
-                                    <td class="center">
-                                        <a href="{{ route('alert-method-of-group.edit', ['alert_method_of_group' => $alertMethodOfGroups->id]) }}"><i class="fa fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
                         </table>
-                        {!! $alertMethodOfGroup->render() !!}
                         <form id="deleteListSelectForm" method="post" action="{{ route('alert-method-of-group.destroy') }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
@@ -59,4 +42,33 @@
                     </div>
                 </div>
             </div>
+            <script>
+                $('#alert-method-of-group-table').DataTable({
+                    processing: false,
+                    serverSide: true,
+                    ordering: false,
+                    ajax: "{{ route('alert-method-of-group.search')}}",
+                    "columns": [
+                        {
+                            "data": "id", "orderable": "false", "searchable": "false",
+                            "render": function (id) {
+                                var inputChecbox = '<input type="checkbox" value="' + id + '" name="selectedIds[]" onClick="toggleIdCheckbox(\'' + id + '\');" />';
+                                return inputChecbox;
+                            }
+                        },
+                        {"data": "alert_group.name"},
+                        {"data": "alert_method.name"},
+                        {"data": "created_at"},
+                        {"data": "updated_at"},
+                        {
+                            "data": "id",
+                            "render": function (id) {
+                                var editAlertMethofOfGroup = '<a href="/alert-method-of-group/' + id + '/edit" ' + 'class="btn btn-xs btn-primary">' +
+                                    '<i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                                return editAlertMethofOfGroup;
+                            }
+                        }
+                    ],
+                });
+            </script>
 @endsection

@@ -25,10 +25,10 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <table width="100%" class="table table-bordered"
-                               id="dataTables-example">
+                               id="website-table">
                             <thead>
                             <tr>
-                                <th class="check-box"><input type="checkbox" id="select_all"/></th>
+                                <th class="checkAllButon"><input type="checkbox" id="select_all"/></th>
                                 <th class="name-website">Name</th>
                                 <th>Url</th>
                                 <th>Last status</th>
@@ -90,15 +90,12 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
         <link href="{{ asset('css/style-button-website.css')}}" rel="stylesheet" type="text/css">
-        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('js/website.js')}}"></script>
-
         <script>
             $(function() {
-                $('#dataTables-example').DataTable({
-                    "ordering": true,
+                $('#website-table').DataTable({
+                    "processing": true,
                     "info":     false,
                     "bLengthChange": false,
                     columnDefs: [

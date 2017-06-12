@@ -43,6 +43,8 @@ Route::get('/websites/{website_id}/stat', 'WebsitesController@charts')->name('we
 //Route for alert method of a group
 Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
 
+Route::get('/search-alert-method-of-group','AlertMethodAlertGroupController@searchAlertMethodOfGroup')->name('alert-method-of-group.search');
+
 //Route for deleted alert method of a group
 Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');
 
@@ -56,6 +58,8 @@ Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->
 
 //Resource router alert method
 Route::resource('alert-methods', 'AlertMethodsController');
+
+Route::get('/search-alert-method','AlertMethodsController@searchAlertMethod')->name('alert-method.search');
 
 Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');
 

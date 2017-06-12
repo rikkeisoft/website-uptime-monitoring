@@ -7,6 +7,7 @@ use App\Repositories\AlertMethodAlertGroupRepository;
 use App\Repositories\AlertGroupsRepository;
 use App\Repositories\AlertMethodsRepository;
 use Illuminate\Support\Facades\Auth;
+use Yajra\Datatables\Datatables;
 
 class AlertMethodAlertGroupController extends Controller
 {
@@ -25,6 +26,7 @@ class AlertMethodAlertGroupController extends Controller
         AlertGroupsRepository $alertGroupsRepository,
         AlertMethodsRepository $alertMethodsRepository
     ) {
+    
         $this->middleware('auth');
         $this->alertMethodAlertGroupRepository = $alertMethodAlertGroupRepository;
         $this->alertGroupsRepository = $alertGroupsRepository;
@@ -37,9 +39,7 @@ class AlertMethodAlertGroupController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->getAllAlertMethodAlertGroupByUserId($user_id);
-        return view('/alert-method-of-group.index')->with('alertMethodOfGroup', $alertMethodOfGroup);
+        return view('/alert-method-of-group.index');
     }
 
     /**
@@ -50,6 +50,7 @@ class AlertMethodAlertGroupController extends Controller
     {
         $alertGroup = $this->alertGroupsRepository->all();
         $alertMethod = $this->alertMethodsRepository->all();
+
         return view('alert-method-of-group.create')->with([
             'alertGroup' => $alertGroup,
             'alertMethod' => $alertMethod
@@ -67,6 +68,7 @@ class AlertMethodAlertGroupController extends Controller
         $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->create($data);
         if ($alertMethodOfGroup) {
             $request->session()->flash('alert-success', 'Add Alert Method Of Group Successfully');
+
             return redirect('/alert-method-of-group');
         }
         $request->session()->flash('alert-error', 'Add Alert Method Of Group Failed');
@@ -85,6 +87,7 @@ class AlertMethodAlertGroupController extends Controller
         if (empty($alertMethodOfGroup)) {
             abort(404);
         }
+
         return view('/alert-method-of-group.edit')->with([
             'alertMethodOfGroup' => $alertMethodOfGroup,
             'alertGroup' => $alertGroup,
@@ -111,6 +114,7 @@ class AlertMethodAlertGroupController extends Controller
         $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->update($data, $id);
         if ($alertMethodOfGroup) {
             $request->session()->flash('alert-success', 'Update Alert Method Of Group Successfully');
+
             return redirect('/alert-method-of-group');
         }
         $request->session()->flash('alert-error', 'Update Alert Method Of Group Failed');
@@ -128,8 +132,22 @@ class AlertMethodAlertGroupController extends Controller
         $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->delete($selectedIds);
         if ($alertMethodOfGroup > 0) {
             $request->session()->flash('alert-success', 'Delete Alert Method Of Group Successfully');
+
             return redirect('/alert-method-of-group');
         }
         $request->session()->flash('alert-error', 'Delete Alert Method Of Group Failed');
+    }
+
+    /**
+     * @param Datatables $datatables
+     * @return mixed
+     */
+    public function searchAlertMethodOfGroup(Datatables $datatables)
+    {
+        $user_id = Auth::user()->id;
+        $result = $this->alertMethodAlertGroupRepository->searchAlertMethodOfGroup($user_id);
+        return Datatables::of($result)
+            ->rawColumns([5])
+            ->make(true);
     }
 }

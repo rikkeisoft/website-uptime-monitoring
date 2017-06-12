@@ -3,7 +3,6 @@ namespace App\Repositories;
 
 use App\Repositories\Eloquent\BaseRepository;
 use App\Models\AlertGroup;
-use Yajra\Datatables\Datatables;
 
 class AlertGroupsRepository extends BaseRepository
 {
@@ -17,6 +16,10 @@ class AlertGroupsRepository extends BaseRepository
         return AlertGroup::class;
     }
 
+    /**
+     * @param $alertGroups
+     * @return mixed
+     */
     public function searchAlertGroup($alertGroups)
     {
         $alertGroups = AlertGroup::select(['id', 'name','created_at', 'updated_at']);

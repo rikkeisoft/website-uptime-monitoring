@@ -25,8 +25,7 @@ class AlertGroupController extends Controller
      */
     public function index()
     {
-        $alertGroups = $this->alertGroupsRepository->all();
-        return view('alert-group.index')->with('alertGroups', $alertGroups);
+        return view('alert-group.index');
     }
 
     /**

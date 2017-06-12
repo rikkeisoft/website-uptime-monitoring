@@ -11,6 +11,7 @@ use App\Http\Requests\CreateAlertMethodsRequest;
 use App\Http\Requests\UpdateAlertMethodsRequest;
 use App\Repositories\AlertMethodsRepository;
 use Illuminate\Support\Facades\Auth;
+use Yajra\Datatables\Datatables;
 
 class AlertMethodsController extends Controller
 {
@@ -31,7 +32,7 @@ class AlertMethodsController extends Controller
         AlertMethodAlertGroupRepository $alertMethodAlertGroupRepository,
         AlertGroupsRepository $alertGroupsRepository
     ) {
-        
+
         $this->middleware('auth');
         $this->alertMethodsRepository = $alertMethodsRepository;
         $this->alertMethodAlertGroupRepository = $alertMethodAlertGroupRepository;
@@ -44,10 +45,7 @@ class AlertMethodsController extends Controller
      */
     public function index()
     {
-        $listTypes = AlertMethod::LIST_TYPE_ALERT_METHOD;
-        $listAlertMethods = $this->alertMethodsRepository->paginate(Constants::LIMIT_PAGINATE);
-
-        return view('alert-methods.index', compact('listAlertMethods', 'listTypes'));
+        return view('alert-methods.index');
     }
 
     /**
@@ -123,7 +121,7 @@ class AlertMethodsController extends Controller
 
         if ($update) {
             $dataAlertMethodGroup = $request->only('alert_group_id');
-            $dataAlertMethodGroupId = $update->alertmethodalertgroup->id;
+            $dataAlertMethodGroupId = $update->alertMethodAlertGroup->id;
             $updateMethodGroup = $this->alertMethodAlertGroupRepository
                 ->update($dataAlertMethodGroup, $dataAlertMethodGroupId);
 
@@ -165,5 +163,13 @@ class AlertMethodsController extends Controller
             $request->session()->flash('alert-error', 'Deleted Alert Method Failed');
             return redirect()->back();
         }
+    }
+
+    public function searchAlertMethod(Datatables $datatables)
+    {
+        $result = $this->alertMethodsRepository->searchAlertMethod($datatables);
+        return Datatables::of($result)
+            ->rawColumns([5])
+            ->make(true);
     }
 }

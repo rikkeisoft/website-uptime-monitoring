@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Repositories\Eloquent\BaseRepository;
 use App\Models\AlertMethod;
+use App\Contracts\DBTable;
 
 class AlertMethodsRepository extends BaseRepository
 {
@@ -14,5 +15,15 @@ class AlertMethodsRepository extends BaseRepository
     public function setModel()
     {
         return AlertMethod::class;
+    }
+
+    /**
+     * @param $alertMethods
+     * @return mixed
+     */
+    public function searchAlertMethod($alertMethods)
+    {
+        $alertMethods = AlertMethod::with('alertMethodAlertGroup')->select('alert_methods.*')->get();
+        return $alertMethods;
     }
 }
