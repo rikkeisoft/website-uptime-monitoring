@@ -24,12 +24,12 @@
                 <div class="panel panel-default">
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover"
-                               id="website-table">
+                        <table width="100%" class="table table-bordered"
+                               id="dataTables-example">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" id="select_all"/></th>
-                                <th>Name</th>
+                                <th class="check-box"><input type="checkbox" id="select_all"/></th>
+                                <th class="name-website">Name</th>
                                 <th>Url</th>
                                 <th>Last status</th>
                                 <th>Time of the last request</th>
@@ -43,8 +43,8 @@
                             @foreach($listWebsites as $website)
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}"
-                                               onclick="toggleIdCheckbox();"></td>
-                                    <td>{{ $website->name }}</td>
+                                               onclick="clickCheckbox();"></td>
+                                    <td><a href="{{ route('websites.charts', [$website->id]) }}">{{ $website->name }}</a> </td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                     @if($website->monitor->first()->result== 0)
                                         <td>
@@ -90,16 +90,17 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
         <link href="{{ asset('css/style-button-website.css')}}" rel="stylesheet" type="text/css">
+        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('js/website.js')}}"></script>
-    </div>
+
         <script>
             $(function() {
-                $('#website-table').DataTable({
-                    processing: true,
-                    info:true,
-                    bLengthChange: true,
-                    ordering:false,
+                $('#dataTables-example').DataTable({
+                    "ordering": true,
+                    "info":     false,
+                    "bLengthChange": false,
                     columnDefs: [
                         { orderable: false, targets: [0,1,6,8] },
                     ]

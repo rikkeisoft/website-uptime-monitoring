@@ -11,6 +11,8 @@ use App\Repositories\MonitorRepository;
 use Illuminate\Http\Request;
 use App\Repositories\WebsiteRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 class WebsitesController extends Controller
 {
@@ -22,12 +24,8 @@ class WebsitesController extends Controller
      * WebsitesController constructor.
      * @param WebsiteRepository $websiteRepository
      */
-    public function __construct(
-        WebsiteRepository $websiteRepository,
-        MonitorRepository $monitorRepository,
-        AlertGroupsRepository $alertGroupsRepository
-    ) {
-
+    public function __construct(WebsiteRepository $websiteRepository, MonitorRepository $monitorRepository, AlertGroupsRepository $alertGroupsRepository)
+    {
         $this->middleware('auth');
         $this->websiteRepository = $websiteRepository;
         $this->monitorRepository = $monitorRepository;
@@ -95,6 +93,43 @@ class WebsitesController extends Controller
                 'listAlertGroup' => $listAlertGroup
             ]);
     }
+
+
+    public function charts(string $website_id)
+    {
+        $listChart = [];
+        $listDonut = [];
+        $listDate = [];
+
+        try {
+            $key = "statistic_{$website_id}";
+            $redis = Redis::connection();
+            $listLength = $redis->llen($key);
+            //Get list status website
+            $listStatusWebsite = $redis->lrange($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+            //$listStatusWebsite = json_decode($listStatusWebsite);
+            if (!empty($listStatusWebsite)) {
+                foreach ($listStatusWebsite as $status) {
+                    $status = json_decode($status);
+//                    var_dump($status);
+                    array_push($listChart, $status->time_request);
+                    array_push($listDonut, $status->success);
+                    array_push($listDate, $status->created_at);
+                }
+            }
+
+        } catch(\Exception $e) {
+            Log::info('redis error : '.$e);
+        }
+        return view('websites.charts')
+            ->with([
+                'listChart' => $listChart,
+                'listDonut' => $listDonut,
+                'listDate' => $listDate,
+            ]);
+    }
+
+
 
     /**
      * add new website post
