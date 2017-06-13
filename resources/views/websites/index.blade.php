@@ -28,7 +28,7 @@
                                id="dataTables-example">
                             <thead>
                             <tr>
-                                <th class="check-box"><input type="checkbox" id="select_all"/></th>
+                                <th class="checkAllButon"><input type="checkbox" id="select_all"/></th>
                                 <th class="name-website">Name</th>
                                 <th>Url</th>
                                 <th>Last status</th>
@@ -43,7 +43,7 @@
                             @foreach($listWebsites as $website)
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}"
-                                               onclick="clickCheckbox();"></td>
+                                               onclick="toggleIdCheckbox();"></td>
                                     <td><a href="{{ route('websites.charts', [$website->id]) }}">{{ $website->name }}</a> </td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                     @if($website->monitor->first()->result== 0)
@@ -98,7 +98,7 @@
         <script>
             $(function() {
                 $('#dataTables-example').DataTable({
-                    "ordering": true,
+                    "ordering": false,
                     "info":     false,
                     "bLengthChange": false,
                     columnDefs: [

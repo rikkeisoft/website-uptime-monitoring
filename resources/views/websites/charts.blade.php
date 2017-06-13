@@ -16,15 +16,15 @@
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script>
-            console.log({{ json_encode($listChart) }});
-            var listCharts = {{ json_encode($listChart) }}
+            var listCharts = {{ json_encode($listChart) }};
+            var websiteName = '{{ $websiteName }}'
             Highcharts.chart('request', {
                 title: {
                     text: 'Request Time'
                 },
 
                 subtitle: {
-                    text: 'Source: Website Uptime'
+                    text: websiteName
                 },
 
                 yAxis: {
@@ -53,39 +53,59 @@
 
         </script>
         <script>
-            $(document).ready(function () {
-                var listDonut = {{json_encode($listDonut)}}
-                // Build the chart
-                Highcharts.chart('uptime', {
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
-                        text: 'Website Up/Down'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: false
-                            },
-                            showInLegend: true
+            var listDonutFail =
+                    {{ $listDonut['fail'] }}
+            var listDonutSuccess =
+                    {{ $listDonut['success'] }}
+
+            var websiteName = '{{ $websiteName }}'
+            // Build the chart
+            Highcharts.chart('uptime', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Up/Down'
+                },
+                subtitle: {
+                    text: websiteName
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
                         }
+                    }
+                },
+                series: [{
+                    name: 'Up/Down',
+                    colorByPoint: true,
+                    data: [{
+                        'name': 'Down',
+                        'y': listDonutFail,
                     },
-                    series: [{
-                        name: 'Availability',
-                        colorByPoint: true,
-                        data: listDonut
-                    }]
-                });
+                        {
+                            'name': 'Up',
+                            'y': listDonutSuccess,
+                        }],
+                    sliced: true,
+                    selected: true
+                }]
             });
+
         </script>
+
     </div>
 @endsection
