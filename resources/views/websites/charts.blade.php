@@ -8,7 +8,8 @@
         <div class="row">
             @component('flash_alert_message')
             @endcomponent
-            <div id="hightCharst"></div>
+            <div id="request"></div>
+            <div id="uptime"></div>
 
             <!-- /.col-lg-12 -->
         </div>
@@ -17,14 +18,13 @@
         <script>
             console.log({{ json_encode($listChart) }});
             var listCharts = {{ json_encode($listChart) }}
-            Highcharts.chart('hightCharst', {
-
+            Highcharts.chart('request', {
                 title: {
-                    text: 'Solar Employment Growth by Sector, 2010-2016'
+                    text: 'Request Time'
                 },
 
                 subtitle: {
-                    text: 'Source: thesolarfoundation.com'
+                    text: 'Source: Website Uptime'
                 },
 
                 yAxis: {
@@ -49,6 +49,42 @@
                     data: listCharts
                 }]
 
+            });
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                var listDonut = {{json_encode($listDonut)}}
+                // Build the chart
+                Highcharts.chart('uptime', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Website Up/Down'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                        name: 'Availability',
+                        colorByPoint: true,
+                        data: listDonut
+                    }]
+                });
             });
         </script>
     </div>

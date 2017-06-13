@@ -95,6 +95,10 @@ class WebsitesController extends Controller
     }
 
 
+    /**
+     * @param string $website_id
+     * @return $this
+     */
     public function charts(string $website_id)
     {
         $listChart = [];
@@ -111,13 +115,12 @@ class WebsitesController extends Controller
             if (!empty($listStatusWebsite)) {
                 foreach ($listStatusWebsite as $status) {
                     $status = json_decode($status);
-//                    var_dump($status);
                     array_push($listChart, $status->time_request);
                     array_push($listDonut, $status->success);
                     array_push($listDate, $status->created_at);
                 }
             }
-
+//   dd($listChart);
         } catch(\Exception $e) {
             Log::info('redis error : '.$e);
         }
