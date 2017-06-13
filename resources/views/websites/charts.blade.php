@@ -8,8 +8,14 @@
         <div class="row">
             @component('flash_alert_message')
             @endcomponent
-            <div id="request"></div>
-            <div id="uptime"></div>
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div id="request"></div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div id="uptime"></div>
+                </div>
+            </div>
 
             <!-- /.col-lg-12 -->
         </div>
@@ -29,7 +35,7 @@
 
                 yAxis: {
                     title: {
-                        text: 'Number of Employees'
+                        text: 'Minute'
                     }
                 },
                 legend: {
@@ -45,7 +51,7 @@
                 },
 
                 series: [{
-                    name: 'Time Request',
+                    name: 'Second',
                     data: listCharts
                 }]
 
