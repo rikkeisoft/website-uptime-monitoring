@@ -101,7 +101,7 @@ class WebsitesController extends Controller
     public function statistic(string $website_id)
     {
         $listRequest = [];
-        $listDonut = [];
+        $listUpDown = [];
         $listCreated = [];
         $webSite = $this->websiteRepository->find($website_id);
         $websiteName = $webSite['name'];
@@ -123,8 +123,8 @@ class WebsitesController extends Controller
                     } else {
                         $checkSuccess++;
                     }
-                    $listDonut['fail'] = $checkFail;
-                    $listDonut['success'] = $checkSuccess;
+                    $listUpDown['fail'] = $checkFail;
+                    $listUpDown['success'] = $checkSuccess;
                 }
             }
         } catch (\Exception $e) {
@@ -133,7 +133,7 @@ class WebsitesController extends Controller
         return view('websites.statistic')
             ->with([
                 'listRequest' => $listRequest,
-                'listDonut' => $listDonut,
+                'listUpDown' => $listUpDown,
                 'listCreated' => implode('|', $listCreated),
                 'websiteName' => $websiteName
             ]);

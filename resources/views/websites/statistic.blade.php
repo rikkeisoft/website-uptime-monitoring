@@ -31,14 +31,12 @@
                 title: {
                     text: 'Time Request'
                 },
-
                 subtitle: {
                     text: websiteName
                 },
                 xAxis: {
                     categories: listCreateds
                 },
-
                 yAxis: {
                     title: {
                         text: 'Time Request(s)'
@@ -49,7 +47,6 @@
                     align: 'right',
                     verticalAlign: 'middle'
                 },
-
                 plotOptions: {
                     series: {
                         pointStart: 0,
@@ -65,18 +62,15 @@
                     headerFormat: '<b>{series.name}</b><br>',
                     pointFormat: '{point.y:.2f} s '
                 },
-
                 series: [{
                     name: 'Time Request',
                     data: listRequests
-
                 }]
-
             });
         </script>
         <script>
-            var listDonutFail = {{ $listDonut['fail'] }};
-            var listDonutSuccess = {{ $listDonut['success'] }};
+            var listDown = {{ $listUpDown['fail'] }};
+            var listUp = {{ $listUpDown['success'] }};
             var websiteName = '{{ $websiteName }}';
 
             Highcharts.chart('uptime', {
@@ -113,19 +107,17 @@
                     data: [
                         {
                             'name': 'Up',
-                            'y': listDonutSuccess,
+                            'y': listUp,
                         },
                         {
                             'name': 'Down',
-                            'y': listDonutFail,
+                            'y': listDown,
                         }
-
                     ],
                     sliced: true,
                     selected: true
                 }]
             });
-
         </script>
 
     </div>
