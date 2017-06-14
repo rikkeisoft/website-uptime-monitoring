@@ -21,9 +21,12 @@
         </div>
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
         <script>
-            var listCharts = {{ json_encode($listChart) }};
-            var websiteName = '{{ $websiteName }}'
+            var listRequests = {{ json_encode($listRequest) }};
+            var websiteName = '{{ $websiteName }}';
+            var listCreateds = '{{ $listCreated}}'.split('|');
+
             Highcharts.chart('request', {
                 title: {
                     text: 'Time Request'
@@ -32,10 +35,13 @@
                 subtitle: {
                     text: websiteName
                 },
+                xAxis: {
+                    categories: listCreateds
+                },
 
                 yAxis: {
                     title: {
-                        text: 'Minute'
+                        text: 'Time Request(m)'
                     }
                 },
                 legend: {
@@ -46,24 +52,32 @@
 
                 plotOptions: {
                     series: {
-                        pointStart: 0
+                        pointStart: 0,
+                        dataLabels: {
+                            enabled: true,
+                            x: 2,
+                            y: -10,
+                            format: '{point.y:.2f} s '
+                        }
                     }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.y:.2f} s '
                 },
 
                 series: [{
-                    name: 'Second',
-                    data: listCharts
+                    name: 'Time Request',
+                    data: listRequests
+
                 }]
 
             });
-
         </script>
         <script>
-            var listDonutFail =
-                    {{ $listDonut['fail'] }}
+            var listDonutFail = {{ $listDonut['fail'] }};
             var listDonutSuccess =
                     {{ $listDonut['success'] }}
-
             var websiteName = '{{ $websiteName }}'
             // Build the chart
             Highcharts.chart('uptime', {
@@ -88,7 +102,7 @@
                         cursor: 'pointer',
                         dataLabels: {
                             enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            format: '<b>{point.name}</b>: {point.percentage:.0f} %',
                             style: {
                                 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                             }
@@ -96,16 +110,18 @@
                     }
                 },
                 series: [{
-                    name: 'Up/Down',
                     colorByPoint: true,
-                    data: [{
-                        'name': 'Down',
-                        'y': listDonutFail,
-                    },
+                    data: [
                         {
                             'name': 'Up',
                             'y': listDonutSuccess,
-                        }],
+                        },
+                        {
+                            'name': 'Down',
+                            'y': listDonutFail,
+                        }
+
+                    ],
                     sliced: true,
                     selected: true
                 }]

@@ -100,9 +100,9 @@ class WebsitesController extends Controller
 
     public function charts(string $website_id)
     {
-        $listChart = [];
+        $listRequest = [];
         $listDonut = [];
-        $listDate = [];
+        $listCreated = [];
         $webSite = $this->websiteRepository->find($website_id);
         $websiteName = $webSite['name'];
         try {
@@ -116,8 +116,8 @@ class WebsitesController extends Controller
                 $checkSuccess = 0;
                 foreach ($listStatusWebsite as $status) {
                     $status = json_decode($status);
-                    array_push($listChart, $status->time_request);
-                    array_push($listDate, $status->created_at);
+                    array_push($listRequest, $status->time_request);
+                    array_push($listCreated, $status->created_at);
                     if ($status->success == Constants::CHECK_FAILED) {
                         $checkFail++;
                     } else {
@@ -130,11 +130,11 @@ class WebsitesController extends Controller
         } catch (\Exception $e) {
             Log::info('redis error : '.$e);
         }
-        return view('websites.charts')
+        return view('websites.statistic')
             ->with([
-                'listChart' => $listChart,
+                'listRequest' => $listRequest,
                 'listDonut' => $listDonut,
-                'listDate' => $listDate,
+                'listCreated' => implode('|', $listCreated),
                 'websiteName' => $websiteName
             ]);
     }
