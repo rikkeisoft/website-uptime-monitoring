@@ -26,7 +26,7 @@
             var websiteName = '{{ $websiteName }}'
             Highcharts.chart('request', {
                 title: {
-                    text: 'Request Time'
+                    text: 'Time Request'
                 },
 
                 subtitle: {
