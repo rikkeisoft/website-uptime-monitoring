@@ -11,6 +11,8 @@ use App\Repositories\MonitorRepository;
 use Illuminate\Http\Request;
 use App\Repositories\WebsiteRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 class WebsitesController extends Controller
 {
@@ -27,7 +29,7 @@ class WebsitesController extends Controller
         MonitorRepository $monitorRepository,
         AlertGroupsRepository $alertGroupsRepository
     ) {
-
+    
         $this->middleware('auth');
         $this->websiteRepository = $websiteRepository;
         $this->monitorRepository = $monitorRepository;
@@ -93,6 +95,47 @@ class WebsitesController extends Controller
                 'listSensitivitys' => Website::LIST_SENSITIVITYS,
                 'listStatus' => Website::LIST_STATUS,
                 'listAlertGroup' => $listAlertGroup
+            ]);
+    }
+
+    public function statistic(string $website_id)
+    {
+        $listRequest = [];
+        $listUpDown = [];
+        $listCreated = [];
+        $webSite = $this->websiteRepository->find($website_id);
+        $websiteName = $webSite['name'];
+        try {
+            $key = "statistic_{$website_id}";
+            $redis = Redis::connection();
+            $listLength = $redis->llen($key);
+            //Get list status website
+            $listStatusWebsite = $redis->lrange($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+            if (!empty($listStatusWebsite)) {
+                $checkFail = 0;
+                $checkSuccess = 0;
+                foreach ($listStatusWebsite as $status) {
+                    $status = json_decode($status);
+                    array_push($listRequest, $status->time_request);
+                    array_push($listCreated, $status->created_at);
+                    if ($status->success == Constants::CHECK_FAILED) {
+                        $checkFail++;
+                    } else {
+                        $checkSuccess++;
+                    }
+                    $listUpDown['fail'] = $checkFail;
+                    $listUpDown['success'] = $checkSuccess;
+                }
+            }
+        } catch (\Exception $e) {
+            Log::info('redis error : '.$e);
+        }
+        return view('websites.statistic')
+            ->with([
+                'listRequest' => $listRequest,
+                'listUpDown' => $listUpDown,
+                'listCreated' => implode('|', $listCreated),
+                'websiteName' => $websiteName
             ]);
     }
 
