@@ -98,7 +98,7 @@ class WebsitesController extends Controller
             ]);
     }
 
-    public function charts(string $website_id)
+    public function statistic(string $website_id)
     {
         $listRequest = [];
         $listDonut = [];

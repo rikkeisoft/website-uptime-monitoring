@@ -41,7 +41,7 @@
 
                 yAxis: {
                     title: {
-                        text: 'Time Request(m)'
+                        text: 'Time Request(s)'
                     }
                 },
                 legend: {
@@ -76,10 +76,9 @@
         </script>
         <script>
             var listDonutFail = {{ $listDonut['fail'] }};
-            var listDonutSuccess =
-                    {{ $listDonut['success'] }}
-            var websiteName = '{{ $websiteName }}'
-            // Build the chart
+            var listDonutSuccess = {{ $listDonut['success'] }};
+            var websiteName = '{{ $websiteName }}';
+
             Highcharts.chart('uptime', {
                 chart: {
                     plotBackgroundColor: null,

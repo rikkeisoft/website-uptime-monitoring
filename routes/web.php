@@ -37,8 +37,8 @@ Route::resource('websites', 'WebsitesController');
 Route::delete('/websites/destroy', 'WebsitesController@destroy')->name('websites.destroy');
 //router change status website
 Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
-//Router detail charts website
-Route::get('/websites/{website_id}/statistics', 'WebsitesController@charts')->name('websites.charts');
+//Router detail statistic website
+Route::get('/websites/{website_id}/statistics', 'WebsitesController@statistic')->name('websites.charts');
 
 //Route for alert method of a group
 Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
