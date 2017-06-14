@@ -14,12 +14,12 @@ class StatisticsService
         $alertGroups = AlertGroup::count();
         $websites = Website::count();
         $upWebsites = Website::where('status', Website::STATUS_ENABLED)->count();
-        
+
         return [
             'alert_methods' => $alertMethods,
             'alert_groups' => $alertGroups,
             'websites' => $websites,
-            'up_websites' => $upWebsites
+            'up_websites' => $upWebsites,
         ];
     }
 }

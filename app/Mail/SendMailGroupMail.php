@@ -13,14 +13,14 @@ class SendMailGroupMail extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * @var User
+     * @var array
      */
     protected $data;
 
     /**
-     * @param User $user
+     * @param array
      */
-    public function __construct($data)
+    public function __construct(array $data)
     {
         $this->data = $data;
         $this->onQueue('email');
@@ -38,7 +38,7 @@ class SendMailGroupMail extends Mailable implements ShouldQueue
             ->view('mail-template.mail-template-send-alert', [
                 'name' => $this->data['name'],
                 'url' => $this->data['url'],
-                'result'=> $this->data['status']== Constants::CHECK_FAILED?'Down':'Up'
+                'result' => $this->data['status'] == Constants::STATUS_FAILED ? 'Down' : 'Up',
             ]);
     }
 }

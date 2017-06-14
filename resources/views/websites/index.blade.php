@@ -44,7 +44,7 @@
                                 <tr class="odd gradeX">
                                     <td><input type="checkbox" name="selectedIds[]" value="{{ $website->id }}"
                                                onclick="toggleIdCheckbox();"></td>
-                                    <td><a href="{{ route('websites.charts', [$website->id]) }}">{{ $website->name }}</a> </td>
+                                    <td><a href="{{ route('websites.statistics', [$website->id]) }}">{{ $website->name }}</a> </td>
                                     <td><a href="{{ $website->url }}" target="_blank">{{ $website->url }}</a></td>
                                     @if($website->monitor->first()->result== 0)
                                         <td>
@@ -73,7 +73,7 @@
                             </tbody>
                         </table>
                         {!! $listWebsites->render() !!}
-                        <form id="checkEnableDisable" method="post" action="{{ route('setStatusWebsite') }}">
+                        <form id="checkEnableDisable" method="post" action="{{ route('websites.toggle_status') }}">
                             <input id="checkEnableDisableID" name="id" type="hidden">
                             <input id="checkEnableDisableStatus" name="status" type="hidden">
                             {{ csrf_field() }}

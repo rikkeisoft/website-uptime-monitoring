@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
@@ -8,7 +9,9 @@ use App\Repositories\UserRepository;
 
 class RegisterController extends Controller
 {
-
+    /**
+     * @var UserRepository
+     */
     protected $userRepository;
 
     public function __construct()
@@ -24,6 +27,7 @@ class RegisterController extends Controller
 
     /**
      * @param RegistrationRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
     public function register(RegistrationRequest $request)
@@ -31,7 +35,7 @@ class RegisterController extends Controller
         $formData = $request->input();
         $result = $this->userRepository->createUser($formData);
         if ($result === false) {
-            return 'Error'; // Redirect to error page
+            return 'Error';
         }
 
         return redirect('/login');
@@ -39,6 +43,7 @@ class RegisterController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function activate(Request $request)
@@ -51,6 +56,7 @@ class RegisterController extends Controller
         } else {
             $request->session()->flash('alert-error', 'Account does not exist or not activate.Please try again');
         }
+
         return redirect('/login');
     }
 }

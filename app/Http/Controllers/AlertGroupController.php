@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\AlertGroupsRepository;
 use Auth;
-use App\Http\Requests\AlertGroupRequest;
 use Illuminate\Http\Request;
+use App\Repositories\AlertGroupsRepository;
+use App\Http\Requests\AlertGroupRequest;
 
 class AlertGroupController extends Controller
 {
@@ -25,13 +25,14 @@ class AlertGroupController extends Controller
     public function index()
     {
         $alertGroups = $this->alertGroupsRepository->all();
+
         return view('alert-group.index')->with('alertGroups', $alertGroups);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string $id
+     * @param string $id
      *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
@@ -41,13 +42,16 @@ class AlertGroupController extends Controller
         if (empty($alertGroup)) {
             abort(404);
         }
+
         return view('alert-group.edit')->with('alertGroup', $alertGroup);
     }
 
     /**
      * Update the specified resource in storage.
+     *
      * @param \App\Http\Requests\AlertGroupRequest $request
-     * @param string $id
+     * @param string                               $id
+     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function update(AlertGroupRequest $request, string $id)
@@ -55,7 +59,8 @@ class AlertGroupController extends Controller
         $data = $request->only('name');
         $alertGroup = $this->alertGroupsRepository->update($data, $id);
         if ($alertGroup) {
-            $request->session()->flash('alert-success', 'Update  Successfully');
+            $request->session()->flash('alert-success', 'Update Successfully');
+
             return redirect('/alert-group');
         }
         $request->session()->flash('alert-error', 'Update Alert Group Failed');
@@ -63,6 +68,7 @@ class AlertGroupController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
@@ -72,7 +78,9 @@ class AlertGroupController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param  \App\Http\Requests\AlertGroupRequest $request
+     *
+     * @param \App\Http\Requests\AlertGroupRequest $request
+     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(AlertGroupRequest $request)
@@ -82,6 +90,7 @@ class AlertGroupController extends Controller
         $created = $this->alertGroupsRepository->create($data);
         if ($created) {
             $request->session()->flash('alert-success', 'Add Alert Group Successfully');
+
             return redirect('/alert-group');
         }
         $request->session()->flash('alert-error', 'Add Alert Group Failed');
@@ -89,7 +98,9 @@ class AlertGroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param  \Illuminate\Http\Request $request
+     *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
@@ -99,6 +110,7 @@ class AlertGroupController extends Controller
         $numDeleted = $this->alertGroupsRepository->delete($selectedIds);
         if ($numDeleted > 0) {
             $request->session()->flash('alert-success', 'Delete Alert Group Successfully');
+
             return redirect('/alert-group');
         }
         $request->session()->flash('alert-error', 'Delete Alert Group Failed');

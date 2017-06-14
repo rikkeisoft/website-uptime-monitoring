@@ -6,12 +6,11 @@ use App\Services\StatisticsService;
 
 class HomeController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
-  
+
     /**
      * Show the application dashboard.
      *
@@ -21,8 +20,8 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    
-     /**
+
+    /**
      * Show the alert group in dashboard.
      */
     public function showStatistics()
@@ -33,7 +32,7 @@ class HomeController extends Controller
              'alert_groups' => $result['alert_groups'],
              'alert_methods' => $result['alert_methods'],
              'websites' => $result['websites'],
-             'up_websites' => $result['up_websites']
+             'up_websites' => $result['up_websites'],
         ]);
     }
 }

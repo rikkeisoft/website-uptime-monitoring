@@ -1,21 +1,21 @@
 <?php
+
 namespace App\Repositories;
 
 use Log;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Events\UserCreated;
-use Mockery\Exception;
 
 class UserRepository
 {
-
     /**
-     * Create a new  user
+     * Create a new  user.
      *
-     * @param type $data
+     * @param type  $data
+     * @param mixed $user
      *
-     * @return boolean
+     * @return bool
      */
     public function createUser($user = [])
     {
@@ -30,17 +30,18 @@ class UserRepository
                 'password' => bcrypt($user['password']),
                 'status' => 0,
                 'access_token' => Str::random(60),
-                'remember_token' => Str::random(60)
+                'remember_token' => Str::random(60),
             ];
             $data = new User();
             $data->fill($user);
             $createdUser = $data->saveOrFail();
             // Get access_token, Event send mail
             event(new UserCreated($user));
-            
+
             return $createdUser;
-        } catch (Exception $ex) {
-            Log::error($ex->getMessage());
+        } catch (\Exception $e) {
+            Log::error('Exception: '.$e->getMessage());
+
             return false;
         }
     }
@@ -64,6 +65,7 @@ class UserRepository
     /**
      * @param array $data
      * @param $id
+     *
      * @return bool
      */
     public function changePassword(array $data, $id)
@@ -75,9 +77,11 @@ class UserRepository
             $user = User::find($id);
             $user->password = bcrypt($data['password']);
             $updatePass = $user->saveOrFail();
+
             return $updatePass;
-        } catch (Exception $ex) {
-            Log::error($ex->getMessage());
+        } catch (\Exception $e) {
+            Log::error('Exception: '.$e->getMessage());
+
             return false;
         }
     }

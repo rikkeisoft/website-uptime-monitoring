@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Contracts\Constants;
@@ -9,7 +10,7 @@ use App\Models\AlertMethodAlertGroup;
 class AlertMethodAlertGroupRepository extends BaseRepository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return class
      */
@@ -17,9 +18,12 @@ class AlertMethodAlertGroupRepository extends BaseRepository
     {
         return AlertMethodAlertGroup::class;
     }
+
     /**
-     * get lisst email alert group
+     * get lisst email alert group.
+     *
      * @param string $alertGroupId
+     *
      * @return object
      */
     public function getListEmail(string $alertGroupId)
@@ -39,12 +43,13 @@ class AlertMethodAlertGroupRepository extends BaseRepository
 
     /**
      * @param string $user_id
+     *
      * @return array
      */
     public function getAllAlertMethodAlertGroupByUserId($user_id)
     {
         return $this->model->whereHas('alertGroup', function ($q) use ($user_id) {
             $q->where('user_id', $user_id);
-        })->paginate(Constants::LIMIT_PAGINATE);
+        })->paginate(Constants::DEFAULT_PER_PAGE);
     }
 }

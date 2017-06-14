@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
+use Auth;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
-use Auth;
 use App\Http\Requests\Auth\ProfileRequest;
-use Hash;
 
 class ProfileController extends Controller
 {
-
     private $userRepository;
 
     public function __construct(UserRepository $userRepository)
@@ -21,7 +20,9 @@ class ProfileController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @param $id
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
@@ -29,10 +30,11 @@ class ProfileController extends Controller
         return view('auth.user-profile');
     }
 
-
     /**
-     * Changer password
+     * Changer password.
+     *
      * @param ProfileRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ProfileRequest $request)
@@ -46,10 +48,12 @@ class ProfileController extends Controller
             $user = $this->userRepository->changePassword($data, $id);
             if ($user) {
                 $request->session()->flash('alert-success', 'Change Password Successfully');
+
                 return redirect('/user-profile');
             }
         }
         $request->session()->flash('alert-error', 'Change Password Failed');
+
         return redirect('/user-profile');
     }
 }

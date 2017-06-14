@@ -3,26 +3,21 @@
 namespace App\Listeners;
 
 use App\Events\SendAlertToGroup;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Mail;
 
 class SendAlertToGroupListener
 {
     /**
      * Create the event listener.
-     *
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * Handle the event.
      *
-     * @param  SendAlertToGroup $event
-     * @return void
+     * @param SendAlertToGroup $event
      */
     public function handle(SendAlertToGroup $event)
     {
@@ -33,7 +28,7 @@ class SendAlertToGroupListener
             'name' => $data['name'],
             'url' => $data['url'],
             'result' => $data['result'],
-            'date' => $data['date']
+            'date' => $data['date'],
         ], function ($message) use ($data, $subject) {
             $message->to($data['email'])->subject($subject);
         });

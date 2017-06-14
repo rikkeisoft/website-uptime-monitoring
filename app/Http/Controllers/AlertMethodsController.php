@@ -1,20 +1,19 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Contracts\Constants;
 use App\Models\AlertMethod;
 use App\Repositories\AlertGroupsRepository;
 use App\Repositories\AlertMethodAlertGroupRepository;
-use App\Repositories\MonitorRepository;
-use Illuminate\Http\Request;
+use App\Repositories\AlertMethodsRepository;
 use App\Http\Requests\CreateAlertMethodsRequest;
 use App\Http\Requests\UpdateAlertMethodsRequest;
-use App\Repositories\AlertMethodsRepository;
-use Illuminate\Support\Facades\Auth;
 
 class AlertMethodsController extends Controller
 {
-
     protected $alertMethodsRepository;
 
     protected $alertMethodAlertGroupRepository;
@@ -23,15 +22,12 @@ class AlertMethodsController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct(
         AlertMethodsRepository $alertMethodsRepository,
         AlertMethodAlertGroupRepository $alertMethodAlertGroupRepository,
         AlertGroupsRepository $alertGroupsRepository
     ) {
-
         $this->middleware('auth');
         $this->alertMethodsRepository = $alertMethodsRepository;
         $this->alertMethodAlertGroupRepository = $alertMethodAlertGroupRepository;
@@ -39,31 +35,36 @@ class AlertMethodsController extends Controller
     }
 
     /**
-     * show list alert method
+     * show list alert method.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
         $listTypes = AlertMethod::LIST_TYPE_ALERT_METHOD;
-        $listAlertMethods = $this->alertMethodsRepository->paginate(Constants::LIMIT_PAGINATE);
+        $listAlertMethods = $this->alertMethodsRepository->paginate(Constants::DEFAULT_PER_PAGE);
 
         return view('alert-methods.index', compact('listAlertMethods', 'listTypes'));
     }
 
     /**
-     * show view add alert method
+     * show view add alert method.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
         $listAlertGroup = $this->alertGroupsRepository->all();
+
         return view('alert-methods.create', compact('listType', 'listAlertGroup'));
     }
 
     /**
-     * view update alert methods
+     * view update alert methods.
+     *
      * @param string $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(string $id)
@@ -75,6 +76,7 @@ class AlertMethodsController extends Controller
         }
         $listAlertGroup = $this->alertGroupsRepository->all();
         $listType = AlertMethod::LIST_TYPE_ALERT_METHOD;
+
         return view('alert-methods.edit', compact('listType', 'alertMethod', 'listAlertGroup'));
     }
 
@@ -83,8 +85,10 @@ class AlertMethodsController extends Controller
     }
 
     /**
-     * api add form add alert method
+     * api add form add alert method.
+     *
      * @param CreateAlertMethodsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateAlertMethodsRequest $request)
@@ -103,17 +107,20 @@ class AlertMethodsController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'Add Alert Method Of Group Failed');
             }
+
             return redirect()->route('alert-methods.index');
-        } else {
-            //message alsert error
-            $request->session()->flash('alert-error', 'Add Alert Method Failed');
-            return redirect()->back();
         }
+        //message alsert error
+        $request->session()->flash('alert-error', 'Add Alert Method Failed');
+
+        return redirect()->back();
     }
 
     /**
-     * update alert methods post
+     * update alert methods post.
+     *
      * @param UpdateAlertMethodsRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateAlertMethodsRequest $request, string $id)
@@ -132,17 +139,20 @@ class AlertMethodsController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'update Alert Method Alert Group Failed');
             }
+
             return redirect()->route('alert-methods.index');
-        } else {
-            //message alsert error
-            $request->session()->flash('alert-error', 'Update Alert Method Failed');
-            return redirect()->back();
         }
+        //message alsert error
+        $request->session()->flash('alert-error', 'Update Alert Method Failed');
+
+        return redirect()->back();
     }
 
     /**
-     * delete alert method post
+     * delete alert method post.
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
@@ -152,6 +162,7 @@ class AlertMethodsController extends Controller
 
         if (empty($selectedIds)) {
             $request->session()->flash('alert-error', 'Add Error');
+
             return redirect()->back();
         }
         $deleteAlertMethod = $this->alertMethodsRepository->delete($selectedIds);
@@ -159,11 +170,12 @@ class AlertMethodsController extends Controller
         if ($deleteAlertMethod) {
             //messgae alert success
             $request->session()->flash('alert-success', 'Deleted Alert Method Successfully');
+
             return redirect()->route('alert-methods.index');
-        } else {
-            //message alsert error
-            $request->session()->flash('alert-error', 'Deleted Alert Method Failed');
-            return redirect()->back();
         }
+        //message alsert error
+        $request->session()->flash('alert-error', 'Deleted Alert Method Failed');
+
+        return redirect()->back();
     }
 }

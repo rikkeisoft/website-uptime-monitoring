@@ -16,47 +16,31 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route administrator
 Route::get('/dashboard','HomeController@showStatistics');
 
-//Route active user
 Route::get('/activate', 'Auth\RegisterController@activate');
-
-//Route error activate
-Route::get('/activate-error',function(){
+Route::get('/activate-error', function () {
     return view('template-activate-auth.active-error');
 });
-
-Route::get('/activate/successfully',function(){
+Route::get('/activate/successfully', function () {
     return view('template-activate-auth.active');
 });
-//Resource router website
+
+
 Route::resource('websites', 'WebsitesController');
-
-//Router delete list website
 Route::delete('/websites/destroy', 'WebsitesController@destroy')->name('websites.destroy');
-//router change status website
-Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('setStatusWebsite');
-//Router detail statistic website
-Route::get('/websites/{website_id}/statistics', 'WebsitesController@statistic')->name('websites.charts');
+Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('websites.toggle_status');
+Route::get('/websites/{website_id}/statistics', 'WebsitesController@statistics')->name('websites.statistics');
 
-//Route for alert method of a group
-Route::resource('/alert-method-of-group','AlertMethodAlertGroupController');
-
-//Route for deleted alert method of a group
-Route::delete('/alert-method-of-group/destroy','AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');
-
-// Routes for Alert Group
 Route::resource('/alert-group','AlertGroupController');
-
-// Route for mass delete Alert Group
 Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
 
-//Resource router alert method
 Route::resource('alert-methods', 'AlertMethodsController');
-
 Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');
 
-Route::get('/user-profile','ProfileController@index')->name('user-profile.index');
-Route::put('/user-profile','ProfileController@update')->name('user-profile.update');
+Route::resource('/alert-method-of-group', 'AlertMethodAlertGroupController');
+Route::delete('/alert-method-of-group/destroy', 'AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');
+
+Route::get('/user-profile', 'ProfileController@index')->name('user-profile.index');
+Route::put('/user-profile', 'ProfileController@update')->name('user-profile.update');
 

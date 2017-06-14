@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 use App\Contracts\Constants;
 use App\Http\Requests\AddWebsitesRequest;
 use App\Http\Requests\UpdateWebsitesRequest;
 use App\Models\Website;
 use App\Repositories\AlertGroupsRepository;
 use App\Repositories\MonitorRepository;
-use Illuminate\Http\Request;
 use App\Repositories\WebsiteRepository;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redis;
 
 class WebsitesController extends Controller
 {
-
     protected $websiteRepository;
     protected $monitorRepository;
     protected $alertGroupsRepository;
+
     /**
      * WebsitesController constructor.
+     *
      * @param WebsiteRepository $websiteRepository
      */
     public function __construct(
@@ -29,7 +30,6 @@ class WebsitesController extends Controller
         MonitorRepository $monitorRepository,
         AlertGroupsRepository $alertGroupsRepository
     ) {
-    
         $this->middleware('auth');
         $this->websiteRepository = $websiteRepository;
         $this->monitorRepository = $monitorRepository;
@@ -37,13 +37,15 @@ class WebsitesController extends Controller
     }
 
     /**
-     * view list website
+     * view list website.
+     *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        $listWebsite = $this->websiteRepository->paginate(Constants::LIMIT_PAGINATE);
+        $listWebsite = $this->websiteRepository->paginate(Constants::DEFAULT_PER_PAGE);
         $listAlertGroup = $this->alertGroupsRepository->all();
+
         return view('websites.index')
             ->with([
                 'listWebsites' => $listWebsite,
@@ -51,23 +53,25 @@ class WebsitesController extends Controller
                 'listResults' => Website::LIST_RESULTS,
                 'listSensitivitys' => Website::LIST_SENSITIVITYS,
                 'listStatus' => Website::LIST_STATUS,
-                'listAlertGroup' => $listAlertGroup
+                'listAlertGroup' => $listAlertGroup,
             ]);
     }
 
     /**
-     * view add website
+     * view add website.
+     *
      * @return \Illuminate\View\View
      */
     public function create()
     {
         $listAlertGroup = $this->alertGroupsRepository->all();
+
         return view('websites.create')
             ->with([
                 'listFrequencys' => Website::LIST_FREQUENCYS,
                 'listSensitivitys' => Website::LIST_SENSITIVITYS,
                 'listStatus' => Website::LIST_STATUS,
-                'listAlertGroup' => $listAlertGroup
+                'listAlertGroup' => $listAlertGroup,
             ]);
     }
 
@@ -76,8 +80,10 @@ class WebsitesController extends Controller
     }
 
     /**
-     * view update website
+     * view update website.
+     *
      * @param string $id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(string $id)
@@ -94,11 +100,11 @@ class WebsitesController extends Controller
                 'listFrequencys' => Website::LIST_FREQUENCYS,
                 'listSensitivitys' => Website::LIST_SENSITIVITYS,
                 'listStatus' => Website::LIST_STATUS,
-                'listAlertGroup' => $listAlertGroup
+                'listAlertGroup' => $listAlertGroup,
             ]);
     }
 
-    public function statistic(string $website_id)
+    public function statistics(string $website_id)
     {
         $listRequest = [];
         $listUpDown = [];
@@ -106,11 +112,11 @@ class WebsitesController extends Controller
         $webSite = $this->websiteRepository->find($website_id);
         $websiteName = $webSite['name'];
         try {
-            $key = "statistic_{$website_id}";
+            $key = "statistics_{$website_id}";
             $redis = Redis::connection();
             $listLength = $redis->llen($key);
             //Get list status website
-            $listStatusWebsite = $redis->lrange($key, $listLength - Constants::LIMIT_LIST_REDIS, $listLength);
+            $listStatusWebsite = $redis->lrange($key, $listLength - Constants::NUMBER_OF_MILESTONES, $listLength);
             if (!empty($listStatusWebsite)) {
                 $checkFail = 0;
                 $checkSuccess = 0;
@@ -118,30 +124,33 @@ class WebsitesController extends Controller
                     $status = json_decode($status);
                     array_push($listRequest, $status->time_request);
                     array_push($listCreated, $status->created_at);
-                    if ($status->success == Constants::CHECK_FAILED) {
-                        $checkFail++;
+                    if ($status->success == Constants::STATUS_FAILED) {
+                        ++$checkFail;
                     } else {
-                        $checkSuccess++;
+                        ++$checkSuccess;
                     }
                     $listUpDown['fail'] = $checkFail;
                     $listUpDown['success'] = $checkSuccess;
                 }
             }
         } catch (\Exception $e) {
-            Log::info('redis error : '.$e);
+            Log::error('Exception: '.$e->getMessage());
         }
-        return view('websites.statistic')
+
+        return view('websites.statistics')
             ->with([
                 'listRequest' => $listRequest,
                 'listUpDown' => $listUpDown,
                 'listCreated' => implode('|', $listCreated),
-                'websiteName' => $websiteName
+                'websiteName' => $websiteName,
             ]);
     }
 
     /**
-     * add new website post
+     * add new website post.
+     *
      * @param AddWebsitesRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(AddWebsitesRequest $request)
@@ -154,7 +163,7 @@ class WebsitesController extends Controller
             //create monitor with website
             $dataMonitor = $request->only('alert_group_id');
             $dataMonitor['website_id'] = $createWebsite->id;
-            $dataMonitor['result'] = Constants::CHECK_PENDING;
+            $dataMonitor['result'] = Constants::STATUS_PENDING;
             $createMonitor = $this->monitorRepository->create($dataMonitor);
 
             if ($createMonitor) {
@@ -162,18 +171,21 @@ class WebsitesController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'Add Monitor Websites Failed');
             }
+
             return redirect()->route('websites.index');
-        } else {
-            //message alsert error
-            $request->session()->flash('alert-error', 'Add Websites Failed');
-            return redirect()->back();
         }
+        //message alsert error
+        $request->session()->flash('alert-error', 'Add Websites Failed');
+
+        return redirect()->back();
     }
 
     /**
-     * update website post
+     * update website post.
+     *
      * @param UpdateWebsitesRequest $request
-     * @param string $id
+     * @param string                $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateWebsitesRequest $request, string $id)
@@ -192,26 +204,30 @@ class WebsitesController extends Controller
             } else {
                 $request->session()->flash('alert-error', 'Update Monitor Websites Failed');
             }
+
             return redirect()->route('websites.index');
-        } else {
-            //message alsert error
-            $request->session()->flash('alert-error', 'Update Websites Failed');
-            return redirect()->back();
         }
+        //message alsert error
+        $request->session()->flash('alert-error', 'Update Websites Failed');
+
+        return redirect()->back();
     }
 
     /**
-     * delete website post
+     * delete website post.
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
     {
         $selectedIds = $request->input('selectedIds');
-        $selectedIds = explode(",", $selectedIds);
+        $selectedIds = explode(',', $selectedIds);
 
         if (empty($selectedIds)) {
             $request->session()->flash('alert-error', 'Delete Websites Failed');
+
             return redirect()->back();
         }
         $deleteWebsite = $this->websiteRepository->delete($selectedIds);
@@ -219,17 +235,20 @@ class WebsitesController extends Controller
         if ($deleteWebsite) {
             //messgae alert success
             $request->session()->flash('alert-success', 'Delete Websites Successfully');
+
             return redirect()->route('websites.index');
-        } else {
-            //message alsert error
-            $request->session()->flash('alert-error', 'Delete Websites Failed');
-            return redirect()->back();
         }
+        //message alsert error
+        $request->session()->flash('alert-error', 'Delete Websites Failed');
+
+        return redirect()->back();
     }
 
     /**
-     * set enable or disable website
+     * set enable or disable website.
+     *
      * @param Request $request
+     *
      * @return json
      */
     public function setEnableDisable(Request $request)
@@ -237,7 +256,7 @@ class WebsitesController extends Controller
         $status = $request->input('status');
         $status == Website::STATUS_ENABLED ? $check = Website::STATUS_DISABLED : $check = Website::STATUS_ENABLED;
         $data = [
-            'status' => $check
+            'status' => $check,
         ];
 
         $id = $request->input('id');
@@ -245,8 +264,8 @@ class WebsitesController extends Controller
 
         if (isset($update->id)) {
             return json_encode(['success' => true]);
-        } else {
-            return json_encode(['success' => false]);
         }
+
+        return json_encode(['success' => false]);
     }
 }

@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Models;
 
-use App\Scopes\UserIdScope;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Scopes\UserIdScope;
 
 class Website extends BaseModel
 {
@@ -17,8 +18,8 @@ class Website extends BaseModel
     ];
 
     const LIST_RESULTS = [
-        '1'=>'Success',
-        '2'=>'Failed'
+        '1' => 'Success',
+        '2' => 'Failed',
     ];
 
     const LIST_FREQUENCYS = [
@@ -38,23 +39,20 @@ class Website extends BaseModel
 
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
     protected static function boot()
     {
         parent::boot();
-
         static::addGlobalScope(new UserIdScope());
     }
-    
+
     protected $fillable = [
         'user_id',
         'url',
         'name',
         'sensitivity',
         'frequency',
-        'status'
+        'status',
     ];
 
     public function user()

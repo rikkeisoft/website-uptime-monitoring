@@ -2,13 +2,13 @@
 
 namespace App\Console;
 
-use App\Contracts\DBTable;
-use DB;
-use App\Console\Commands\CheckWebsite;
-use App\Repositories\WebsiteRepository;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Schema;
+use App\Contracts\DBTable;
+use App\Console\Commands\CheckWebsite;
+use App\Models\Website;
+use App\Repositories\WebsiteRepository;
 
 class Kernel extends ConsoleKernel
 {
@@ -18,38 +18,33 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
     ];
-
-    protected $website;
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      */
     protected function schedule(Schedule $schedule)
     {
-
         if (Schema::hasTable(DBTable::WEBSITE)) {
-            //get website from database
-            $this->website = $this->getAllWebsite();
+            $websites = $this->getAllWebsite();
 
-            foreach ($this->website as $website) {
+            foreach ($websites as $website) {
                 $schedule->call(function () use ($website) {
                     new CheckWebsite($website);
-                })->cron('*/'.$website->frequency.' * * * * *');
+                })->cron("*/{$website->frequency} * * * * *");
             }
         }
     }
 
     /**
-     * get all website enable
+     * Retrieve all enabled Websites.
+     *
      * @return array
      */
-    public function getAllWebsite()
+    public function getEnabledWebsites()
     {
-        return app(WebsiteRepository::class)->findAllBy('status', 1);
+        return app(WebsiteRepository::class)->findAllBy('status', Website::STATUS_ENABLED);
     }
 }

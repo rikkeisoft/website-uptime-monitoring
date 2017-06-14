@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-
     use Notifiable, UuidModelTrait, SoftDeletes;
 
     public $incrementing = false;
@@ -20,10 +19,10 @@ class User extends Authenticatable
         'status',
         'access_token',
         'remember_token',
-        'password'
+        'password',
     ];
 
     protected $hidden = [
-        'password'
+        'password',
     ];
 }

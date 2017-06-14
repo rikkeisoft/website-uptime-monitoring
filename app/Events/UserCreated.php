@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
@@ -8,7 +9,6 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 
 class UserCreated
 {
-
     use InteractsWithSockets,
         SerializesModels;
 
@@ -17,7 +17,7 @@ class UserCreated
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param mixed $user
      */
     public function __construct($user)
     {

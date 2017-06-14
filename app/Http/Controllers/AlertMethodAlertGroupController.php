@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\AlertMethodAlertGroupRepository;
 use App\Repositories\AlertGroupsRepository;
 use App\Repositories\AlertMethodsRepository;
-use Illuminate\Support\Facades\Auth;
 
 class AlertMethodAlertGroupController extends Controller
 {
@@ -16,9 +16,10 @@ class AlertMethodAlertGroupController extends Controller
 
     /**
      * AlertMethodAlertGroupController constructor.
+     *
      * @param AlertMethodAlertGroupRepository $alertMethodAlertGroupRepository
-     * @param AlertGroupsRepository $alertGroupsRepository
-     * @param AlertMethodsRepository $alertMethodsRepository
+     * @param AlertGroupsRepository           $alertGroupsRepository
+     * @param AlertMethodsRepository          $alertMethodsRepository
      */
     public function __construct(
         AlertMethodAlertGroupRepository $alertMethodAlertGroupRepository,
@@ -33,32 +34,38 @@ class AlertMethodAlertGroupController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
         $user_id = Auth::user()->id;
         $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->getAllAlertMethodAlertGroupByUserId($user_id);
+
         return view('/alert-method-of-group.index')->with('alertMethodOfGroup', $alertMethodOfGroup);
     }
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function create()
     {
         $alertGroup = $this->alertGroupsRepository->all();
         $alertMethod = $this->alertMethodsRepository->all();
+
         return view('alert-method-of-group.create')->with([
             'alertGroup' => $alertGroup,
-            'alertMethod' => $alertMethod
+            'alertMethod' => $alertMethod,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
@@ -67,6 +74,7 @@ class AlertMethodAlertGroupController extends Controller
         $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->create($data);
         if ($alertMethodOfGroup) {
             $request->session()->flash('alert-success', 'Add Alert Method Of Group Successfully');
+
             return redirect('/alert-method-of-group');
         }
         $request->session()->flash('alert-error', 'Add Alert Method Of Group Failed');
@@ -74,7 +82,9 @@ class AlertMethodAlertGroupController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @param string $id
+     *
      * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function edit(string $id)
@@ -85,17 +95,20 @@ class AlertMethodAlertGroupController extends Controller
         if (empty($alertMethodOfGroup)) {
             abort(404);
         }
+
         return view('/alert-method-of-group.edit')->with([
             'alertMethodOfGroup' => $alertMethodOfGroup,
             'alertGroup' => $alertGroup,
-            'alertMethod' => $alertMethod
+            'alertMethod' => $alertMethod,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
      * @param Request $request
-     * @param string $id
+     * @param string  $id
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, string $id)
@@ -111,6 +124,7 @@ class AlertMethodAlertGroupController extends Controller
         $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->update($data, $id);
         if ($alertMethodOfGroup) {
             $request->session()->flash('alert-success', 'Update Alert Method Of Group Successfully');
+
             return redirect('/alert-method-of-group');
         }
         $request->session()->flash('alert-error', 'Update Alert Method Of Group Failed');
@@ -118,7 +132,9 @@ class AlertMethodAlertGroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Request $request)
@@ -128,6 +144,7 @@ class AlertMethodAlertGroupController extends Controller
         $alertMethodOfGroup = $this->alertMethodAlertGroupRepository->delete($selectedIds);
         if ($alertMethodOfGroup > 0) {
             $request->session()->flash('alert-success', 'Delete Alert Method Of Group Successfully');
+
             return redirect('/alert-method-of-group');
         }
         $request->session()->flash('alert-error', 'Delete Alert Method Of Group Failed');

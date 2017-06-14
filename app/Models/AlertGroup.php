@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use App\Scopes\UserIdScope;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Scopes\UserIdScope;
 
 class AlertGroup extends BaseModel
 {
     use SoftDeletes;
+
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
     protected static function boot()
     {
@@ -22,7 +21,7 @@ class AlertGroup extends BaseModel
 
     protected $fillable = [
         'user_id',
-        'name'
+        'name',
     ];
 
     public function user()

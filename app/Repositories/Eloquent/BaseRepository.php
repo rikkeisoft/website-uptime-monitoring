@@ -2,13 +2,12 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Container\Container as App;
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\Contracts\RepositoryInterface;
 
 abstract class BaseRepository implements RepositoryInterface
 {
-
     /**
      * @var App
      */
@@ -21,6 +20,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     /**
      * BaseRepository constructor.
+     *
      * @param App $app
      */
     public function __construct(App $app)
@@ -30,13 +30,15 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Specify Model class name
+     * Specify Model class name.
+     *
      * @return class
      */
     abstract public function setModel();
 
     /**
-     * make model
+     * make model.
+     *
      * @return Model
      */
     public function makeModel()
@@ -47,8 +49,10 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Retrieve all data of repository
+     * Retrieve all data of repository.
+     *
      * @param array $columns
+     *
      * @return array
      */
     public function all(array $columns = ['*'])
@@ -57,9 +61,11 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Retrieve all data of repository, paginated
+     * Retrieve all data of repository, paginated.
+     *
      * @param string $limit
-     * @param array $columns
+     * @param array  $columns
+     *
      * @return array
      */
     public function paginate(string $limit, $columns = ['*'])
@@ -70,9 +76,11 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Find data by id
+     * Find data by id.
+     *
      * @param string $id
-     * @param array $columns
+     * @param array  $columns
+     *
      * @return object
      */
     public function find(string $id, $columns = ['*'])
@@ -81,10 +89,12 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * find data by attribute
+     * find data by attribute.
+     *
      * @param string $attribute
      * @param string $value
-     * @param array $columns
+     * @param array  $columns
+     *
      * @return array
      */
     public function findAllBy(string $attribute, string $value, $columns = ['*'])
@@ -93,9 +103,11 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Save a new entity in repository
+     * Save a new entity in repository.
+     *
      * @param array $input
-     * @return boolean
+     *
+     * @return bool
      */
     public function create(array $input)
     {
@@ -103,9 +115,11 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Update a entity in repository by id
-     * @param array $input
+     * Update a entity in repository by id.
+     *
+     * @param array  $input
      * @param string $id
+     *
      * @return array
      */
     public function update(array $input, string $id)
@@ -118,8 +132,10 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Delete a entity in repository by id
+     * Delete a entity in repository by id.
+     *
      * @param string $id
+     *
      * @return int
      */
     public function delete($id)

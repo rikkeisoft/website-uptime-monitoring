@@ -11,7 +11,7 @@ class SendMailGroupListener
     /**
      * Handle the event.
      *
-     * @param  Registered  $event
+     * @param Registered $event
      */
     public function handle(SendMailGroup $event)
     {

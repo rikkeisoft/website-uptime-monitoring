@@ -1,10 +1,9 @@
 <?php
+
 namespace App\Contracts;
 
 /**
- * Defined tables' name
- *
- * @package App\Contracts
+ * Defined tables' name.
  */
 class DBTable
 {

@@ -13,10 +13,11 @@ class SendAlertToGroup
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $data;
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param mixed $data
      */
     public function __construct($data)
     {

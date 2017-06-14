@@ -26,7 +26,7 @@ class AddWebsitesRequest extends FormRequest
         return [
             'url' => 'required|string|url|max:255',
             'name' => 'required|string|max:255',
-            'alert_group_id' => 'required|string|max:255'
+            'alert_group_id' => 'required|string|max:255',
         ];
     }
 }

@@ -1,17 +1,16 @@
 <?php
+
 namespace App\Contracts;
 
 /**
- * Defined tables' name
- *
- * @package App\Contracts
+ * Defined tables' name.
  */
 class Constants
 {
-    const CHECK_PENDING = 0;
-    const CHECK_SUCCESS = 1;
+    const STATUS_PENDING = 0;
+    const STATUS_SUCCESS = 1;
     const CHECK_FAILED = 2;
-    const TIME_DELAY_SENSITIVITY = 10;
-    const LIMIT_PAGINATE = 20;
-    const LIMIT_LIST_REDIS = 10;
+    const DELAYED_INTERVAL = 10; // In seconds
+    const DEFAULT_PER_PAGE = 20;
+    const NUMBER_OF_MILESTONES = 10;
 }

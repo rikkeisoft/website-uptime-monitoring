@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use App\Contracts\Constants;
 
 class LoginController extends Controller
@@ -33,8 +33,6 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -43,6 +41,7 @@ class LoginController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function authenticated(Request $request)
@@ -50,13 +49,14 @@ class LoginController extends Controller
         if (Auth::attempt([
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'status' => Constants::CHECK_SUCCESS
+            'status' => Constants::STATUS_SUCCESS,
         ], $request->input('remember', false))) {
-            // Authentication passed...
             return redirect()->intended('/dashboard');
         }
+
         Auth::logout();
-        Session::put('alert-danger', 'Account does not activate.Please try again!');
+        Session::put('alert-danger', 'Your account isn\'t activated. Please check your email inbox!');
+
         return redirect('/login');
     }
 }

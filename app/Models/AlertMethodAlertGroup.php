@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Contracts\DBTable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Contracts\DBTable;
 
 class AlertMethodAlertGroup extends BaseModel
 {
@@ -13,7 +13,7 @@ class AlertMethodAlertGroup extends BaseModel
 
     protected $fillable = [
         'alert_method_id',
-        'alert_group_id'
+        'alert_group_id',
     ];
 
     public function alertGroup()
