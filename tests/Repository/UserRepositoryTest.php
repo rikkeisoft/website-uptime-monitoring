@@ -76,7 +76,7 @@ class UserRepositoryTest extends TestCase
      */
     public function testActivateUserTrue()
     {
-        factory(User::class, 5)->create();
+        factory(User::class, 1)->create();
         $token = [
             'access_token' => "D0NaNVz43YzjitVlekIU"
         ];
