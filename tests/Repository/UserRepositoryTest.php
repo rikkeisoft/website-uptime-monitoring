@@ -15,13 +15,13 @@ class UserRepositoryTest extends TestCase
 
     /**
      * Test request Repository function CreateUser empty
-//     */
-//    public function testCreateUserEmptyData()
-//    {
-//        $data = [];
-//        $result = app(UserRepository::class)->createUser($data);
-//        $this->assertFalse($result);
-//    }
+     */
+    public function testCreateUserEmptyData()
+    {
+        $data = [];
+        $result = app(UserRepository::class)->createUser($data);
+        $this->assertFalse($result);
+    }
 
     /**
      * Test request Repository function CreateUser true
@@ -45,19 +45,20 @@ class UserRepositoryTest extends TestCase
     public function testActivateUserByInvalidToken()
     {
         $token = '';
-        $result= app(UserRepository::class)->activateUser($token);
+        $result = app(UserRepository::class)->activateUser($token);
         $this->assertFalse($result);
     }
 
     /**
      * Test request Repository function Activate status false
      */
-    public function  testActivateUserByStatus()
+    public function testActivateUserByStatus()
     {
         $status = 1;
         $result = app(UserRepository::class)->activateUser($status);
         $this->assertFalse($result);
     }
+
     /**
      * Test request Repository function Activate False
      */
@@ -69,11 +70,17 @@ class UserRepositoryTest extends TestCase
         $updated = app(UserRepository::class)->activateUser($token);
         $this->assertFalse($updated);
     }
+
     /**
      * Test request Repository function Activate True
      */
     public function testActivateUserTrue()
     {
-
+        factory(User::class, 5)->create();
+        $token = [
+            'access_token' => "D0NaNVz43YzjitVlekIU"
+        ];
+        $updated = app(UserRepository::class)->activateUser($token);
+        $this->assertTrue($updated);
     }
 }
