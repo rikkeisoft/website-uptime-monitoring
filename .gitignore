@@ -14,4 +14,10 @@ bootstrap/cache/
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 
+# Text Editor and IDE
 .idea/
+.vscode/
+
+*.bak
+composer
+.php_cs.cache
