@@ -1,0 +1,22 @@
+language: php
+php:
+  - '7.0'
+sudo: false
+services:
+  - mysql
+  - redis
+before_install:
+  - mkdir -p bootstrap/cache
+  - chmod 777 -R bootstrap/cache
+  - travis_retry pecl install -f redis
+  - travis_retry composer self-update
+  - travis_retry composer global require hirak/prestissimo
+install:
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest --dev
+before_script:
+  - mysql -u root -e 'CREATE DATABASE IF NOT EXISTS wum_test;'
+  - sed -e "s/TEST_DB_DATABASE=homestead/TEST_DB_DATABASE=wum_test/g;s/TEST_DB_USERNAME=homestead/TEST_DB_USERNAME=root/g;s/TEST_DB_PASSWORD=secret/TEST_DB_PASSWORD=/g" < .env.example > .env
+script:
+  - composer phpunit
+  - composer phpcs
+
