@@ -98,15 +98,15 @@ class CheckWebsite extends Command
                 ];
             }
         } catch (ClientException $e) {
-            Log::error('Client Exception: '.$e->getMessage());
+            Log::error('Client Exception: ' . $e->getMessage());
 
             return ['success' => Constants::STATUS_FAILED, 'time_request' => 0, 'created_at' => $date];
         } catch (RequestException $e) {
-            Log::error('Request Exception: '.$e->getMessage());
+            Log::error('Request Exception: ' . $e->getMessage());
 
             return ['success' => Constants::STATUS_FAILED, 'time_request' => 0, 'created_at' => $date];
         } catch (\Exception $e) {
-            Log::error('Exception: '.$e->getMessage());
+            Log::error('Exception: ' . $e->getMessage());
 
             return ['success' => Constants::STATUS_FAILED, 'time_request' => 0, 'created_at' => $date];
         }
@@ -137,7 +137,7 @@ class CheckWebsite extends Command
                 $redis->ltrim($key, $listLength - Constants::NUMBER_OF_MILESTONES, $listLength);
             }
         } catch (\Exception $e) {
-            Log::error('Exception: '.$e->getMessage());
+            Log::error('Exception: ' . $e->getMessage());
         }
 
         // Send email if the status is changed

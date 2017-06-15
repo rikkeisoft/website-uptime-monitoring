@@ -31,12 +31,12 @@ class AlertMethodAlertGroupRepository extends BaseRepository
         return $this->model->where('alert_group_id', $alertGroupId)
             ->leftJoin(
                 DBTable::ALERT_METHOD,
-                DBTable::ALERT_METHOD_ALERT_GROUP.'.alert_method_id',
+                DBTable::ALERT_METHOD_ALERT_GROUP . '.alert_method_id',
                 '=',
-                DBTable::ALERT_METHOD.'.id'
+                DBTable::ALERT_METHOD . '.id'
             )
             ->select([
-                DBTable::ALERT_METHOD.'.email',
+                DBTable::ALERT_METHOD . '.email',
             ])
             ->get();
     }

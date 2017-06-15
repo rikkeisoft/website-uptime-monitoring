@@ -40,7 +40,7 @@ class UserRepository
 
             return $createdUser;
         } catch (\Exception $e) {
-            Log::error('Exception: '.$e->getMessage());
+            Log::error('Exception: ' . $e->getMessage());
 
             return false;
         }
@@ -80,7 +80,7 @@ class UserRepository
 
             return $updatePass;
         } catch (\Exception $e) {
-            Log::error('Exception: '.$e->getMessage());
+            Log::error('Exception: ' . $e->getMessage());
 
             return false;
         }

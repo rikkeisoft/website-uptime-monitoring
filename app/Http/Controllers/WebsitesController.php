@@ -134,7 +134,7 @@ class WebsitesController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            Log::error('Exception: '.$e->getMessage());
+            Log::error('Exception: ' . $e->getMessage());
         }
 
         return view('websites.statistics')
