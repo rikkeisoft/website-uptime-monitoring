@@ -22,11 +22,9 @@ class CreateAlertMethodsTable extends Migration
                 $table->char('user_id', 36);
                 $table->string('name', 255);
                 $table->tinyInteger('type')->comment('1: Email, 2: SMS, 3: Webhook');
-                $table->string('email', 255)->nullable()->change();
-                ;
-                $table->string('phone_number', 255)->nullable()->change();
-                ;
-                $table->string('webhook', 255)->nullable()->change();
+                $table->string('email', 255);
+                $table->string('phone_number', 255);
+                $table->string('webhook', 255);
                 $table->softDeletes();
                 $table->timestamps();
                 $table->primary('id');
