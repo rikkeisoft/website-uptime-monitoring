@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         if (Schema::hasTable(DBTable::WEBSITE)) {
-            $websites = $this->getAllWebsite();
+            $websites = $this->getEnabledWebsites();
 
             foreach ($websites as $website) {
                 $schedule->call(function () use ($website) {
