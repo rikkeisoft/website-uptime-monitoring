@@ -80,4 +80,6 @@
 
     <exclude-pattern>*.blade.php</exclude-pattern>
     <exclude-pattern>bootstrap/cache</exclude-pattern>
+    <exclude-pattern>app/Scopes</exclude-pattern>
+    <exclude-pattern>app/Exceptions</exclude-pattern>
 </ruleset>
