@@ -28,6 +28,10 @@ class UpdateAlertMethodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::ALERT_METHOD);
+        Schema::table(DBTable::ALERT_METHOD, function (Blueprint $table) {
+            $table->string('email', 255)->change();
+            $table->string('phone_number', 255)->change();
+            $table->string('webhook', 255)->change();
+        });
     }
 }
