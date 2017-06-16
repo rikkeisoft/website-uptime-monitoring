@@ -31,12 +31,12 @@
                                 <th class="checkAllButon"><input type="checkbox" id="select_all"/></th>
                                 <th class="name-website">Name</th>
                                 <th>Url</th>
-                                <th>Last status</th>
-                                <th>Time of the last request</th>
+                                <th>Last Status</th>
+                                <th>Last Request</th>
                                 <th>Alert Group</th>
                                 <th>Disable/Enable</th>
-                                <th>Created Time</th>
-                                <th class="center">Update</th>
+                                <th>Created At</th>
+                                <th class="center">Edit</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -90,11 +90,8 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
         <link href="{{ asset('css/style-button-website.css')}}" rel="stylesheet" type="text/css">
-        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('js/website.js')}}"></script>
-
         <script>
             $(function() {
                 $('#dataTables-example').DataTable({

@@ -33,18 +33,18 @@
                                 <th>Name</th>
                                 <th>Alert Group</th>
                                 <th>Method</th>
-                                <th>Create By</th>
-                                <th>Created</th>
-                                <th class="center">Update</th>
+                                <th>Created At</th>
+                                <th class="center">Edit</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($listAlertMethods as $alert)
                                 <tr class="odd gradeX">
-                                    <td><input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}"
-                                               onclick="toggleIdCheckbox();"></td>
+                                    <td>
+                                        <input type="checkbox" name="selectedIds[]" value="{{ $alert->id }}" onclick="toggleIdCheckbox();">
+                                    </td>
                                     <td>{{ $alert->name }}</td>
-                                    <td>{{ isset($alert->alertmethodalertgroup->alertGroup['name'])?$alert->alertmethodalertgroup->alertGroup['name']:'' }}</td>
+                                    <td>{{ isset($alert->alertmethodalertgroup->alertGroup['name']) ? $alert->alertmethodalertgroup->alertGroup['name'] : '' }}</td>
                                     <td>{{ $listTypes[$alert->type] }} /
                                         @if($alert->type == 1)
                                             {{ $alert->email }}
@@ -54,11 +54,12 @@
                                             {{ $alert->webhook }}
                                         @endif
                                     </td>
-                                    <td>{{ $alert->user->username }}</td>
                                     <td>{{ $alert->created_at }}</td>
-                                    <td class="center"><a
-                                                href="{{ route('alert-methods.edit', ['alert_method_id' => $alert->id]) }}"><i
-                                                    class="fa fa-edit"></i></a></td>
+                                    <td class="center">
+                                        <a href="{{ route('alert-methods.edit', ['alert_method_id' => $alert->id]) }}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

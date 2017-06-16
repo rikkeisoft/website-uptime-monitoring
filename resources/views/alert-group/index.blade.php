@@ -27,9 +27,8 @@
                                     <input type="checkbox" value="option3" id="select_all" name="checkbox[]" data-id="checkbox">
                                 </th>
                                 <th>Name</th>
-                                <th>Created at</th>
-                                <th>Updated at</th>
-                                <th class="center">Update</th>
+                                <th>Created At</th>
+                                <th class="center">Edit</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -40,7 +39,6 @@
                                     </td>
                                     <td>{{ $alertGroup->name }}</td>
                                     <td>{{ $alertGroup->created_at }}</td>
-                                    <td>{{ $alertGroup->updated_at }}</td>
                                     <td class="center">
                                         <a href="{{ route('alert-group.edit', ['alert_group' => $alertGroup->id]) }}"><i class="fa fa-edit"></i></a>
                                     </td>
