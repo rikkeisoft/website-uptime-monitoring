@@ -9,6 +9,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use App\Contracts\Constants;
 use App\Events\SendMailGroup;
+use App\Models\Website;
 use App\Repositories\AlertMethodAlertGroupRepository;
 use App\Repositories\MonitorRepository;
 
@@ -41,9 +42,9 @@ class CheckWebsite extends Command
     /**
      * Create a new command instance.
      *
-     * @param object $website
+     * @param \App\Models\Website $website
      */
-    public function __construct($website)
+    public function __construct(Website $website)
     {
         parent::__construct();
 
@@ -54,9 +55,9 @@ class CheckWebsite extends Command
     /**
      * Check Status of an Website.
      *
-     * @param object $website
+     * @param \App\Models\Website $website
      */
-    public function check(object $website)
+    public function check(Website $website)
     {
         $status = $this->getWebsiteStatus($website->url);
         if ($status['success'] === Constants::STATUS_FAILED) {
@@ -117,12 +118,13 @@ class CheckWebsite extends Command
     /**
      * Update Monitor and Send Email to Alert Group.
      *
-     * @param object $website
+     * @param \App\Models\Website $website
      * @param array $status
      */
-    private function updateMonitorAndSendMailGroup(object $website, array $status)
+    private function updateMonitorAndSendMailGroup(Website $website, array $status)
     {
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
+        Log::info('check monitor :' . json_encode($monitor));
         $result = $monitor->result;
         $monitor['result'] = $status['success'];
         $monitor->save();
@@ -150,10 +152,10 @@ class CheckWebsite extends Command
      * Send mail to an Alert Group.
      *
      * @param string $groupId
-     * @param object  $website
+     * @param \App\Models\Website  $website
      * @param int    $status
      */
-    private function sendMailGroup(string $groupId, object $website, int $status)
+    private function sendMailGroup(string $groupId, Website $website, int $status)
     {
         $listMethods = app(AlertMethodAlertGroupRepository::class)->getListEmail($groupId);
 
