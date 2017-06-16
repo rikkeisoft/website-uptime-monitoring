@@ -107,7 +107,10 @@ class WebsitesController extends Controller
     public function statistics(string $website_id)
     {
         $listRequest = [];
-        $listUpDown = [];
+        $listUpDown = [
+            'fail' => 0,
+            'success' => 0
+        ];
         $listCreated = [];
         $webSite = $this->websiteRepository->find($website_id);
         $websiteName = $webSite['name'];
