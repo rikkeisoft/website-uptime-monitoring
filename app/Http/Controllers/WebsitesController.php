@@ -108,8 +108,8 @@ class WebsitesController extends Controller
     {
         $listRequest = [];
         $listUpDown = [
-            'fail' => 0,
-            'success' => 0
+            'down' => 0,
+            'up' => 0
         ];
         $listCreated = [];
         $webSite = $this->websiteRepository->find($website_id);
@@ -132,8 +132,8 @@ class WebsitesController extends Controller
                     } else {
                         ++$checkSuccess;
                     }
-                    $listUpDown['fail'] = $checkFail;
-                    $listUpDown['success'] = $checkSuccess;
+                    $listUpDown['down'] = $checkFail;
+                    $listUpDown['up'] = $checkSuccess;
                 }
             }
         } catch (\Exception $e) {

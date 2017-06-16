@@ -69,8 +69,8 @@
             });
         </script>
         <script>
-            var listDown = {{ $listUpDown['fail'] }};
-            var listUp = {{ $listUpDown['success'] }};
+            var listDown = {{ $listUpDown['down'] }};
+            var listUp = {{ $listUpDown['up'] }};
             var websiteName = '{{ $websiteName }}';
 
             Highcharts.chart('uptime', {
