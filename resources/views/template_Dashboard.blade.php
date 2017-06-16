@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title')</title>
-
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico')}}">
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <!-- MetisMenu CSS -->
     <link href="{{asset('css/metisMenu.min.css')}}" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
-
     <!-- Morris Charts CSS -->
     <link href="{{asset('css/morris.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -23,30 +20,21 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <!-- Custom style -->
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" type="text/css">
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <!-- Metis Menu Plugin JavaScript -->
-
     <script src="{{ asset('js/metisMenu.min.js')}}"></script>
-
     <!-- Morris Charts JavaScript -->
     <script src="{{ asset('js/raphael.min.js')}}"></script>
-
     <script src="{{ asset('js/morris.min.js')}}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('js/sb-admin-2.js')}}"></script>
-
-    <script src="{{ asset('js/website-uptime-monitoring.js')}}"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/autofill/2.2.0/js/dataTables.autoFill.min.js"></script>
-
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico')}}">
-
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ asset('js/sb-admin-2.js')}}"></script>
+    <script src="{{ asset('js/website-uptime-monitoring.js')}}"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -106,11 +94,10 @@
                     <li>
                         <a href="{{ route('alert-methods.index') }}"><i class="fa fa-tasks fa-fw"></i> Alert Methods</a>
                     </li>
-                    <li>
-                        <a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>
-                            Alert Method of a Group</a>
-                    </li>
-
+                    {{--<li>--}}
+                        {{--<a href="{{ route('alert-method-of-group.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>--}}
+                            {{--Alert Method of a Group</a>--}}
+                    {{--</li>--}}
                     <li>
                         <a href="{{ route('websites.index') }}"><i class="fa fa-windows fa-fw"></i> Website</a>
                     </li>
