@@ -19,7 +19,7 @@ interface RepositoryInterface
      * @param string $id
      * @param array  $columns
      *
-     * @return array
+     * @return object
      */
     public function find(string $id, $columns = ['*']);
 
@@ -49,7 +49,7 @@ interface RepositoryInterface
      *
      * @param array $input
      *
-     * @return bool
+     * @return object|bool
      */
     public function create(array $input);
 
@@ -59,7 +59,7 @@ interface RepositoryInterface
      * @param array  $input
      * @param string $id
      *
-     * @return array
+     * @return object|false
      */
     public function update(array $input, string $id);
 

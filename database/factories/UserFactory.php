@@ -4,7 +4,6 @@ use App\Models\User;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(User::class, function (Faker\Generator $faker) {
-    $user = User::all()->first();
     return [
         'id' => $faker->uuid,
         'username' => 'Mr Test',

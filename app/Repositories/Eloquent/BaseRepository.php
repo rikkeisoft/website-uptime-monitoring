@@ -107,7 +107,7 @@ abstract class BaseRepository implements RepositoryInterface
      *
      * @param array $input
      *
-     * @return bool
+     * @return object|bool
      */
     public function create(array $input)
     {
@@ -120,7 +120,7 @@ abstract class BaseRepository implements RepositoryInterface
      * @param array  $input
      * @param string $id
      *
-     * @return array
+     * @return object
      */
     public function update(array $input, string $id)
     {
