@@ -8,7 +8,7 @@ $factory->define(AlertGroup::class, function (Faker\Generator $faker) {
     $user = User::all()->first();
     return [
         'id' => $faker->uuid,
-        'name' => 'Group1',
+        'name' => $faker->name,
         'user_id' => $user->id
     ];
 });

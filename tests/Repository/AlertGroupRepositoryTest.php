@@ -79,19 +79,6 @@ class AlertGroupRepositoryTest extends TestCase
         $this->assertEquals(1, $result);
     }
 
-
-    /**
-     * Test function find alert group successfully
-     */
-    public function testFindAlertGroup()
-    {
-        factory(AlertGroup::class, 1)->create();
-        $alertGroup = AlertGroup::all()->first();
-        $id = $alertGroup->id;
-        $result = app(AlertGroupsRepository::class)->find($id);
-        $this->assertEquals($id, $result->id);
-    }
-
     /**
      * Test function findAllBy failed
      */
@@ -105,16 +92,48 @@ class AlertGroupRepositoryTest extends TestCase
     }
 
     /**
-     * Test function findAllBy Successfully
+     * Test function findAllBy successfully
      */
     public function testFindAllByAlertGroupSuccessfully()
     {
         factory(AlertGroup::class, 1)->create();
+        $alertGroup = AlertGroup::all()->first();
         $attribute = 'name';
-        $data = 'Group1';
+        $data = $alertGroup->name;
         $result = app(AlertGroupsRepository::class)->findAllBy($attribute, $data);
         foreach ($result as $alertGroup) {
             $this->assertEquals($data, $alertGroup->name);
         }
+    }
+
+    /**
+     * Test function all Alert Group failed
+     */
+    public function testAllAlertGroupFailed()
+    {
+        $result = app(AlertGroupsRepository::class)->all();
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * Test function all Alert Group successfully
+     */
+    public function testAllAlertGroupSuccessfully()
+    {
+        factory(AlertGroup::class, 5)->create();
+        $result = app(AlertGroupsRepository::class)->all();
+        $this->assertNotEmpty($result);
+    }
+
+    /**
+     * Test function find alert group
+     */
+    public function testFindAlertGroup()
+    {
+        factory(AlertGroup::class, 1)->create();
+        $alertGroup = AlertGroup::all()->first();
+        $id = $alertGroup->id;
+        $result = app(AlertGroupsRepository::class)->find($id);
+        $this->assertEquals($id, $result->id);
     }
 }
