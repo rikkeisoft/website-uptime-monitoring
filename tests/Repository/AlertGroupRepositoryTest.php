@@ -11,8 +11,8 @@ use App\Models\AlertGroup;
 
 class AlertGroupRepositoryTest extends TestCase
 {
-    use DatabaseMigrations, DatabaseTransactions;
-
+    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * Test create alert group successfully
@@ -113,11 +113,8 @@ class AlertGroupRepositoryTest extends TestCase
         $attribute = 'name';
         $data = 'Group1';
         $result = app(AlertGroupsRepository::class)->findAllBy($attribute, $data);
-        foreach ($result as $alertGroup){
+        foreach ($result as $alertGroup) {
             $this->assertEquals($data, $alertGroup->name);
         }
     }
-
-
-
-
+}
