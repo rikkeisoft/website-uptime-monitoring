@@ -35,7 +35,8 @@ class RegisterController extends Controller
         $formData = $request->input();
         $result = $this->userRepository->createUser($formData);
         if ($result === false) {
-            return 'Error';
+            $request->session()->flash('alert-error', 'Registration failed.');
+            return redirect('/register');
         }
 
         return redirect('/login');
@@ -52,9 +53,9 @@ class RegisterController extends Controller
         $result = $this->userRepository->activateUser($token);
 
         if ($result) {
-            $request->session()->flash('alert-success', 'Authentication Successfully, please login!');
+            $request->session()->flash('alert-success', 'Authentication is successfully.');
         } else {
-            $request->session()->flash('alert-error', 'Account does not exist or not activate.Please try again');
+            $request->session()->flash('alert-error', 'Account does not exists or is not activated yet.');
         }
 
         return redirect('/login');

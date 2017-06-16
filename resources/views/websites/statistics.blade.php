@@ -23,16 +23,16 @@
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
         <script>
-            var listRequests = {{ json_encode($listRequest) }};
-            var websiteName = '{{ $websiteName }}';
-            var listCreateds = '{{ $listCreated}}'.split('|');
+            var listRequests = {{ json_encode($stats['duration']) }};
+            var title = '{{ $title }}';
+            var listCreateds = '{{ $time}}'.split('|');
 
             Highcharts.chart('request', {
                 title: {
                     text: 'Time Request'
                 },
                 subtitle: {
-                    text: websiteName
+                    text: title
                 },
                 xAxis: {
                     categories: listCreateds
@@ -69,9 +69,9 @@
             });
         </script>
         <script>
-            var listDown = {{ $listUpDown['fail'] }};
-            var listUp = {{ $listUpDown['success'] }};
-            var websiteName = '{{ $websiteName }}';
+            var title = '{{ $title }}';
+            var listDown = {{ $stats['down'] }};
+            var listUp = {{ $stats['up'] }};
 
             Highcharts.chart('uptime', {
                 chart: {
@@ -84,7 +84,7 @@
                     text: 'Up/Down'
                 },
                 subtitle: {
-                    text: websiteName
+                    text: title
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
