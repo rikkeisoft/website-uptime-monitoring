@@ -54,7 +54,7 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
         Auth::logout();
-        $request->session()->flash('alert-error', 'Account does not exist or not activate.Please try again');
+        $request->session()->flash('alert-error', 'Your account is not activated. Please check your email inbox!');
         return back()->withInput();
     }
 }
