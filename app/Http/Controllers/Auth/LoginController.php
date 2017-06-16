@@ -53,10 +53,8 @@ class LoginController extends Controller
         ], $request->input('remember', false))) {
             return redirect()->intended('/dashboard');
         }
-
         Auth::logout();
-        Session::put('alert-danger', 'Your account isn\'t activated. Please check your email inbox!');
-
-        return redirect('/login');
+        $request->session()->flash('alert-error', 'Your account is not activated. Please check your email inbox!');
+        return back()->withInput();
     }
 }

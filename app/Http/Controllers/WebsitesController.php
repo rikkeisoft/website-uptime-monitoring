@@ -107,10 +107,13 @@ class WebsitesController extends Controller
     public function statistics(string $website_id)
     {
         $listRequest = [];
-        $listUpDown = [];
+        $listUpDown = [
+            'down' => 0,
+            'up' => 0
+        ];
         $listCreated = [];
-        $webSite = $this->websiteRepository->find($website_id);
-        $websiteName = $webSite['name'];
+        $website = $this->websiteRepository->find($website_id);
+        $websiteName = $website['name'];
         try {
             $key = "statistics_{$website_id}";
             $redis = Redis::connection();
@@ -118,19 +121,19 @@ class WebsitesController extends Controller
             //Get list status website
             $listStatusWebsite = $redis->lrange($key, $listLength - Constants::NUMBER_OF_MILESTONES, $listLength);
             if (!empty($listStatusWebsite)) {
-                $checkFail = 0;
-                $checkSuccess = 0;
+                $checkDown = 0;
+                $checkUp = 0;
                 foreach ($listStatusWebsite as $status) {
                     $status = json_decode($status);
                     array_push($listRequest, $status->time_request);
                     array_push($listCreated, $status->created_at);
                     if ($status->success == Constants::STATUS_FAILED) {
-                        ++$checkFail;
+                        ++$checkDown;
                     } else {
-                        ++$checkSuccess;
+                        ++$checkUp;
                     }
-                    $listUpDown['fail'] = $checkFail;
-                    $listUpDown['success'] = $checkSuccess;
+                    $listUpDown['down'] = $checkDown;
+                    $listUpDown['up'] = $checkUp;
                 }
             }
         } catch (\Exception $e) {

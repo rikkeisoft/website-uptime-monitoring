@@ -60,14 +60,15 @@
                                     <td>
                                         <a onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')">
                                             <label class="switch">
-                                                <input type="checkbox" {{ $website->status == 1?'checked':'' }}>
+                                                <input type="radio" {{ $website->status == 1?'checked':'' }}>
                                                 <div class="slider round"></div>
                                             </label>
                                         </a>
                                     </td>
                                     <td>{{ $website->created_at }}</td>
-                                    <td class="center"><a href="{{ route('websites.edit', [$website->id]) }}"><i
-                                                    class="fa fa-edit"></i></a></td>
+                                    <td class="center">
+                                        <a href="{{ route('websites.edit', [$website->id]) }}"><i class="fa fa-edit"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

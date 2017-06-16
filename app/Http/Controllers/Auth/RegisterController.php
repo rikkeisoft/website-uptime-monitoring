@@ -35,7 +35,8 @@ class RegisterController extends Controller
         $formData = $request->input();
         $result = $this->userRepository->createUser($formData);
         if ($result === false) {
-            return 'Error';
+            $request->session()->flash('alert-error', 'Registration failed.Please try again');
+            return redirect('/register');
         }
 
         return redirect('/login');
