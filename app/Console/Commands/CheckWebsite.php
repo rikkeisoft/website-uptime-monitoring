@@ -124,7 +124,7 @@ class CheckWebsite extends Command
     private function updateMonitorAndSendMailGroup(Website $website, array $status)
     {
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
-        Log::info('check monitor :'.json_encode($monitor));
+        Log::info('check monitor :' . json_encode($monitor));
         $result = $monitor->result;
         $monitor['result'] = $status['success'];
         $monitor->save();
