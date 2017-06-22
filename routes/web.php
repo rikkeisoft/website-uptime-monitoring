@@ -10,37 +10,35 @@
   |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/dashboard','HomeController@showStatistics');
-
-Route::get('/activate', 'Auth\RegisterController@activate');
-Route::get('/activate-error', function () {
-    return view('template-activate-auth.active-error');
-});
-Route::get('/activate/successfully', function () {
-    return view('template-activate-auth.active');
+Route::get('/', function () {
+    return view('v2/modules/intro/introduction');
 });
 
+// Route::get('/dashboard', 'HomeController@showStatistics');
 
-Route::resource('websites', 'WebsitesController');
-Route::delete('/websites/destroy', 'WebsitesController@destroy')->name('websites.destroy');
-Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('websites.toggle_status');
-Route::get('/websites/{website_id}/statistics', 'WebsitesController@statistics')->name('websites.statistics');
+// Route::get('/user-profile', 'ProfileController@index')->name('user-profile.index');
+// Route::put('/user-profile', 'ProfileController@update')->name('user-profile.update');
 
-Route::resource('/alert-group','AlertGroupController');
-Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
+// Route::get('/activate', 'Auth\RegisterController@activate');
+// Route::get('/activate-error', function () {
+//     return view('template-activate-auth.active-error');
+// });
+// Route::get('/activate/successfully', function () {
+//     return view('template-activate-auth.active');
+// });
 
-Route::resource('alert-methods', 'AlertMethodsController');
-Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');
+// Route::resource('websites', 'WebsitesController');
+// Route::delete('/websites/destroy', 'WebsitesController@destroy')->name('websites.destroy');
+// Route::post('/websites/set_status_website', 'WebsitesController@setEnableDisable')->name('websites.toggle_status');
+// Route::get('/websites/{website_id}/statistics', 'WebsitesController@statistics')->name('websites.statistics');
 
-Route::resource('/alert-method-of-group', 'AlertMethodAlertGroupController');
-Route::delete('/alert-method-of-group/destroy', 'AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');
+// Route::resource('/alert-group','AlertGroupController');
+// Route::delete('/alert-group/destroyAlertGroup','AlertGroupController@destroy')->name('alert-group.destroy');
 
-Route::get('/user-profile', 'ProfileController@index')->name('user-profile.index');
-Route::put('/user-profile', 'ProfileController@update')->name('user-profile.update');
+// Route::resource('alert-methods', 'AlertMethodsController');
+// Route::delete('/alert-methods/destroy', 'AlertMethodsController@destroy')->name('alert-methods.destroy');
 
+// Route::resource('/alert-method-of-group', 'AlertMethodAlertGroupController');
+// Route::delete('/alert-method-of-group/destroy', 'AlertMethodAlertGroupController@destroy')->name('alert-method-of-group.destroy');

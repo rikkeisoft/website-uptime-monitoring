@@ -1,4 +1,4 @@
-@extends('template_Dashboard')
+@extends('common/dashboard')
 
 @section('title')
     List Websites
@@ -6,7 +6,7 @@
 @section('content')
     <div id="page-wrapper">
         <div class="row">
-            @component('flash_alert_message')
+            @component('flash_messages')
             @endcomponent
             <div class="row">
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">

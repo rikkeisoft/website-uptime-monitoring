@@ -5,7 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Schema;
-use App\Contracts\DBTable;
+use App\Contracts\DatabaseTables;
 use App\Console\Commands\CheckWebsite;
 use App\Models\Website;
 use App\Repositories\WebsiteRepository;
@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        if (Schema::hasTable(DBTable::WEBSITE)) {
+        if (Schema::hasTable(DatabaseTables::WEBSITES)) {
             $websites = $this->getEnabledWebsites();
 
             foreach ($websites as $website) {

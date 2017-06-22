@@ -1,4 +1,4 @@
-@extends("../template_Auth")
+@extends("../auth")
 @section('title')
 Register
 @endsection
@@ -7,7 +7,7 @@ Register
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            @component('flash_alert_message')
+            @component('flash_messages')
 
             @endcomponent
         </div>

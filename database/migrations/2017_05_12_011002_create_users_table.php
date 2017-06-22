@@ -1,6 +1,6 @@
 <?php
 
-use App\Contracts\DBTable;
+use App\Contracts\DatabaseTables;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create(
-            DBTable::USER,
+            DatabaseTables::USERS,
             function (Blueprint $table) {
                 $table->uuid('id');
                 $table->string('username', 255);
@@ -39,6 +39,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::USER);
+        Schema::dropIfExists(DatabaseTables::USERS);
     }
 }

@@ -1,4 +1,4 @@
-@extends('../../template_Auth')
+@extends('../../auth')
 
 @section('content')
     <div class="container">

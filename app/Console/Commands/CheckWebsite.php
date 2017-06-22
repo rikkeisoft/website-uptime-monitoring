@@ -37,7 +37,7 @@ class CheckWebsite extends Command
      *
      * @var string
      */
-    protected $description = 'Command Check Website Status';
+    protected $description = 'Command for checking Website\' status';
 
     /**
      * Create a new command instance.
@@ -119,18 +119,17 @@ class CheckWebsite extends Command
      * Update Monitor and Send Email to Alert Group.
      *
      * @param \App\Models\Website $website
-     * @param array $status
+     * @param array               $status
      */
     private function updateMonitorAndSendMailGroup(Website $website, array $status)
     {
         $monitor = app(MonitorRepository::class)->findByWebsiteId($website->id);
-        Log::info('check monitor :' . json_encode($monitor));
+        Log::info('Monitor :' . json_encode($monitor));
         $result = $monitor->result;
         $monitor['result'] = $status['success'];
         $monitor->save();
 
         try {
-            // Set data monitor redis
             $key = "statistics_{$website->id}";
             $redis = Redis::connection();
             $redis->rpush($key, json_encode($status));
@@ -151,9 +150,9 @@ class CheckWebsite extends Command
     /**
      * Send mail to an Alert Group.
      *
-     * @param string $groupId
-     * @param \App\Models\Website  $website
-     * @param int    $status
+     * @param string              $groupId
+     * @param \App\Models\Website $website
+     * @param int                 $status
      */
     private function sendMailGroup(string $groupId, Website $website, int $status)
     {

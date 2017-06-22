@@ -1,6 +1,6 @@
 <?php
 
-use App\Contracts\DBTable;
+use App\Contracts\DatabaseTables;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -14,7 +14,7 @@ class UpdateAlertMethodsTable extends Migration
      */
     public function up()
     {
-        Schema::table(DBTable::ALERT_METHOD, function (Blueprint $table) {
+        Schema::table(DatabaseTables::ALERT_METHODS, function (Blueprint $table) {
             $table->string('email', 255)->nullable()->change();
             $table->string('phone_number', 255)->nullable()->change();
             $table->string('webhook', 255)->nullable()->change();
@@ -28,7 +28,7 @@ class UpdateAlertMethodsTable extends Migration
      */
     public function down()
     {
-        Schema::table(DBTable::ALERT_METHOD, function (Blueprint $table) {
+        Schema::table(DatabaseTables::ALERT_METHODS, function (Blueprint $table) {
             $table->string('email', 255)->change();
             $table->string('phone_number', 255)->change();
             $table->string('webhook', 255)->change();

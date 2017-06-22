@@ -21,3 +21,11 @@ bootstrap/cache/
 *.bak
 composer
 .php_cs.cache
+
+/public/hot
+/public/storage
+/public/dist
+/storage/*.key
+/.vagrant
+npm-debug.log
+mix-manifest.json

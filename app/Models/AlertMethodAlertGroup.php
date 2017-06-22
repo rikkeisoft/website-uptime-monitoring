@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Contracts\DBTable;
+use App\Contracts\DatabaseTables;
 
 class AlertMethodAlertGroup extends BaseModel
 {
     use SoftDeletes;
 
-    protected $table = DBTable::ALERT_METHOD_ALERT_GROUP;
+    protected $table = DatabaseTables::ALERT_METHOD_ALERT_GROUP;
 
     protected $fillable = [
         'alert_method_id',

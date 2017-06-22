@@ -1,11 +1,11 @@
-@extends('../template_Dashboard')
+@extends('../common/dashboard')
 @section('title')
     List Alert Groups
 @endsection
 @section('content')
     <div id="page-wrapper">
         <div class="row">
-            @component('flash_alert_message')
+            @component('flash_messages')
             @endcomponent
             <div class="col-lg-12">
                 <h1 class="page-header">List Alert Groups</h1>

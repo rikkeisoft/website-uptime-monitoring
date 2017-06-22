@@ -1,6 +1,6 @@
 <?php
 
-use App\Contracts\DBTable;
+use App\Contracts\DatabaseTables;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +16,7 @@ class CreateAlertMethodsTable extends Migration
     public function up()
     {
         Schema::create(
-            DBTable::ALERT_METHOD,
+            DatabaseTables::ALERT_METHODS,
             function (Blueprint $table) {
                 $table->uuid('id');
                 $table->char('user_id', 36);
@@ -32,10 +32,10 @@ class CreateAlertMethodsTable extends Migration
         );
 
         Schema::table(
-            DBTable::ALERT_METHOD,
+            DatabaseTables::ALERT_METHODS,
             function (Blueprint $table) {
                 $table->foreign('user_id', 'fk__users__alert_methods')->references('id')
-                    ->on(DBTable::USER)->onDelete('cascade');
+                    ->on(DatabaseTables::USERS)->onDelete('cascade');
             }
         );
     }
@@ -47,6 +47,6 @@ class CreateAlertMethodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::ALERT_METHOD);
+        Schema::dropIfExists(DatabaseTables::ALERT_METHODS);
     }
 }

@@ -1,4 +1,4 @@
-@extends('template_Dashboard')
+@extends('common/dashboard')
 
 @section('title')
     List Websites
@@ -6,7 +6,7 @@
 @section('content')
     <div id="page-wrapper">
         <div class="row">
-            @component('flash_alert_message')
+            @component('flash_messages')
             @endcomponent
             <div class="col-lg-12">
                 <h1 class="page-header">List Websites</h1>
@@ -60,7 +60,7 @@
                                     <td>
                                         <a onclick="checkEnable('{{ $website->id }}', '{{ $website->status }}')">
                                             <label class="switch">
-                                                <input type="radio" {{ $website->status == 1?'checked':'' }}>
+                                                <input type="radio" {{ $website->status == 1 ? 'checked' : '' }}>
                                                 <div class="slider round"></div>
                                             </label>
                                         </a>
@@ -75,9 +75,9 @@
                         </table>
                         {!! $listWebsites->render() !!}
                         <form id="checkEnableDisable" method="post" action="{{ route('websites.toggle_status') }}">
+                            {{ csrf_field() }}
                             <input id="checkEnableDisableID" name="id" type="hidden">
                             <input id="checkEnableDisableStatus" name="status" type="hidden">
-                            {{ csrf_field() }}
                         </form>
                         <form id="deleteListSelectForm" method="post" action="{{ route('websites.destroy') }}">
                             {{ csrf_field() }}

@@ -1,38 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=vietnamese);
+@import "../../../node_modules/bulma/sass/utilities/initial-variables";
 
-// Body
-$body-bg: #f5f8fa;
+$blue: #72d0eb;
+$pink: #ffb3b3;
+$pink-invert: #fff;
+$family-serif: "Open Sans", "Arial", serif;
 
-// Borders
-$laravel-border-color: darken($body-bg, 10%);
-$list-group-border: $laravel-border-color;
-$navbar-default-border: $laravel-border-color;
-$panel-default-border: $laravel-border-color;
-$panel-inner-border: $laravel-border-color;
-
-// Brands
-$brand-primary: #3097D1;
-$brand-info: #8eb4cb;
-$brand-success: #2ab27b;
-$brand-warning: #cbb956;
-$brand-danger: #bf5329;
-
-// Typography
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 14px;
-$line-height-base: 1.6;
-$text-color: #636b6f;
-
-// Navbar
-$navbar-default-bg: #fff;
-
-// Buttons
-$btn-default-color: $text-color;
-
-// Inputs
-$input-border: lighten($text-color, 40%);
-$input-border-focus: lighten($brand-primary, 25%);
-$input-color-placeholder: lighten($text-color, 30%);
-
-// Panels
-$panel-default-heading-bg: #fff;
+$primary: $pink;
+$primary-invert: $pink-invert;
+$danger: $orange;
+$family-primary: $family-serif;

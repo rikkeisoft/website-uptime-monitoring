@@ -1,6 +1,6 @@
 <?php
 
-use App\Contracts\DBTable;
+use App\Contracts\DatabaseTables;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +16,7 @@ class CreateAlertGroupsTable extends Migration
     public function up()
     {
         Schema::create(
-            DBTable::ALERT_GROUP,
+            DatabaseTables::ALERT_GROUPS,
             function (Blueprint $table) {
                 $table->uuid('id');
                 $table->char('user_id', 36);
@@ -28,10 +28,10 @@ class CreateAlertGroupsTable extends Migration
         );
 
         Schema::table(
-            DBTable::ALERT_GROUP,
+            DatabaseTables::ALERT_GROUPS,
             function (Blueprint $table) {
                 $table->foreign('user_id', 'fk__users__alert_groups')->references('id')
-                    ->on(DBTable::USER)->onDelete('cascade');
+                    ->on(DatabaseTables::USERS)->onDelete('cascade');
             }
         );
     }
@@ -43,6 +43,6 @@ class CreateAlertGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(DBTable::ALERT_GROUP);
+        Schema::dropIfExists(DatabaseTables::ALERT_GROUPS);
     }
 }

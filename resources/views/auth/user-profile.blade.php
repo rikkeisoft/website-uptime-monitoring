@@ -1,4 +1,4 @@
-@extends('template_Dashboard')
+@extends('common/dashboard')
 
 @section('title')
     Changer Password
@@ -6,7 +6,7 @@
 @section('content')
     <div id="page-wrapper">
         <div class="row">
-            @component('flash_alert_message')
+            @component('flash_messages')
             @endcomponent
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
